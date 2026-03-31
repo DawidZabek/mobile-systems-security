@@ -3,6 +3,8 @@
 *.aab
 *.dex
 *.class
+*teacher.ipynb
+teacher/
 bin/
 gen/
 out/
