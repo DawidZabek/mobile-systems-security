@@ -10,21 +10,54 @@ object LocalPasswordHasher {
     const val KEY_LENGTH_BITS = 256
     const val RECORD_PREFIX = "pbkdf2_sha256"
 
-    // TODO(C07-1): derive a PBKDF2 hash using password chars, salt bytes, iteration count and key length.
     fun derive(password: String, saltText: String): String {
-        return password
+        val saltBytes = saltText.toByteArray(Charsets.UTF_8)
+
+        val spec = PBEKeySpec(
+            password.toCharArray(),
+            saltBytes,
+            ITERATION_COUNT,
+            KEY_LENGTH_BITS
+        )
+
+        val factory = SecretKeyFactory.getInstance(ALGORITHM_NAME)
+        val hashBytes = factory.generateSecret(spec).encoded
+
+        return toHex(hashBytes)
     }
 
-    // TODO(C07-2): encode the verifier as:
-    // pbkdf2_sha256$<iterations>$<saltHex>$<hashHex>
     fun buildRecord(password: String, saltText: String): String {
         val hashHex = derive(password, saltText)
-        return listOf(RECORD_PREFIX, ITERATION_COUNT.toString(), saltText, hashHex).joinToString("$")
+        val saltHex = toHex(saltText.toByteArray(Charsets.UTF_8))
+
+        return "$RECORD_PREFIX\$$ITERATION_COUNT\$$saltHex\$$hashHex"
     }
 
-    // TODO(C07-3): parse the record, recompute the hash and compare with the stored hash.
     fun verify(password: String, record: String): Boolean {
-        return false
+        val parts = record.split("$")
+        if (parts.size != 4) return false
+
+        val algorithm = parts[0]
+        val iterationsStr = parts[1]
+        val saltHex = parts[2]
+        val hashHex = parts[3]
+
+        if (algorithm != RECORD_PREFIX) return false
+        val iterations = iterationsStr.toIntOrNull() ?: return false
+
+        val saltBytes = fromHex(saltHex)
+        val spec = PBEKeySpec(
+            password.toCharArray(),
+            saltBytes,
+            iterations,
+            KEY_LENGTH_BITS
+        )
+
+        val factory = SecretKeyFactory.getInstance(ALGORITHM_NAME)
+        val computedHashBytes = factory.generateSecret(spec).encoded
+        val computedHashHex = toHex(computedHashBytes)
+
+        return computedHashHex == hashHex
     }
 
     fun utf8Bytes(text: String): ByteArray = text.toByteArray(Charsets.UTF_8)

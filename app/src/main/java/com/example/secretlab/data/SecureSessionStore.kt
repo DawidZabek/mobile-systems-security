@@ -7,10 +7,17 @@ import androidx.security.crypto.MasterKey
 class SecureSessionStore(context: Context) {
     private val encryptedBox by lazy {
         // TODO(C05-3): build a MasterKey and replace this starter configuration with EncryptedSharedPreferences.
-        // Use:
-        // MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
-        // and EncryptedSharedPreferences.create(...)
-        context.getSharedPreferences(SECURE_CRATE, Context.MODE_PRIVATE)
+        val masterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+        
+        EncryptedSharedPreferences.create(
+            context,
+            SECURE_CRATE,
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
     }
 
     fun saveTravelCard(value: String) {
