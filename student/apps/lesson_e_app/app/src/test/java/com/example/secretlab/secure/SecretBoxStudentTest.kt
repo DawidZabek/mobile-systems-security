@@ -34,6 +34,14 @@ class SecretBoxStudentTest {
         assertNull(decrypted)
     }
 
+    @Test(expected = IllegalArgumentException::class)
+    fun rejectsWrongIvLengthInEncrypt() {
+        val box = SecretBox(InMemoryKeyProvider(random))
+        val plaintext = "secret".encodeToByteArray()
+        val ivWrong = ByteArray(SecretBox.IV_BYTES - 1).also(random::nextBytes)
+        box.encrypt(plaintext, ivWrong)
+    }
+
     @Test
     fun detectsTamperingAndReturnsNull() {
         val keyProvider = InMemoryKeyProvider(random)
@@ -49,4 +57,3 @@ class SecretBoxStudentTest {
         assertNull(decrypted)
     }
 }
-

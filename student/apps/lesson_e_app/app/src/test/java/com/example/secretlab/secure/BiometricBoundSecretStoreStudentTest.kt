@@ -39,6 +39,16 @@ class BiometricBoundSecretStoreStudentTest {
         assertArrayEquals(expected, revealed)
     }
 
+    @Test
+    fun refusesToRevealSecretWhenTokenIsFromFuture() {
+        val now = 1_000L
+        val store = buildStore(nowEpochSeconds = now, maxAge = 30)
+        store.setSecret("seed".encodeToByteArray(), iv())
+
+        val futureToken = GateToken(issuedAtEpochSeconds = now + 1)
+        assertNull(store.revealSecret(futureToken))
+    }
+
     private fun buildStore(nowEpochSeconds: Long, maxAge: Long = 30): BiometricBoundSecretStore {
         val keyProvider = InMemoryKeyProvider(random)
         val box = SecretBox(keyProvider)
@@ -51,4 +61,3 @@ class BiometricBoundSecretStoreStudentTest {
 
     private fun iv(): ByteArray = ByteArray(SecretBox.IV_BYTES).also(random::nextBytes)
 }
-
