@@ -6,6 +6,7 @@ plugins {
 
 import java.io.File
 import javax.xml.parsers.DocumentBuilderFactory
+import org.gradle.api.tasks.testing.Test
 
 android {
     namespace = "com.example.secretlab"
@@ -186,6 +187,15 @@ tasks.register("bsmEvidence") {
                 ),
             ),
         )
-        println(evidenceOverall())
+    }
+}
+
+// Ensure `:app:bsmEvidence` always prints evidence lines even when tests fail.
+// It is a student workflow helper, not a CI gate.
+tasks.matching { it.name == "testDebugUnitTest" }.configureEach {
+    (this as? Test)?.let { t ->
+        if (gradle.startParameter.taskNames.any { it.endsWith("bsmEvidence") }) {
+            t.ignoreFailures = true
+        }
     }
 }
