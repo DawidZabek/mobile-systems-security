@@ -10,18 +10,22 @@ class TotpEngine(
     private val clock: EpochClock = SystemEpochClock,
 ) {
     fun generate(secretBase32: String, epochSeconds: Long = clock.nowEpochSeconds()): String {
-        // TODO(D03-1): decode the Base32 secret and generate the RFC 6238 code for the current step.
-        // Starter returns a fixed placeholder so the student tests fail until the implementation is complete.
-        return "000000"
+        val counter = epochSeconds / stepSeconds
+        return hotpFromDecodedSecret(Base32Codec.decode(secretBase32), counter, digits)
     }
 
     fun verify(secretBase32: String, code: String, epochSeconds: Long = clock.nowEpochSeconds()): Boolean {
         val normalizedCode = code.trim()
-        val currentStep = timeStep(epochSeconds)
+        val currentCounter = epochSeconds / stepSeconds
 
-        // TODO(D03-2): compare the provided code against the current time step and the
-        // neighbouring steps according to `window`.
-        return normalizedCode == generate(secretBase32, currentStep * stepSeconds)
+        for (offset in -window..window) {
+            val counter = currentCounter + offset
+            if (counter < 0) continue
+            if (hotpFromDecodedSecret(Base32Codec.decode(secretBase32), counter, digits) == normalizedCode) {
+                return true
+            }
+        }
+        return false
     }
 
     fun timeStep(epochSeconds: Long = clock.nowEpochSeconds()): Long = epochSeconds / stepSeconds
