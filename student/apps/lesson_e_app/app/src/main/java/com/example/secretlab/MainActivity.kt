@@ -27,7 +27,8 @@ import androidx.compose.ui.unit.dp
 import com.example.secretlab.secure.BiometricBoundSecretStore
 import com.example.secretlab.secure.BiometricPromptGate
 import com.example.secretlab.secure.GateToken
-import com.example.secretlab.secure.InMemoryKeyProvider
+import com.example.secretlab.secure.SecureKeyProvider
+import com.example.secretlab.secure.SecureNoteRepository
 import com.example.secretlab.secure.SecretBox
 import com.example.secretlab.ui.theme.SecretLabTheme
 import java.security.SecureRandom
@@ -37,13 +38,14 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
 
         val random = SecureRandom()
-        val secretBox = SecretBox(InMemoryKeyProvider(random))
         val clock: () -> Long = { System.currentTimeMillis() / 1000L }
+        val secretBox = SecretBox(SecureKeyProvider(this, random), random)
         val store = BiometricBoundSecretStore(
             secretBox = secretBox,
             clock = clock,
             maxTokenAgeSeconds = 30,
         )
+        val noteRepo = SecureNoteRepository(this)
 
         val iv = ByteArray(SecretBox.IV_BYTES).also(random::nextBytes)
         store.setSecret(
@@ -56,6 +58,8 @@ class MainActivity : FragmentActivity() {
                 LessonEApp(
                     activity = this,
                     store = store,
+                    noteRepo = noteRepo,
+                    secretBox = secretBox,
                     clock = clock,
                     biometricGate = BiometricPromptGate(clock = clock),
                 )
@@ -68,6 +72,8 @@ class MainActivity : FragmentActivity() {
 private fun LessonEApp(
     activity: FragmentActivity,
     store: BiometricBoundSecretStore,
+    noteRepo: SecureNoteRepository,
+    secretBox: SecretBox,
     clock: () -> Long,
     biometricGate: BiometricPromptGate,
 ) {
@@ -152,6 +158,91 @@ private fun LessonEApp(
                     Text(text = "Preview: ${secretPreview ?: "—"}")
                 }
             }
+
+            Card(modifier = Modifier.fillMaxWidth()) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    Text("Secure note (encrypted on close)", style = MaterialTheme.typography.titleLarge)
+                    Text(
+                        "This is a practical demo: open a long multi-line note behind the gate, edit it, then close to encrypt.",
+                    )
+                    SecureNoteCard(
+                        activity = activity,
+                        gate = biometricGate,
+                        clock = clock,
+                        store = store,
+                        noteRepo = noteRepo,
+                        secretBox = secretBox,
+                        onBanner = { banner = it },
+                    )
+                }
+            }
         }
     }
 }
+
+@Composable
+private fun SecureNoteCard(
+    activity: FragmentActivity,
+    gate: BiometricPromptGate,
+    clock: () -> Long,
+    store: BiometricBoundSecretStore,
+    noteRepo: SecureNoteRepository,
+    secretBox: SecretBox,
+    onBanner: (String) -> Unit,
+) {
+    var opened by remember { mutableStateOf(false) }
+    var noteText by remember { mutableStateOf("") }
+
+    if (!opened) {
+        Button(onClick = {
+            if (!gate.canAuthenticate(activity)) {
+                onBanner("BiometricPrompt unavailable on this device/emulator.")
+                return@Button
+            }
+            gate.authenticate(activity) { token ->
+                if (token == null) {
+                    onBanner("Biometric auth failed/canceled.")
+                    return@authenticate
+                }
+                val allowed = store.revealSecret(token) != null
+                if (!allowed) {
+                    onBanner("Gate token rejected by policy (too old/future).")
+                    return@authenticate
+                }
+                val message = noteRepo.readEncryptedNote()
+                noteText = if (message == null) {
+                    ""
+                } else {
+                    secretBox.decryptBound(message, NOTE_CONTEXT)?.decodeToString() ?: ""
+                }
+                opened = true
+                onBanner("Secure note opened.")
+            }
+        }) {
+            Text("Open secure note (biometrics)")
+        }
+        return
+    }
+
+    OutlinedTextField(
+        value = noteText,
+        onValueChange = { noteText = it },
+        label = { Text("Secure note (multi-line)") },
+        modifier = Modifier.fillMaxWidth(),
+        minLines = 6,
+    )
+    Button(onClick = {
+        val iv = secretBox.generateIv()
+        val message = secretBox.encryptBound(noteText.encodeToByteArray(), iv, NOTE_CONTEXT)
+        noteRepo.writeEncryptedNote(message)
+        opened = false
+        onBanner("Secure note encrypted and saved.")
+    }) {
+        Text("Close & encrypt")
+    }
+}
+
+private val NOTE_CONTEXT: ByteArray = "bsm:l05e:secure_note:v1".encodeToByteArray()
