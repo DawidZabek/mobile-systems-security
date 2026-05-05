@@ -15,42 +15,57 @@ class SecretBox(
     private val random: SecureRandom = SecureRandom(),
 ) {
     fun generateIv(): ByteArray {
-        // TODO(L05-7): generate a fresh random IV of length `IV_BYTES`.
-        // Requirements checked by tests:
-        // - returns a ByteArray of length IV_BYTES
-        // - successive calls should not return the same IV
-        return ByteArray(IV_BYTES)
+        val iv = ByteArray(IV_BYTES)
+        random.nextBytes(iv)
+        return iv
     }
 
     fun encrypt(plaintext: ByteArray, iv: ByteArray): ByteArray {
-        // TODO(L05-1): implement AES/GCM/NoPadding encryption using the key from `keyProvider`.
-        // Requirements checked by tests:
-        // - Uses the provided IV (do not generate a new one inside the function).
-        // - Rejects invalid IV length with IllegalArgumentException.
-        // - Output layout is `iv || ciphertextAndTag`.
-        // - Must be deterministic for identical inputs (since IV is provided).
-        return iv + plaintext
+        if (iv.size != IV_BYTES) {
+            throw IllegalArgumentException("Invalid IV length")
+        }
+        val cipher = cipherEncrypt(iv)
+        val ciphertextAndTag = cipher.doFinal(plaintext)
+        return iv + ciphertextAndTag
     }
 
     fun decrypt(message: ByteArray): ByteArray? {
-        // TODO(L05-2): implement AES/GCM/NoPadding decryption for the `iv || ciphertextAndTag` format.
-        // Requirements checked by tests:
-        // - Returns null when the message is too short to contain an IV + tag.
-        // - Returns null when authentication fails (tamper detected).
-        return message
+        if (message.size < IV_BYTES + (TAG_BITS / 8)) {
+            return null
+        }
+        val iv = message.sliceArray(0 until IV_BYTES)
+        val ciphertextAndTag = message.sliceArray(IV_BYTES until message.size)
+        return try {
+            val cipher = cipherDecrypt(iv)
+            cipher.doFinal(ciphertextAndTag)
+        } catch (e: Exception) {
+            null
+        }
     }
 
     fun encryptBound(plaintext: ByteArray, iv: ByteArray, context: ByteArray): ByteArray {
-        // TODO(L05-5): same as encrypt(...), but bind the ciphertext to `context` using AAD.
-        // Requirements checked by tests:
-        // - Uses cipher.updateAAD(context) before doFinal(...).
-        // - Decryption must fail (return null) if context differs.
-        return encrypt(plaintext, iv)
+        if (iv.size != IV_BYTES) {
+            throw IllegalArgumentException("Invalid IV length")
+        }
+        val cipher = cipherEncrypt(iv)
+        cipher.updateAAD(context)
+        val ciphertextAndTag = cipher.doFinal(plaintext)
+        return iv + ciphertextAndTag
     }
 
     fun decryptBound(message: ByteArray, context: ByteArray): ByteArray? {
-        // TODO(L05-6): same as decrypt(...), but uses the provided `context` as AAD.
-        return decrypt(message)
+        if (message.size < IV_BYTES + (TAG_BITS / 8)) {
+            return null
+        }
+        val iv = message.sliceArray(0 until IV_BYTES)
+        val ciphertextAndTag = message.sliceArray(IV_BYTES until message.size)
+        return try {
+            val cipher = cipherDecrypt(iv)
+            cipher.updateAAD(context)
+            cipher.doFinal(ciphertextAndTag)
+        } catch (e: Exception) {
+            null
+        }
     }
 
     private fun cipherEncrypt(iv: ByteArray): Cipher {
