@@ -24,4 +24,4 @@ Student-facing test suite:
 Notes:
 - The project is scaffolded for Android Studio.
 - The Gradle wrapper JAR is not included in this workspace snapshot.
-- The lab stays runnable on low-end Android devices by using a small classifier and gallery-based enrollment/inference fallback.
+- The lab stays runnable on low-end Android devices by using a small classifier, camera capture as the main path, and gallery fallback for emulators and recovery.

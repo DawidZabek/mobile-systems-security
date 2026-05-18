@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,6 +35,7 @@ import com.example.secretlab.face.FaceImageProcessor
 import com.example.secretlab.face.FacePipeline
 import com.example.secretlab.ui.theme.SecretLabTheme
 import kotlinx.coroutines.launch
+import java.io.File
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +64,19 @@ private fun FaceLabApp() {
     var status by remember { mutableStateOf("signed out") }
     var confidence by remember { mutableStateOf("0.00") }
     var selectedUri by remember { mutableStateOf<Uri?>(null) }
+    var cameraCaptureUri by remember { mutableStateOf<Uri?>(null) }
     var selectedUser by remember { mutableStateOf(enrollmentStore.nextUserId()) }
+
+    val takePhoto = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.TakePicture(),
+    ) { success ->
+        if (!success) {
+            banner = "Camera capture canceled."
+        } else {
+            selectedUri = cameraCaptureUri
+            banner = "Camera photo captured."
+        }
+    }
 
     val pickImage = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
@@ -91,6 +105,13 @@ private fun FaceLabApp() {
                         label = { Text("Current user id") },
                         modifier = Modifier.fillMaxWidth(),
                     )
+                    Button(onClick = {
+                        val uri = createCameraImageUri(context)
+                        cameraCaptureUri = uri
+                        takePhoto.launch(uri)
+                    }) {
+                        Text("Capture face photo")
+                    }
                     Button(onClick = { pickImage.launch("image/*") }) {
                         Text("Pick face photo")
                     }
@@ -116,6 +137,7 @@ private fun FaceLabApp() {
                     }
                     Text("Selected user: $selectedUser")
                     Text(enrolled)
+                    Text("Current input: ${selectedUri?.toString() ?: "none"}")
                 }
             }
 
@@ -140,7 +162,14 @@ private fun FaceLabApp() {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text("Live inference", style = MaterialTheme.typography.titleLarge)
-                    Text("Gallery fallback works on emulator and low-end devices.")
+                    Text("Camera capture is primary; gallery fallback works on emulator and low-end devices.")
+                    Button(onClick = {
+                        val uri = createCameraImageUri(context)
+                        cameraCaptureUri = uri
+                        takePhoto.launch(uri)
+                    }) {
+                        Text("Capture inference photo")
+                    }
                     Button(onClick = { pickImage.launch("image/*") }) {
                         Text("Pick inference photo")
                     }
@@ -174,4 +203,10 @@ private fun FaceLabApp() {
             }
         }
     }
+}
+
+private fun createCameraImageUri(context: android.content.Context): Uri {
+    val dir = File(context.cacheDir, "camera").also { it.mkdirs() }
+    val file = File.createTempFile("face_capture_", ".jpg", dir)
+    return FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
 }
