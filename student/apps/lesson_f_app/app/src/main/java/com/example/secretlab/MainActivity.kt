@@ -105,10 +105,11 @@ private fun FaceLabApp() {
                                 banner = "No face detected."
                                 return@launch
                             }
-                            enrollmentStore.addSample(selectedUser, frame)
+                            val enrolledUser = selectedUser
+                            enrollmentStore.addSample(enrolledUser, frame)
                             enrolled = enrollmentStore.summary()
                             selectedUser = enrollmentStore.nextUserId()
-                            banner = "Added face crop for $selectedUser"
+                            banner = "Added face crop for $enrolledUser"
                         }
                     }) {
                         Text("Add selected face crop")
