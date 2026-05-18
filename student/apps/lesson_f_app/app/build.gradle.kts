@@ -154,7 +154,7 @@ tasks.register("bsmEvidence") {
                 totalSkipped += suiteAttrInt(suite, "skipped")
             }
             val okS = if (totalFailures == 0 && totalErrors == 0) "YES" else "NO"
-            return "E04|ok=$okS|tests=$totalTests|failures=$totalFailures|errors=$totalErrors|skipped=$totalSkipped"
+            return "F04|ok=$okS|tests=$totalTests|failures=$totalFailures|errors=$totalErrors|skipped=$totalSkipped"
         }
 
         println(
@@ -184,6 +184,16 @@ tasks.register("bsmEvidence") {
                 required = listOf(
                     "runsEndToEndInference",
                     "returnsSignedOutBelowThreshold",
+                ),
+            ),
+        )
+        println(
+            evidenceFor(
+                taskId = "F04",
+                fqcn = "com.example.secretlab.face.FaceInputPolicyStudentTest",
+                required = listOf(
+                    "cameraIsPreferredAndGalleryIsFallback",
+                    "galleryCanBeMadePrimaryForFallbackMode",
                 ),
             ),
         )
