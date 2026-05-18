@@ -1,24 +1,25 @@
 package com.example.secretlab.face
 
 import kotlin.math.exp
-import kotlin.math.max
 
 class FaceClassifier(
     private val featureWidth: Int = 16,
     private val featureHeight: Int = 16,
-    private val threshold: Double = 0.55,
+    private val threshold: Double = 0.6,
 ) {
     private var labels: List<String> = emptyList()
     private var weights: Array<DoubleArray> = emptyArray()
     private var bias: DoubleArray = doubleArrayOf()
     private var trained = false
 
-    fun train(snapshot: FaceEnrollmentSnapshot, epochs: Int = 80, learningRate: Double = 0.15) {
+    fun train(snapshot: FaceEnrollmentSnapshot, epochs: Int = 120, learningRate: Double = 0.12) {
         val dataset = snapshot.samplesByUser.entries.flatMap { (userId, frames) ->
             frames.map { userId to extractFeatures(it) }
         }
         val distinctLabels = snapshot.samplesByUser.keys.sorted()
-        require(distinctLabels.isNotEmpty()) { "No enrolled users" }
+        require(distinctLabels.size >= 5) { "Need at least 5 enrolled users" }
+        require(dataset.all { it.second.isNotEmpty() }) { "Empty training sample" }
+
         labels = distinctLabels
         val featureSize = featureWidth * featureHeight
         weights = Array(labels.size) { DoubleArray(featureSize) }
@@ -27,10 +28,10 @@ class FaceClassifier(
         repeat(epochs) {
             for ((userId, features) in dataset) {
                 val targetIndex = labels.indexOf(userId)
-                val logits = logits(features)
-                val probs = softmax(logits)
+                val probs = softmax(logits(features))
                 for (classIndex in labels.indices) {
-                    val error = probs[classIndex] - if (classIndex == targetIndex) 1.0 else 0.0
+                    val target = if (classIndex == targetIndex) 1.0 else 0.0
+                    val error = probs[classIndex] - target
                     for (i in features.indices) {
                         weights[classIndex][i] -= learningRate * error * features[i]
                     }
@@ -42,7 +43,7 @@ class FaceClassifier(
     }
 
     fun classify(frame: FaceFrame): FaceClassification {
-        if (!trained || labels.isEmpty()) {
+        if (!trained) {
             return FaceClassification(null, 0.0, "Model not trained yet.")
         }
         val features = extractFeatures(frame)
@@ -57,8 +58,7 @@ class FaceClassifier(
         }
     }
 
-    fun modelSummary(): String =
-        if (!trained) "untrained" else "logreg(${labels.size} classes, ${featureWidth}x$featureHeight)"
+    fun modelSummary(): String = if (!trained) "untrained" else "logreg(${labels.size} classes)"
 
     private fun logits(features: DoubleArray): DoubleArray {
         val result = DoubleArray(labels.size)
@@ -74,9 +74,9 @@ class FaceClassifier(
 
     private fun softmax(logits: DoubleArray): DoubleArray {
         val maxLogit = logits.maxOrNull() ?: 0.0
-        val expValues = DoubleArray(logits.size) { exp(logits[it] - maxLogit) }
-        val total = expValues.sum().coerceAtLeast(1e-12)
-        return DoubleArray(logits.size) { expValues[it] / total }
+        val exps = DoubleArray(logits.size) { exp(logits[it] - maxLogit) }
+        val total = exps.sum().coerceAtLeast(1e-12)
+        return DoubleArray(logits.size) { exps[it] / total }
     }
 
     private fun extractFeatures(frame: FaceFrame): DoubleArray {
@@ -92,8 +92,7 @@ class FaceClassifier(
                 val r = (color shr 16) and 0xFF
                 val g = (color shr 8) and 0xFF
                 val b = color and 0xFF
-                val gray = (r * 0.299 + g * 0.587 + b * 0.114) / 255.0
-                out[index++] = gray
+                out[index++] = (r * 0.299 + g * 0.587 + b * 0.114) / 255.0
             }
         }
         return out

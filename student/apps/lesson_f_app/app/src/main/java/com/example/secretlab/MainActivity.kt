@@ -1,8 +1,10 @@
 package com.example.secretlab
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,15 +22,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.secretlab.face.FaceFrame
 import com.example.secretlab.face.FaceCameraGate
 import com.example.secretlab.face.FaceClassifier
 import com.example.secretlab.face.FaceEnrollmentStore
+import com.example.secretlab.face.FaceImageProcessor
 import com.example.secretlab.face.FacePipeline
 import com.example.secretlab.ui.theme.SecretLabTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,17 +48,27 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun FaceLabApp() {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     val enrollmentStore = remember { FaceEnrollmentStore() }
     val classifier = remember { FaceClassifier() }
     val pipeline = remember { FacePipeline(enrollmentStore, classifier) }
     val cameraGate = remember { FaceCameraGate() }
+    val processor = remember { FaceImageProcessor(context) }
 
-    var banner by remember { mutableStateOf("Enroll 5 users, train the tiny head, then run local sign-in.") }
+    var banner by remember { mutableStateOf("Enroll 5 users, 10 face crops each, then train and infer.") }
     var enrolled by remember { mutableStateOf(enrollmentStore.summary()) }
     var activeUser by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("signed out") }
     var confidence by remember { mutableStateOf("0.00") }
-    var sampleInput by remember { mutableStateOf("face_sample_01") }
+    var selectedUri by remember { mutableStateOf<Uri?>(null) }
+    var selectedUser by remember { mutableStateOf(enrollmentStore.nextUserId()) }
+
+    val pickImage = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+    ) { uri ->
+        selectedUri = uri
+    }
 
     Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
         Column(
@@ -71,26 +86,34 @@ private fun FaceLabApp() {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text("Enrollment", style = MaterialTheme.typography.titleLarge)
                     OutlinedTextField(
-                        value = sampleInput,
-                        onValueChange = { sampleInput = it },
-                        label = { Text("Sample face crop id") },
+                        value = selectedUser,
+                        onValueChange = { selectedUser = it },
+                        label = { Text("Current user id") },
                         modifier = Modifier.fillMaxWidth(),
                     )
-                    Button(onClick = {
-                        val userId = "user-${enrollmentStore.userCount() + 1}"
-                        enrollmentStore.addSample(userId, syntheticFrame(sampleInput))
-                        enrolled = enrollmentStore.summary()
-                        banner = "Added sample for $userId"
-                    }) {
-                        Text("Add crop to next user")
+                    Button(onClick = { pickImage.launch("image/*") }) {
+                        Text("Pick face photo")
                     }
                     Button(onClick = {
-                        enrollmentStore.ensureFiveUsers()
-                        enrolled = enrollmentStore.summary()
-                        banner = "Prepared 5 users with starter enrollment sets."
+                        scope.launch {
+                            val uri = selectedUri ?: run {
+                                banner = "Pick a photo first."
+                                return@launch
+                            }
+                            val frame = processor.loadAndCropFace(context, uri)
+                            if (frame == null) {
+                                banner = "No face detected."
+                                return@launch
+                            }
+                            enrollmentStore.addSample(selectedUser, frame)
+                            enrolled = enrollmentStore.summary()
+                            selectedUser = enrollmentStore.nextUserId()
+                            banner = "Added face crop for $selectedUser"
+                        }
                     }) {
-                        Text("Seed 5 users")
+                        Text("Add selected face crop")
                     }
+                    Text("Selected user: $selectedUser")
                     Text(enrolled)
                 }
             }
@@ -98,10 +121,14 @@ private fun FaceLabApp() {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text("Training", style = MaterialTheme.typography.titleLarge)
-                    Text("Tiny local logistic regression on face crops.")
+                    Text("Train a small local classifier on the enrolled face crops.")
                     Button(onClick = {
-                        classifier.train(enrollmentStore.snapshot())
-                        banner = "Local model trained from ${enrollmentStore.userCount()} users."
+                        if (!enrollmentStore.hasEnoughData()) {
+                            banner = "Need 5 users and at least 10 face crops each."
+                            return@Button
+                        }
+                        pipeline.train()
+                        banner = "Local model trained from real face crops."
                     }) {
                         Text("Train")
                     }
@@ -112,16 +139,30 @@ private fun FaceLabApp() {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text("Live inference", style = MaterialTheme.typography.titleLarge)
-                    Text("This is simulator-friendly: the gate can run from imported samples.")
+                    Text("Gallery fallback works on emulator and low-end devices.")
+                    Button(onClick = { pickImage.launch("image/*") }) {
+                        Text("Pick inference photo")
+                    }
                     Button(onClick = {
-                        if (!cameraGate.isAvailable()) {
-                            banner = "Camera unavailable; using imported sample fallback."
+                        scope.launch {
+                            val uri = selectedUri ?: run {
+                                banner = "Pick a photo first."
+                                return@launch
+                            }
+                            val frame = processor.loadAndCropFace(context, uri)
+                            if (frame == null) {
+                                banner = "No face detected."
+                                return@launch
+                            }
+                            if (!cameraGate.isAvailable()) {
+                                banner = "Camera unavailable; using imported photo fallback."
+                            }
+                            val result = pipeline.infer(frame)
+                            activeUser = result.userId.orEmpty()
+                            confidence = "%.2f".format(result.confidence)
+                            status = if (result.userId == null) "signed out" else "signed in as ${result.userId}"
+                            banner = result.reason
                         }
-                        val result = pipeline.infer(syntheticFrame(sampleInput))
-                        activeUser = result.userId.orEmpty()
-                        confidence = "%.2f".format(result.confidence)
-                        status = if (result.userId == null) "signed out" else "signed in as ${result.userId}"
-                        banner = result.reason
                     }) {
                         Text("Run inference")
                     }
@@ -132,18 +173,4 @@ private fun FaceLabApp() {
             }
         }
     }
-}
-
-private fun syntheticFrame(seedText: String): FaceFrame {
-    val width = 32
-    val height = 32
-    val pixels = IntArray(width * height)
-    val seed = seedText.hashCode()
-    for (y in 0 until height) {
-        for (x in 0 until width) {
-            val value = ((x * 31 + y * 17 + seed) and 0xFF).coerceIn(0, 255)
-            pixels[y * width + x] = 0xFF000000.toInt() or (value shl 16) or (value shl 8) or value
-        }
-    }
-    return FaceFrame(width, height, pixels)
 }

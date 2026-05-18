@@ -8,7 +8,7 @@ class FacePipeline(
         classifier.train(enrollmentStore.snapshot())
     }
 
-    fun infer(frame: FaceFrame): FaceClassification {
-        return classifier.classify(frame)
-    }
+    fun infer(frame: FaceFrame): FaceClassification = classifier.classify(frame)
+
+    fun canTrain(): Boolean = enrollmentStore.hasEnoughData()
 }

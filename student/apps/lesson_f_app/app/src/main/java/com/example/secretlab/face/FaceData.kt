@@ -1,9 +1,12 @@
 package com.example.secretlab.face
 
+import android.net.Uri
+
 data class FaceFrame(
     val width: Int,
     val height: Int,
     val pixels: IntArray,
+    val source: Uri? = null,
 )
 
 data class FaceSample(
