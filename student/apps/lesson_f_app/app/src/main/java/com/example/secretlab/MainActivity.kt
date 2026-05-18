@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.secretlab.face.FaceFrame
 import com.example.secretlab.face.FaceCameraGate
 import com.example.secretlab.face.FaceClassifier
 import com.example.secretlab.face.FaceEnrollmentStore
@@ -52,7 +53,7 @@ private fun FaceLabApp() {
     var activeUser by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("signed out") }
     var confidence by remember { mutableStateOf("0.00") }
-    var sampleInput by remember { mutableStateOf("face_embedding_01") }
+    var sampleInput by remember { mutableStateOf("face_sample_01") }
 
     Scaffold(modifier = Modifier.fillMaxSize()) { padding ->
         Column(
@@ -72,12 +73,12 @@ private fun FaceLabApp() {
                     OutlinedTextField(
                         value = sampleInput,
                         onValueChange = { sampleInput = it },
-                        label = { Text("Sample face crop / embedding id") },
+                        label = { Text("Sample face crop id") },
                         modifier = Modifier.fillMaxWidth(),
                     )
                     Button(onClick = {
                         val userId = "user-${enrollmentStore.userCount() + 1}"
-                        enrollmentStore.addSample(userId, sampleInput)
+                        enrollmentStore.addSample(userId, syntheticFrame(sampleInput))
                         enrolled = enrollmentStore.summary()
                         banner = "Added sample for $userId"
                     }) {
@@ -97,7 +98,7 @@ private fun FaceLabApp() {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text("Training", style = MaterialTheme.typography.titleLarge)
-                    Text("Tiny local head on top of face crops or embeddings.")
+                    Text("Tiny local logistic regression on face crops.")
                     Button(onClick = {
                         classifier.train(enrollmentStore.snapshot())
                         banner = "Local model trained from ${enrollmentStore.userCount()} users."
@@ -116,7 +117,7 @@ private fun FaceLabApp() {
                         if (!cameraGate.isAvailable()) {
                             banner = "Camera unavailable; using imported sample fallback."
                         }
-                        val result = pipeline.infer(sampleInput)
+                        val result = pipeline.infer(syntheticFrame(sampleInput))
                         activeUser = result.userId.orEmpty()
                         confidence = "%.2f".format(result.confidence)
                         status = if (result.userId == null) "signed out" else "signed in as ${result.userId}"
@@ -131,4 +132,18 @@ private fun FaceLabApp() {
             }
         }
     }
+}
+
+private fun syntheticFrame(seedText: String): FaceFrame {
+    val width = 32
+    val height = 32
+    val pixels = IntArray(width * height)
+    val seed = seedText.hashCode()
+    for (y in 0 until height) {
+        for (x in 0 until width) {
+            val value = ((x * 31 + y * 17 + seed) and 0xFF).coerceIn(0, 255)
+            pixels[y * width + x] = 0xFF000000.toInt() or (value shl 16) or (value shl 8) or value
+        }
+    }
+    return FaceFrame(width, height, pixels)
 }

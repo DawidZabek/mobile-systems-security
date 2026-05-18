@@ -157,53 +157,31 @@ tasks.register("bsmEvidence") {
 
         println(
             evidenceFor(
-                taskId = "E01",
-                fqcn = "com.example.secretlab.secure.SecretBoxStudentTest",
+                taskId = "F01",
+                fqcn = "com.example.secretlab.face.FaceEnrollmentStoreStudentTest",
                 required = listOf(
-                    "encryptsAsIvPlusCiphertextAndDecryptsBack",
-                    "detectsTamperingAndReturnsNull",
-                    "rejectsWrongIvLengthInEncrypt",
+                    "ensuresFiveUsersWithTenSamplesEach",
+                    "storesOnlyFaceFrames",
                 ),
             ),
         )
         println(
             evidenceFor(
-                taskId = "E02",
-                fqcn = "com.example.secretlab.secure.BiometricBoundSecretStoreStudentTest",
+                taskId = "F02",
+                fqcn = "com.example.secretlab.face.FaceClassifierStudentTest",
                 required = listOf(
-                    "refusesToRevealSecretWithoutToken",
-                    "refusesToRevealSecretWhenTokenIsTooOld",
-                    "revealsSecretWhenTokenIsFreshEnough",
-                    "refusesToRevealSecretWhenTokenIsFromFuture",
+                    "trainsARealHeadOnImageFeatures",
+                    "classifiesTrainedUserAboveThreshold",
                 ),
             ),
         )
         println(
             evidenceFor(
-                taskId = "E03",
-                fqcn = "com.example.secretlab.secure.SecretBoxStudentTest",
+                taskId = "F03",
+                fqcn = "com.example.secretlab.face.FacePipelineStudentTest",
                 required = listOf(
-                    "bindsCiphertextToContextWithAad",
-                ),
-            ),
-        )
-        println(
-            evidenceFor(
-                taskId = "E04",
-                fqcn = "com.example.secretlab.secure.SecretBoxStudentTest",
-                required = listOf(
-                    "generateIvReturns12BytesAndIsFresh",
-                ),
-            ),
-        )
-        println(
-            evidenceFor(
-                taskId = "E05",
-                fqcn = "com.example.secretlab.secure.SecretBoxStudentTest",
-                required = listOf(
-                    "returnsNullWhenMessageTooShort",
-                    "decryptBoundReturnsNullWhenContextDiffers",
-                    "detectsTamperingAndReturnsNull",
+                    "runsEndToEndInference",
+                    "returnsSignedOutBelowThreshold",
                 ),
             ),
         )
