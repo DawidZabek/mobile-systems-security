@@ -9,6 +9,7 @@ What is intentionally unfinished or weak:
 
 Main files used by the notebook:
 - `app/src/main/java/com/example/secretlab/MainActivity.kt`
+- `app/src/main/java/com/example/secretlab/face/FaceData.kt`
 - `app/src/main/java/com/example/secretlab/face/FaceEnrollmentStore.kt`
 - `app/src/main/java/com/example/secretlab/face/FaceClassifier.kt`
 - `app/src/main/java/com/example/secretlab/face/FacePipeline.kt`
