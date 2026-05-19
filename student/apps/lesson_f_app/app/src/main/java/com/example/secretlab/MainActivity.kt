@@ -45,9 +45,11 @@ import com.example.secretlab.face.FaceFineTuningBridge
 import com.example.secretlab.face.FacePhoto
 import com.example.secretlab.face.FaceInputPolicy
 import com.example.secretlab.face.FaceSession
+import com.example.secretlab.face.FaceTfliteSession
 import com.example.secretlab.face.FaceTrainingPolicy
 import com.example.secretlab.face.InputSource
 import java.io.File
+import java.nio.ByteBuffer
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +67,7 @@ private fun FaceLabScreen() {
     val backbone = remember { FaceBackboneCheckpoint(exportedFromColab = true) }
     val runnerBridge = remember { FaceFineTuningBridge() }
     val session = remember { FaceSession() }
+    val tfliteSession = remember { FaceTfliteSession(context) }
     var banner by remember { mutableStateOf("Five users. Edit photos per user. Train when every slot is ready.") }
     var editor by remember { mutableStateOf<Int?>(null) }
     var selectedPhoto by remember { mutableStateOf<Uri?>(null) }
@@ -121,6 +124,7 @@ private fun FaceLabScreen() {
             Text("Inference ready: ${runnerBridge.isReadyForInference}")
             Text("Session: ${runnerBridge.sessionSummary}")
             Text("Live status: ${session.statusLine()}")
+            Text("TFLite ready: ${tfliteSession.isReady()}")
             Text("Live camera loop: every ${trainingPolicy.backgroundInferenceEverySeconds} seconds")
             selectedPhoto?.let { Text("Last selected photo: $it") }
 
@@ -142,7 +146,14 @@ private fun FaceLabScreen() {
 
             Button(
                 onClick = {
-                    banner = if (box.allReady()) "Ready for training." else "Need 10 photos per user."
+                    banner = if (box.allReady()) {
+                        tfliteSession.open()
+                        val result = tfliteSession.processFrame(ByteBuffer.allocate(96 * 96 * 3 * 4), 0L)
+                        result?.let { session.update(it) }
+                        "Training bridge ready."
+                    } else {
+                        "Need 10 photos per user."
+                    }
                 },
             ) {
                 Icon(Icons.Default.Add, contentDescription = null)
