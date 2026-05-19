@@ -116,6 +116,8 @@ private fun FaceLabScreen() {
             Text("Colab backbone ready: ${trainingPolicy.backboneTrainedInColab}")
             Text("Backbone: ${backbone.spec.modelName} ${backbone.spec.inputShape} -> ${backbone.spec.embeddingSize}d")
             Text("Runner ready: ${runnerBridge.isReadyForOnDeviceTraining}")
+            Text("Inference ready: ${runnerBridge.isReadyForInference}")
+            Text("Session: ${runnerBridge.sessionSummary}")
             Text("Live camera loop: every ${trainingPolicy.backgroundInferenceEverySeconds} seconds")
             selectedPhoto?.let { Text("Last selected photo: $it") }
 
