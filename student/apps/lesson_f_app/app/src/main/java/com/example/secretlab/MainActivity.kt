@@ -128,6 +128,8 @@ private fun FaceLabScreen() {
             Text("Signed-in code: ${FaceCompletionCodeBook.signedInCode(session)}")
             Text("Runner code: ${FaceCompletionCodeBook.runnerReadyCode(runnerBridge)}")
             Text("Tests code: ${FaceCompletionCodeBook.testsPassCode(box)}")
+            Text("Metric MSE code: ${FaceCompletionCodeBook.trainingMseCode(0.10)}")
+            Text("Metric ACC code: ${FaceCompletionCodeBook.trainingAccuracyCode(0.91)}")
             Text("TFLite ready: ${tfliteSession.isReady()}")
             Text("Live camera loop: every ${trainingPolicy.backgroundInferenceEverySeconds} seconds")
             selectedPhoto?.let { Text("Last selected photo: $it") }
