@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.example.secretlab.face.FaceEnrollmentBox
 import com.example.secretlab.face.FaceBackboneCheckpoint
+import com.example.secretlab.face.FaceCompletionCodeBook
 import com.example.secretlab.face.FaceFineTuningBridge
 import com.example.secretlab.face.FacePhoto
 import com.example.secretlab.face.FaceInputPolicy
@@ -124,6 +125,9 @@ private fun FaceLabScreen() {
             Text("Inference ready: ${runnerBridge.isReadyForInference}")
             Text("Session: ${runnerBridge.sessionSummary}")
             Text("Live status: ${session.statusLine()}")
+            Text("Signed-in code: ${FaceCompletionCodeBook.signedInCode(session)}")
+            Text("Runner code: ${FaceCompletionCodeBook.runnerReadyCode(runnerBridge)}")
+            Text("Tests code: ${FaceCompletionCodeBook.testsPassCode(box)}")
             Text("TFLite ready: ${tfliteSession.isReady()}")
             Text("Live camera loop: every ${trainingPolicy.backgroundInferenceEverySeconds} seconds")
             selectedPhoto?.let { Text("Last selected photo: $it") }
@@ -150,7 +154,7 @@ private fun FaceLabScreen() {
                         tfliteSession.open()
                         val result = tfliteSession.processFrame(ByteBuffer.allocate(96 * 96 * 3 * 4), 0L)
                         result?.let { session.update(it) }
-                        "Training bridge ready."
+                        "Training bridge ready. Code: ${FaceCompletionCodeBook.signedInCode(session)}"
                     } else {
                         "Need 10 photos per user."
                     }
