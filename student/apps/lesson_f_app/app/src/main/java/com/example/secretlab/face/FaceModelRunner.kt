@@ -32,6 +32,25 @@ data class FaceFineTuningBridge(
         get() = "${artifact.spec.modelName}:${artifact.spec.inputShape}/${artifact.spec.embeddingSize}d"
 }
 
+data class FaceTrainingProgress(
+    val epoch: Int = 0,
+    val totalEpochs: Int = 0,
+    val loss: Double? = null,
+    val accuracy: Double? = null,
+) {
+    val hasMetrics: Boolean
+        get() = loss != null && accuracy != null
+
+    fun progressFraction(): Float =
+        if (totalEpochs <= 0) 0f else epoch.coerceAtMost(totalEpochs).toFloat() / totalEpochs.toFloat()
+
+    fun summary(): String = when {
+        totalEpochs <= 0 -> "training not started"
+        hasMetrics -> "epoch $epoch/$totalEpochs, loss=${"%.2f".format(loss)}, acc=${"%.2f".format(accuracy)}"
+        else -> "epoch $epoch/$totalEpochs, metrics pending"
+    }
+}
+
 private fun FacePreprocessingPipeline.toSpec(): FaceBackboneSpec = FaceBackboneSpec(
     inputWidth = targetWidth,
     inputHeight = targetHeight,
