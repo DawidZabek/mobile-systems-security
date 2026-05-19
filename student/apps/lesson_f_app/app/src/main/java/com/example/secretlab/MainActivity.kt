@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import com.example.secretlab.face.FaceEnrollmentBox
 import com.example.secretlab.face.FaceBackboneCheckpoint
+import com.example.secretlab.face.FaceFineTuningBridge
 import com.example.secretlab.face.FacePhoto
 import com.example.secretlab.face.FaceInputPolicy
 import com.example.secretlab.face.FaceTrainingPolicy
@@ -61,6 +62,7 @@ private fun FaceLabScreen() {
     val inputPolicy = remember { FaceInputPolicy(InputSource.CAMERA) }
     val trainingPolicy = remember { FaceTrainingPolicy(backboneTrainedInColab = true) }
     val backbone = remember { FaceBackboneCheckpoint(exportedFromColab = true) }
+    val runnerBridge = remember { FaceFineTuningBridge() }
     var banner by remember { mutableStateOf("Five users. Edit photos per user. Train when every slot is ready.") }
     var editor by remember { mutableStateOf<Int?>(null) }
     var selectedPhoto by remember { mutableStateOf<Uri?>(null) }
@@ -113,6 +115,7 @@ private fun FaceLabScreen() {
             Text("Main input: ${inputPolicy.preferredSource} / fallback: ${inputPolicy.fallbackSource}")
             Text("Colab backbone ready: ${trainingPolicy.backboneTrainedInColab}")
             Text("Backbone: ${backbone.spec.modelName} ${backbone.spec.inputShape} -> ${backbone.spec.embeddingSize}d")
+            Text("Runner ready: ${runnerBridge.isReadyForOnDeviceTraining}")
             Text("Live camera loop: every ${trainingPolicy.backgroundInferenceEverySeconds} seconds")
             selectedPhoto?.let { Text("Last selected photo: $it") }
 
