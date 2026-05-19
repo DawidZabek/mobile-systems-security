@@ -44,6 +44,7 @@ import com.example.secretlab.face.FaceBackboneCheckpoint
 import com.example.secretlab.face.FaceFineTuningBridge
 import com.example.secretlab.face.FacePhoto
 import com.example.secretlab.face.FaceInputPolicy
+import com.example.secretlab.face.FaceSession
 import com.example.secretlab.face.FaceTrainingPolicy
 import com.example.secretlab.face.InputSource
 import java.io.File
@@ -63,6 +64,7 @@ private fun FaceLabScreen() {
     val trainingPolicy = remember { FaceTrainingPolicy(backboneTrainedInColab = true) }
     val backbone = remember { FaceBackboneCheckpoint(exportedFromColab = true) }
     val runnerBridge = remember { FaceFineTuningBridge() }
+    val session = remember { FaceSession() }
     var banner by remember { mutableStateOf("Five users. Edit photos per user. Train when every slot is ready.") }
     var editor by remember { mutableStateOf<Int?>(null) }
     var selectedPhoto by remember { mutableStateOf<Uri?>(null) }
@@ -118,6 +120,7 @@ private fun FaceLabScreen() {
             Text("Runner ready: ${runnerBridge.isReadyForOnDeviceTraining}")
             Text("Inference ready: ${runnerBridge.isReadyForInference}")
             Text("Session: ${runnerBridge.sessionSummary}")
+            Text("Live status: ${session.statusLine()}")
             Text("Live camera loop: every ${trainingPolicy.backgroundInferenceEverySeconds} seconds")
             selectedPhoto?.let { Text("Last selected photo: $it") }
 
