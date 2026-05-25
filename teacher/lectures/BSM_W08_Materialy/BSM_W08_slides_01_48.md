@@ -145,10 +145,9 @@ IPv6 link-local
 ## definition
 IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10.
 ## teleprompter:
-IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+Adres link-local ma sens tylko na jednej karcie sieciowej i tylko w obrębie jednego segmentu. Zapis `fe80::/10` od razu mówi, że nie chodzi o routowalny Internet, tylko o lokalne sąsiedztwo sieciowe.
+W praktyce ten adres jest używany tam, gdzie urządzenia chcą się znaleźć bez centralnego serwera. To jest wygodne dla discovery, ale nie daje żadnego dowodu tożsamości endpointu.
+Jeżeli aplikacja traktuje sam lokalny adres jako zaufanie, to myli sąsiedztwo sieciowe z bezpieczeństwem. Dlatego obrona nie może opierać się na samym formacie adresu.
 
 #slide 10
 ## layout
@@ -158,14 +157,14 @@ IPv6 link-local
 ## subtitle
 Jak działa
 ## bullets
-- IPv6 link-local: mDNS używa rekordów PTR SRV i TXT na…
-- IPv6 link-local: mDNS SSDP i link-local IPv6 pokazują że sama…
-- IPv6 link-local: LAN powinien być odcięty od Internetu na poziomie…
+- Adres tylko dla jednej karty
+- Zakres `fe80::/10`
+- Discovery bez zaufania
+- Lokalność nie znaczy bezpieczeństwo
 ## teleprompter:
-IPv6 link-local zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
+Link-local IPv6 nie przechodzi przez routery, więc nie da się go traktować jak zwykłego endpointu internetowego. Jeśli aplikacja spotyka adres `fe80::`, musi jeszcze wiedzieć, na którym interfejsie ma go użyć.
+Bez scope ID adres bywa niejednoznaczny, a klient może wybrać złą kartę sieciową albo błędną trasę. To jest dokładnie ten moment, w którym sieć lokalna przestaje być wygodą, a staje się potencjalnym źródłem pomyłki.
+Sama lokalność nie wystarcza do zaufania. Jeśli klient nie sprawdza hosta i interfejsu, to lokalny adres może prowadzić do fałszywego endpointu równie łatwo jak każdy inny rekord discovery.
 
 #slide 11
 ## layout
@@ -175,14 +174,14 @@ IPv6 link-local
 ## subtitle
 Jak pęka
 ## bullets
-- IPv6 link-local: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- IPv6 link-local: mDNS używa rekordów PTR SRV i TXT na…
-- IPv6 link-local: mDNS SSDP i link-local IPv6 pokazują że sama…
+- Fałszywy endpoint na LAN
+- Zły wybór interfejsu
+- Brak walidacji hosta
+- Adres nie daje zaufania
 ## teleprompter:
-IPv6 link-local przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Atak na link-local IPv6 polega na wykorzystaniu zaufania do lokalności. Klient widzi `fe80::` i zakłada, że to właściwa usługa, choć nie ma jeszcze potwierdzenia źródła.
+Jeśli aplikacja nie sprawdza scope ID, hosta i odpowiedzi, może połączyć się z fałszywym endpointem na tej samej sieci albo na sąsiednim interfejsie. To nie jest problem routingu, tylko problem zaufania do adresu.
+Efekt to mylące discovery albo ruch skierowany do podstawionego urządzenia. Sam format adresu nie daje bezpieczeństwa, a jedynie informację, gdzie szukać usługi.
 
 #slide 12
 ## layout
@@ -192,14 +191,14 @@ IPv6 link-local
 ## subtitle
 Jak się bronić
 ## bullets
-- IPv6 link-local: LAN powinien być odcięty od Internetu na poziomie…
-- IPv6 link-local: mDNS używa rekordów PTR SRV i TXT na…
-- IPv6 link-local: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- Scope ID obowiązkowy
+- `fe80::` to za mało
+- Walidować host i port
+- Test na złą kartę
 ## teleprompter:
-IPv6 link-local wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Obrona link-local IPv6 zaczyna się od poprawnego wskazania interfejsu i scope ID. Bez tego klient nie wie, czy rozmawia z właściwym sąsiadem sieciowym.
+Nie można zakładać, że sam adres `fe80::` wystarczy do zaufania. Trzeba jeszcze sprawdzić host, port i źródło odpowiedzi, bo tylko to oddziela lokalny parametr od prawdziwej usługi.
+Test powinien wykazać, że zła karta sieciowa albo podstawiony endpoint nie przechodzą przez walidację. Jeśli to działa, wtedy lokalność jest tylko cechą transportu, a nie dowodem bezpieczeństwa.
 
 #slide 13
 ## layout
@@ -213,10 +212,9 @@ Raw socket access
 ## definition
 Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET.
 ## teleprompter:
-Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+Raw socket pozwala aplikacji wysyłać i odbierać pakiety bez mediacji frameworka. To oznacza, że mDNS, SSDP albo inne lokalne protokoły discovery można implementować bez wyższego API.
+To jest jednocześnie wygodne i niebezpieczne. Jeśli `INTERNET` zostaje jedynym wymaganym pozwoleniem, aplikacja może nadal próbować wchodzić do LAN, bo sama tworzy pakiety i sama je czyta.
+W takim modelu to aplikacja decyduje, czy ufa odpowiedziom, czy tylko je obserwuje. Bez dodatkowej blokady na etapie socketu ruch lokalny pozostaje otwarty nawet wtedy, gdy platforma próbuje go ograniczać.
 
 #slide 14
 ## layout
@@ -226,14 +224,14 @@ Raw socket access
 ## subtitle
 Jak działa
 ## bullets
-- Raw socket access: mDNS używa rekordów PTR SRV i TXT na…
-- Raw socket access: mDNS SSDP i link-local IPv6 pokazują że sama…
-- Raw socket access: LAN powinien być odcięty od Internetu na poziomie…
+- Pakiety bez mediacji
+- `INTERNET` za szeroki
+- Discovery niżej niż framework
+- Własna obsługa odpowiedzi
 ## teleprompter:
-Raw socket access zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
+Raw socket schodzi niżej niż framework i dlatego daje pełną kontrolę nad formatem pakietu i sposobem odpowiedzi. To jest dobre do własnego discovery, ale złe, jeśli aplikacja myli techniczną możliwość z prawem do korzystania z LAN.
+Gdy ruch idzie bez mediacji frameworka, obrona musi zadziałać w miejscu tworzenia socketu, a nie dopiero na poziomie logiki aplikacji. W przeciwnym razie raw socket dalej będzie próbował rozmawiać z lokalnymi usługami.
+W praktyce oznacza to, że zwykły `INTERNET` nie powinien wystarczać do skanowania LAN. Jeśli trzeba discovery, trzeba też osobno pilnować, jakie odpowiedzi są przyjmowane i kiedy blokada ma obowiązywać.
 
 #slide 15
 ## layout
@@ -243,14 +241,14 @@ Raw socket access
 ## subtitle
 Jak pęka
 ## bullets
-- Raw socket access: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- Raw socket access: mDNS używa rekordów PTR SRV i TXT na…
-- Raw socket access: mDNS SSDP i link-local IPv6 pokazują że sama…
+- Fałszywe odpowiedzi z sieci
+- Brak walidacji pakietu
+- Timeout albo EPERM
+- Zły host i port
 ## teleprompter:
-Raw socket access przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Atak na raw socket polega na wykorzystaniu tego, że odpowiedź z LAN może zostać przyjęta bez wystarczającej walidacji. Jeśli pakiet jest poprawny składniowo, klient może uznać go za poprawny merytorycznie.
+To pozwala wstrzyknąć fałszywy endpoint, podmienić usługę albo wywołać połączenie, które kończy się timeoutem czy EPERM dopiero po stronie systemu. W praktyce przeciwnik nie potrzebuje pełnego przejęcia sieci, tylko fałszywej odpowiedzi.
+Efekt jest podobny jak przy mDNS czy SSDP: aplikacja myśli, że znalazła właściwą usługę, a w rzeczywistości łączy się z podstawionym hostem albo z niczym. Bez walidacji źródła pakietu taki błąd jest trudny do zauważenia.
 
 #slide 16
 ## layout
@@ -260,14 +258,14 @@ Raw socket access
 ## subtitle
 Jak się bronić
 ## bullets
-- Raw socket access: LAN powinien być odcięty od Internetu na poziomie…
-- Raw socket access: mDNS używa rekordów PTR SRV i TXT na…
-- Raw socket access: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- Odcinanie LAN od Internetu
+- Przyznanie lokalnego dostępu
+- Blokada przy socket creation
+- Sprawdzenie po revocation
 ## teleprompter:
-Raw socket access wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Obrona raw socketów musi działać na poziomie przyznawania dostępu i tworzenia połączenia. Jeśli aplikacja nie potrzebuje discovery, nie powinna mieć otwartego LAN tylko dlatego, że ma `INTERNET`.
+Android 16 i późniejszy model lokalnej sieci wymagają jasnego wskazania, kiedy dostęp do LAN jest naprawdę potrzebny. To właśnie wtedy można użyć testu z NDK helperem, żeby zobaczyć, czy blokada faktycznie działa.
+Jeżeli po revocation aplikacja nadal czyta odpowiedzi z LAN, to obrona jest nieskuteczna. Dobry test ma pokazać, że surowy pakiet nie przechodzi dalej niż to, na co pozwala polityka.
 
 #slide 17
 ## layout
