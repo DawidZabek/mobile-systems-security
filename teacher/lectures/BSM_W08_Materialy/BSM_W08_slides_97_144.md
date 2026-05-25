@@ -758,9 +758,7 @@ Native versus Java
 ## definition
 Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex.
 ## teleprompter:
-W Java i w native chodzi o ten sam punkt: kod można podmienić przed wykonaniem.
-Dex i biblioteki `.so` różnią się mechaniką, ale nie zmienia to ryzyka związanego z pochodzeniem payloadu.
-Jeśli ładujesz moduł, musisz wiedzieć, czy pochodzi z zaufanego storage i czy jego integralność została sprawdzona.
+W obu ścieżkach najpierw pojawia się artefakt, potem weryfikacja, a dopiero potem wykonanie. W Java tym artefaktem jest dex, a w native biblioteka `.so` ładowana przez `dlopen` i `dlsym`. Różnica leży w interfejsie, nie w modelu ryzyka: jeśli źródło nie jest zaufane, ścieżka kończy się tak samo.
 
 #slide 142
 ## layout
@@ -770,13 +768,11 @@ Native versus Java
 ## subtitle
 Jak działa
 ## bullets
-- odrębne ścieżki dla dex i .so
-- verify przed load
-- trust nie może siedzieć obok payloadu
+- dex przechodzi przez loader
+- `.so` przechodzi przez `dlopen`
+- integralność sprawdza się wcześniej
 ## teleprompter:
-Ścieżka Java używa loadera dla dex, a natywna ścieżka używa `dlopen` i `dlsym`.
-W obu przypadkach weryfikacja musi nastąpić przed wykonaniem.
-Referencja zaufania nie może leżeć obok pliku, który ma być ładowany, bo wtedy łatwo ją podmienić razem z payloadem.
+Ścieżka Java kończy się na loaderze klas, a ścieżka natywna na `dlopen` i `dlsym`. W obu przypadkach kolejność jest ta sama: pobranie, zapis, sprawdzenie referencji, dopiero potem load. Jeśli referencja hash albo podpis leży obok payloadu, nie chroni przed podmianą.
 
 #slide 143
 ## layout
@@ -786,13 +782,11 @@ Native versus Java
 ## subtitle
 Jak pęka
 ## bullets
-- podmiana dex lub .so
-- payload w shared storage
-- internet bez kontroli pochodzenia
+- zamiana pliku przed verify
+- katalog współdzielony
+- kod z sieci bez kontroli
 ## teleprompter:
-Breach pojawia się wtedy, gdy ktoś podmieni dex albo bibliotekę `.so` przed weryfikacją.
-Jeśli kod leży w współdzielonym storage albo przychodzi z internetu bez kontroli pochodzenia, atakujący może wejść w code execution lub usunąć funkcję aplikacji.
-W tej ścieżce exploit jest prosty: podmiana pliku, brak verify i wykonanie zaufane tylko z nazwy.
+Pęknięcie zaczyna się od podmiany pliku przed weryfikacją. Wystarczy katalog współdzielony albo pobranie z sieci bez kontroli pochodzenia, żeby code execution był tylko kwestią czasu. W praktyce exploit nie potrzebuje złożonego łańcucha, tylko niekontrolowanego pliku i zaufania do nazwy.
 
 #slide 144
 ## layout
@@ -802,10 +796,8 @@ Native versus Java
 ## subtitle
 Jak się bronić
 ## bullets
-- verify-before-load dla obu ścieżek
-- rollback i audit log
-- testy podmiany i braków w uprawnieniach
+- ta sama reguła dla dex i `.so`
+- fallback po błędnym podpisie
+- testy podmiany oraz braku odczytu
 ## teleprompter:
-Obrona musi być taka sama dla Java i native: verify-before-load, sprawdzenie trusted sources i odrzucenie pliku po złym hash albo podpisie.
-Jeśli moduł aktualizuje się dynamicznie, potrzebujesz rollbacku i audit logu.
-Testy muszą obejmować podmianę pliku, uszkodzony digest i przypadek, w którym brakuje prawa do odczytu payloadu.
+Obrona nie może rozróżniać Java i native w kwestii zaufania: dla obu obowiązuje verify-before-load i odrzucenie artefaktu po złym podpisie. Jeśli moduł ma się aktualizować dynamicznie, trzeba mieć bezpieczny fallback i możliwość rollbacku. Test powinien sprawdzić podmianę, błędny digest i sytuację, w której pliku nie da się w ogóle odczytać.
