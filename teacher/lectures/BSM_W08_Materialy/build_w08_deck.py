@@ -35,9 +35,9 @@ BLOCKS = [
         "file": "BSM_W08_slides_01_48.md",
         "title": "Lokalna sieć i discovery",
         "lead": "mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.",
-        "mechanics": "W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.",
-        "attack": "Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.",
-        "defense": "Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.",
+        "mechanics": "mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.",
+        "attack": "Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.",
+        "defense": "LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.",
         "subtopics": {
             "mDNS record anatomy": "mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353.",
             "SSDP discovery": "SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION.",
@@ -57,9 +57,9 @@ BLOCKS = [
         "file": "BSM_W08_slides_49_96.md",
         "title": "Selected media i photo picker",
         "lead": "Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.",
-        "mechanics": "Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.",
-        "attack": "Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.",
-        "defense": "Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.",
+        "mechanics": "Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji.",
+        "attack": "Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.",
+        "defense": "Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.",
         "subtopics": {
             "Media as data class": "Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych.",
             "Selected Photos Access": "Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika.",
@@ -79,9 +79,9 @@ BLOCKS = [
         "file": "BSM_W08_slides_97_144.md",
         "title": "Dynamic code loading",
         "lead": "Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.",
-        "mechanics": "W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.",
-        "attack": "Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.",
-        "defense": "Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.",
+        "mechanics": "Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone.",
+        "attack": "Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.",
+        "defense": "Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.",
         "subtopics": {
             "Why DCL exists": "DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates.",
             "Attack surface": "Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić.",
@@ -101,9 +101,9 @@ BLOCKS = [
         "file": "BSM_W08_slides_145_192.md",
         "title": "Retencja i secure deletion",
         "lead": "Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.",
-        "mechanics": "Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.",
-        "attack": "Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.",
-        "defense": "Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.",
+        "mechanics": "W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.",
+        "attack": "Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.",
+        "defense": "Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.",
         "subtopics": {
             "Retention vs disposal": "Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu.",
             "Why delete fails": "Delete zawodzi przez remanencję danych i metadanych.",
@@ -123,9 +123,9 @@ BLOCKS = [
         "file": "BSM_W08_slides_193_240.md",
         "title": "Apple continuity i cross-device services",
         "lead": "Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.",
-        "mechanics": "W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.",
-        "attack": "Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.",
-        "defense": "PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.",
+        "mechanics": "Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.",
+        "attack": "Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.",
+        "defense": "PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.",
         "subtopics": {
             "Continuity overview": "Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing.",
             "Handoff discovery": "Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity.",
@@ -250,9 +250,9 @@ def teleprompter(num: int, block: dict, subtopic: str, aspect: str) -> str:
 
     return (
         f"Slajd {num}. {subtopic}. {block['title']}.\n\n"
-        f"{first}\n\n"
-        f"{p2}\n\n"
-        f"{p3}\n\n"
+        f"{first}\n"
+        f"{p2}\n"
+        f"{p3}\n"
         f"{p4}"
     )
 
