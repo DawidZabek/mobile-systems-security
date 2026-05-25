@@ -108,9 +108,9 @@ Zakres: bezpieczenstwo aplikacji mobilnych i danych lokalnych.
 2. Android `InputMethodManager` reference - WWW
    - https://developer.android.com/reference/android/view/inputmethod/InputMethodManager
    - co czytac: API surface and security implications
-3. Android keylogging threat - PDF
-   - https://eudl.eu/pdf/10.4108/icst.collaboratecom.2013.254209
-   - co czytac: keyboard-as-malware idea, threat model, evaluation
+3. Wang, Lagesse, "KeyGuard: Using Selective Encryption to Mitigate Keylogging in Third-Party IME" - PDF
+   - lokalnie: `teacher/lectures/BSM_W08_Materialy/papers/keyguard.pdf`
+   - co czytac: ABSTRACT, 1. INTRODUCTION, 2. BACKGROUND, 3. KEYGUARD, 3.1 Threat Models
 
 ## 11. Dynamiczne ładowanie kodu
 1. Android Developers, Dynamic Code Loading - WWW
@@ -119,20 +119,20 @@ Zakres: bezpieczenstwo aplikacji mobilnych i danych lokalnych.
 2. OWASP MASTG code loading guidance - WWW
    - https://mas.owasp.org/MASTG/
    - co czytac: code integrity and trusted sources
-3. Android dynamic linker docs - WWW
-   - https://developer.android.com/ndk/reference/group/libdl
-   - co czytac: shared objects and loader behavior
+3. Qu, Alam, Chen, Zhou, Hong, Riley, "DYDROID: Measuring Dynamic Code Loading and Its Security Implications in Android Applications" - PDF
+   - lokalnie: `teacher/lectures/BSM_W08_Materialy/papers/dydroid.pdf`
+   - co czytac: abstract, I. Introduction, II. Challenges, III. Rooting Techniques, findings on provenance and injection
 
 ## 12. Wykrywanie roota / stan urzadzenia
 1. Bialon, "On Root Detection Strategies for Android Devices" - PDF
    - lokalnie: `teacher/lectures/BSM_W08_Materialy/papers/root-detection.pdf`
    - co czytac: abstract, III. Rooting Techniques, IV. Rooting Mitigation
-2. "Can Root Detection Be Trusted? A Study of Bypass Techniques on Mobile Platforms" - PDF
-   - https://www.sans.org/white-papers/can-root-detection-be-trusted-bypass-techniques-mobile-platforms
-   - co czytac: bypass techniques, findings, limitations
-3. "Android Rooting: An Arms Race between Evasion and Detection" - paper page
-   - https://www.semanticscholar.org/paper/Android-Rooting%3A-An-Arms-Race-between-Evasion-and-Nguyen-Vu-Chau/d38ccc4e80bf78b435da3916b9ecd118561ac472
-   - co czytac: detection vs evasion framing
+2. BSM W09 Android Bezpieczenstwo - WWW
+   - https://developer.android.com/google/play/integrity/overview
+   - co czytac: device integrity, verdicts, backend use
+3. On Root Detection Strategies paper discussion + vendor hardening docs - WWW
+   - https://developer.android.com/privacy-and-security/security-key-attestation
+   - co czytac: attestation as a signal and limits of simple checks
 
 ## 13. Sygnały integralności urządzenia
 1. Play Integrity overview - WWW
@@ -157,15 +157,15 @@ Zakres: bezpieczenstwo aplikacji mobilnych i danych lokalnych.
    - co czytac: data minimization and lifecycle
 
 ## 15. Retencja danych i bezpieczne usuwanie
-1. NIST Privacy Framework - WWW
+1. Reardon, Marforio, Capkun, Basin, "Secure Deletion on Log-structured File Systems" - PDF
+   - lokalnie: `teacher/lectures/BSM_W08_Materialy/papers/secure-deletion.pdf`
+   - co czytac: abstract, 1. Introduction, 2. System Model and Background, 3. Current State of Secure Deletion
+2. NIST Privacy Framework - WWW
    - https://www.nist.gov/privacy-framework
    - co czytac: retention and lifecycle management
-2. OWASP MASTG - storage and deletion guidance - WWW
+3. OWASP MASTG - storage and deletion guidance - WWW
    - https://mas.owasp.org/MASTG/
    - co czytac: backups, caches, deletion
-3. Android data storage guidance - WWW
-   - https://developer.android.com/training/data-storage
-   - co czytac: cache, external storage, cleanup
 
 ## Stan prac
 - Pobranie PDF-ow rozpoczęte dla: kiosku, notyfikacji, tapjacking, accessibility, root detection.
