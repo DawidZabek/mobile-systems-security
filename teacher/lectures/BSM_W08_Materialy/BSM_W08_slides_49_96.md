@@ -252,7 +252,9 @@ Jak się bronić
 ## teleprompter:
 Obrona polega na tym, że nawet w trybie zgodności aplikacja zachowuje ten sam model selekcji mediów.
 Po revoke trzeba odświeżyć stan i usunąć stare URI z cache.
-Nie wolno wracać do pełnego dostępu tylko dlatego, że to ułatwia przejście starego kodu przez migrację.#slide 65
+Nie wolno wracać do pełnego dostępu tylko dlatego, że to ułatwia przejście starego kodu przez migrację.
+
+#slide 65
 ## layout
 definition
 ## slide title
