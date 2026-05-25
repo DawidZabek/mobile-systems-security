@@ -174,6 +174,16 @@ def aspect_block(aspect: str) -> tuple[str, str, str, str]:
     )
 
 
+def short_phrase(text: str, limit: int = 8) -> str:
+    import re
+
+    text = re.split(r"[.;]", text, maxsplit=1)[0]
+    words = text.replace("(", "").replace(")", "").replace(",", "").split()
+    if len(words) <= limit:
+        return text
+    return " ".join(words[:limit]).rstrip(".") + "…"
+
+
 def bullets_for(block: dict, subtopic: str, aspect: str) -> list[str]:
     specific = block["subtopics"][subtopic]
     lead = block["lead"]
@@ -184,29 +194,25 @@ def bullets_for(block: dict, subtopic: str, aspect: str) -> list[str]:
     if aspect == "Co to jest":
         return [
             specific,
-            "Granica pojęcia",
-            "Zakres działania",
-            "Ryzyko dla aplikacji",
+            short_phrase(lead, 8),
+            short_phrase(mechanics, 8),
         ]
     if aspect == "Jak działa":
         return [
-            "Wejście do mechanizmu",
-            "Kolejność decyzji",
-            "Stan pośredni",
-            "Wynik operacji",
+            f"{subtopic}: {short_phrase(mechanics, 8)}",
+            f"{subtopic}: {short_phrase(lead, 8)}",
+            f"{subtopic}: {short_phrase(defense, 8)}",
         ]
     if aspect == "Jak pęka":
         return [
-            "Warunek ataku",
-            "Co kontroluje przeciwnik",
-            "Punkt ufania systemu",
-            "Skutek ataku",
+            f"{subtopic}: {short_phrase(attack, 8)}",
+            f"{subtopic}: {short_phrase(mechanics, 8)}",
+            f"{subtopic}: {short_phrase(lead, 8)}",
         ]
     return [
-        "Reguła egzekwowania",
-        "Miejsce kontroli",
-        "Ograniczony zakres",
-        "Test regresyjny",
+        f"{subtopic}: {short_phrase(defense, 8)}",
+        f"{subtopic}: {short_phrase(mechanics, 8)}",
+        f"{subtopic}: {short_phrase(attack, 8)}",
     ]
 
 
