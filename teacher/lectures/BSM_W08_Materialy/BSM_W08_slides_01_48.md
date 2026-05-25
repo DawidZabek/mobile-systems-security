@@ -10,7 +10,7 @@ mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353.
 ## teleprompter:
 Slajd 1. mDNS record anatomy. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. mDNS record anatomy w tym miejscu oznacza dokładnie: mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+mDNS record anatomy to mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -31,7 +31,7 @@ mDNS record anatomy — Jak działa
 ## teleprompter:
 Slajd 2. mDNS record anatomy. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. mDNS record anatomy w tym miejscu oznacza dokładnie: mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg mDNS record anatomy krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -52,7 +52,7 @@ mDNS record anatomy — Jak pęka
 ## teleprompter:
 Slajd 3. mDNS record anatomy. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. mDNS record anatomy w tym miejscu oznacza dokładnie: mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym mDNS record anatomy przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -73,7 +73,7 @@ mDNS record anatomy — Jak się bronić
 ## teleprompter:
 Slajd 4. mDNS record anatomy. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. mDNS record anatomy w tym miejscu oznacza dokładnie: mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla mDNS record anatomy musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -93,7 +93,7 @@ SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION.
 ## teleprompter:
 Slajd 5. SSDP discovery. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. SSDP discovery w tym miejscu oznacza dokładnie: SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+SSDP discovery to SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -114,7 +114,7 @@ SSDP discovery — Jak działa
 ## teleprompter:
 Slajd 6. SSDP discovery. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. SSDP discovery w tym miejscu oznacza dokładnie: SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg SSDP discovery krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -135,7 +135,7 @@ SSDP discovery — Jak pęka
 ## teleprompter:
 Slajd 7. SSDP discovery. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. SSDP discovery w tym miejscu oznacza dokładnie: SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym SSDP discovery przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -156,7 +156,7 @@ SSDP discovery — Jak się bronić
 ## teleprompter:
 Slajd 8. SSDP discovery. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. SSDP discovery w tym miejscu oznacza dokładnie: SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla SSDP discovery musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -176,7 +176,7 @@ IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::
 ## teleprompter:
 Slajd 9. IPv6 link-local. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. IPv6 link-local w tym miejscu oznacza dokładnie: IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+IPv6 link-local to IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -197,7 +197,7 @@ IPv6 link-local — Jak działa
 ## teleprompter:
 Slajd 10. IPv6 link-local. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. IPv6 link-local w tym miejscu oznacza dokładnie: IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg IPv6 link-local krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -218,7 +218,7 @@ IPv6 link-local — Jak pęka
 ## teleprompter:
 Slajd 11. IPv6 link-local. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. IPv6 link-local w tym miejscu oznacza dokładnie: IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym IPv6 link-local przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -239,7 +239,7 @@ IPv6 link-local — Jak się bronić
 ## teleprompter:
 Slajd 12. IPv6 link-local. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. IPv6 link-local w tym miejscu oznacza dokładnie: IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla IPv6 link-local musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -259,7 +259,7 @@ Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma t
 ## teleprompter:
 Slajd 13. Raw socket access. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. Raw socket access w tym miejscu oznacza dokładnie: Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Raw socket access to Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -280,7 +280,7 @@ Raw socket access — Jak działa
 ## teleprompter:
 Slajd 14. Raw socket access. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. Raw socket access w tym miejscu oznacza dokładnie: Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg Raw socket access krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -301,7 +301,7 @@ Raw socket access — Jak pęka
 ## teleprompter:
 Slajd 15. Raw socket access. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. Raw socket access w tym miejscu oznacza dokładnie: Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym Raw socket access przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -322,7 +322,7 @@ Raw socket access — Jak się bronić
 ## teleprompter:
 Slajd 16. Raw socket access. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. Raw socket access w tym miejscu oznacza dokładnie: Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla Raw socket access musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -342,7 +342,7 @@ NsdManager jest frameworkowym API do discovery, które odciąża aplikację od r
 ## teleprompter:
 Slajd 17. NsdManager. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. NsdManager w tym miejscu oznacza dokładnie: NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+NsdManager to NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -363,7 +363,7 @@ NsdManager — Jak działa
 ## teleprompter:
 Slajd 18. NsdManager. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. NsdManager w tym miejscu oznacza dokładnie: NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg NsdManager krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -384,7 +384,7 @@ NsdManager — Jak pęka
 ## teleprompter:
 Slajd 19. NsdManager. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. NsdManager w tym miejscu oznacza dokładnie: NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym NsdManager przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -405,7 +405,7 @@ NsdManager — Jak się bronić
 ## teleprompter:
 Slajd 20. NsdManager. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. NsdManager w tym miejscu oznacza dokładnie: NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla NsdManager musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -425,7 +425,7 @@ Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast
 ## teleprompter:
 Slajd 21. Casting path. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. Casting path w tym miejscu oznacza dokładnie: Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Casting path to Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -446,7 +446,7 @@ Casting path — Jak działa
 ## teleprompter:
 Slajd 22. Casting path. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. Casting path w tym miejscu oznacza dokładnie: Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg Casting path krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -467,7 +467,7 @@ Casting path — Jak pęka
 ## teleprompter:
 Slajd 23. Casting path. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. Casting path w tym miejscu oznacza dokładnie: Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym Casting path przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -488,7 +488,7 @@ Casting path — Jak się bronić
 ## teleprompter:
 Slajd 24. Casting path. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. Casting path w tym miejscu oznacza dokładnie: Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla Casting path musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -508,7 +508,7 @@ Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawni�
 ## teleprompter:
 Slajd 25. Android 16 opt-in. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. Android 16 opt-in w tym miejscu oznacza dokładnie: Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Android 16 opt-in to Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -529,7 +529,7 @@ Android 16 opt-in — Jak działa
 ## teleprompter:
 Slajd 26. Android 16 opt-in. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. Android 16 opt-in w tym miejscu oznacza dokładnie: Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg Android 16 opt-in krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -550,7 +550,7 @@ Android 16 opt-in — Jak pęka
 ## teleprompter:
 Slajd 27. Android 16 opt-in. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. Android 16 opt-in w tym miejscu oznacza dokładnie: Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym Android 16 opt-in przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -571,7 +571,7 @@ Android 16 opt-in — Jak się bronić
 ## teleprompter:
 Slajd 28. Android 16 opt-in. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. Android 16 opt-in w tym miejscu oznacza dokładnie: Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla Android 16 opt-in musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -591,7 +591,7 @@ Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NET
 ## teleprompter:
 Slajd 29. Android 17 enforcement. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. Android 17 enforcement w tym miejscu oznacza dokładnie: Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Android 17 enforcement to Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -612,7 +612,7 @@ Android 17 enforcement — Jak działa
 ## teleprompter:
 Slajd 30. Android 17 enforcement. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. Android 17 enforcement w tym miejscu oznacza dokładnie: Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg Android 17 enforcement krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -633,7 +633,7 @@ Android 17 enforcement — Jak pęka
 ## teleprompter:
 Slajd 31. Android 17 enforcement. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. Android 17 enforcement w tym miejscu oznacza dokładnie: Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym Android 17 enforcement przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -654,7 +654,7 @@ Android 17 enforcement — Jak się bronić
 ## teleprompter:
 Slajd 32. Android 17 enforcement. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. Android 17 enforcement w tym miejscu oznacza dokładnie: Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla Android 17 enforcement musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -674,7 +674,7 @@ Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do 
 ## teleprompter:
 Slajd 33. Permission split. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. Permission split w tym miejscu oznacza dokładnie: Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Permission split to Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -695,7 +695,7 @@ Permission split — Jak działa
 ## teleprompter:
 Slajd 34. Permission split. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. Permission split w tym miejscu oznacza dokładnie: Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg Permission split krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -716,7 +716,7 @@ Permission split — Jak pęka
 ## teleprompter:
 Slajd 35. Permission split. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. Permission split w tym miejscu oznacza dokładnie: Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym Permission split przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -737,7 +737,7 @@ Permission split — Jak się bronić
 ## teleprompter:
 Slajd 36. Permission split. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. Permission split w tym miejscu oznacza dokładnie: Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla Permission split musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -757,7 +757,7 @@ Broad access path to klasyczny runtime permission request dla lokalnej sieci.
 ## teleprompter:
 Slajd 37. Broad access path. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. Broad access path w tym miejscu oznacza dokładnie: Broad access path to klasyczny runtime permission request dla lokalnej sieci. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Broad access path to Broad access path to klasyczny runtime permission request dla lokalnej sieci. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -778,7 +778,7 @@ Broad access path — Jak działa
 ## teleprompter:
 Slajd 38. Broad access path. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. Broad access path w tym miejscu oznacza dokładnie: Broad access path to klasyczny runtime permission request dla lokalnej sieci. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg Broad access path krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -799,7 +799,7 @@ Broad access path — Jak pęka
 ## teleprompter:
 Slajd 39. Broad access path. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. Broad access path w tym miejscu oznacza dokładnie: Broad access path to klasyczny runtime permission request dla lokalnej sieci. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym Broad access path przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -820,7 +820,7 @@ Broad access path — Jak się bronić
 ## teleprompter:
 Slajd 40. Broad access path. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. Broad access path w tym miejscu oznacza dokładnie: Broad access path to klasyczny runtime permission request dla lokalnej sieci. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla Broad access path musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -840,7 +840,7 @@ System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej
 ## teleprompter:
 Slajd 41. Privacy-preserving picker. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. Privacy-preserving picker w tym miejscu oznacza dokładnie: System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Privacy-preserving picker to System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -861,7 +861,7 @@ Privacy-preserving picker — Jak działa
 ## teleprompter:
 Slajd 42. Privacy-preserving picker. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. Privacy-preserving picker w tym miejscu oznacza dokładnie: System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg Privacy-preserving picker krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -882,7 +882,7 @@ Privacy-preserving picker — Jak pęka
 ## teleprompter:
 Slajd 43. Privacy-preserving picker. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. Privacy-preserving picker w tym miejscu oznacza dokładnie: System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym Privacy-preserving picker przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -903,7 +903,7 @@ Privacy-preserving picker — Jak się bronić
 ## teleprompter:
 Slajd 44. Privacy-preserving picker. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. Privacy-preserving picker w tym miejscu oznacza dokładnie: System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla Privacy-preserving picker musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -923,7 +923,7 @@ WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta.
 ## teleprompter:
 Slajd 45. Host app inheritance. Lokalna sieć i discovery.
 
-Definicja i granica pojęcia. Host app inheritance w tym miejscu oznacza dokładnie: WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Host app inheritance to WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -944,7 +944,7 @@ Host app inheritance — Jak działa
 ## teleprompter:
 Slajd 46. Host app inheritance. Lokalna sieć i discovery.
 
-Wejście i stan początkowy. Host app inheritance w tym miejscu oznacza dokładnie: WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Najpierw rozpisz przebieg Host app inheritance krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -965,7 +965,7 @@ Host app inheritance — Jak pęka
 ## teleprompter:
 Slajd 47. Host app inheritance. Lokalna sieć i discovery.
 
-Warunek powodzenia ataku. Host app inheritance w tym miejscu oznacza dokładnie: WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Tu interesuje nas dokładnie moment, w którym Host app inheritance przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -986,7 +986,7 @@ Host app inheritance — Jak się bronić
 ## teleprompter:
 Slajd 48. Host app inheritance. Lokalna sieć i discovery.
 
-Reguła i miejsce egzekwowania. Host app inheritance w tym miejscu oznacza dokładnie: WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta. Na tle tego bloku chodzi o: mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach.
+Obrona dla Host app inheritance musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 

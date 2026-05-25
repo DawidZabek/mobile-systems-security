@@ -218,10 +218,30 @@ def teleprompter(num: int, block: dict, subtopic: str, aspect: str) -> str:
     defense = block["defense"]
     opening, middle, breach, close = aspect_block(aspect)
 
+    if aspect == "Co to jest":
+        first = (
+            f"{subtopic} to {specific} "
+            f"To jest punkt startowy do zrozumienia, jak działa cały blok o {block['title'].lower()}."
+        )
+    elif aspect == "Jak działa":
+        first = (
+            f"Najpierw rozpisz przebieg {subtopic} krok po kroku. "
+            f"Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system."
+        )
+    elif aspect == "Jak pęka":
+        first = (
+            f"Tu interesuje nas dokładnie moment, w którym {subtopic} przestaje być bezpieczny. "
+            f"Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany."
+        )
+    else:
+        first = (
+            f"Obrona dla {subtopic} musi być praktyczna, nie deklaratywna. "
+            f"Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł."
+        )
+
     return (
         f"Slajd {num}. {subtopic}. {block['title']}.\n\n"
-        f"{opening}. {subtopic} w tym miejscu oznacza dokładnie: {specific} "
-        f"Na tle tego bloku chodzi o: {lead}\n\n"
+        f"{first}\n\n"
         f"{middle}. {mechanics} "
         f"Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.\n\n"
         f"{breach}. {attack} "

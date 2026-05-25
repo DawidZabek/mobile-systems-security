@@ -10,7 +10,7 @@ Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu
 ## teleprompter:
 Slajd 145. Retention vs disposal. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Retention vs disposal w tym miejscu oznacza dokładnie: Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Retention vs disposal to Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -31,7 +31,7 @@ Retention vs disposal — Jak działa
 ## teleprompter:
 Slajd 146. Retention vs disposal. Retencja i secure deletion.
 
-Wejście i stan początkowy. Retention vs disposal w tym miejscu oznacza dokładnie: Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Retention vs disposal krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -52,7 +52,7 @@ Retention vs disposal — Jak pęka
 ## teleprompter:
 Slajd 147. Retention vs disposal. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Retention vs disposal w tym miejscu oznacza dokładnie: Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Retention vs disposal przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -73,7 +73,7 @@ Retention vs disposal — Jak się bronić
 ## teleprompter:
 Slajd 148. Retention vs disposal. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Retention vs disposal w tym miejscu oznacza dokładnie: Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Retention vs disposal musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -93,7 +93,7 @@ Delete zawodzi przez remanencję danych i metadanych.
 ## teleprompter:
 Slajd 149. Why delete fails. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Why delete fails w tym miejscu oznacza dokładnie: Delete zawodzi przez remanencję danych i metadanych. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Why delete fails to Delete zawodzi przez remanencję danych i metadanych. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -114,7 +114,7 @@ Why delete fails — Jak działa
 ## teleprompter:
 Slajd 150. Why delete fails. Retencja i secure deletion.
 
-Wejście i stan początkowy. Why delete fails w tym miejscu oznacza dokładnie: Delete zawodzi przez remanencję danych i metadanych. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Why delete fails krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -135,7 +135,7 @@ Why delete fails — Jak pęka
 ## teleprompter:
 Slajd 151. Why delete fails. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Why delete fails w tym miejscu oznacza dokładnie: Delete zawodzi przez remanencję danych i metadanych. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Why delete fails przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -156,7 +156,7 @@ Why delete fails — Jak się bronić
 ## teleprompter:
 Slajd 152. Why delete fails. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Why delete fails w tym miejscu oznacza dokładnie: Delete zawodzi przez remanencję danych i metadanych. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Why delete fails musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -176,7 +176,7 @@ Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero późn
 ## teleprompter:
 Slajd 153. Log-structured storage. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Log-structured storage w tym miejscu oznacza dokładnie: Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Log-structured storage to Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -197,7 +197,7 @@ Log-structured storage — Jak działa
 ## teleprompter:
 Slajd 154. Log-structured storage. Retencja i secure deletion.
 
-Wejście i stan początkowy. Log-structured storage w tym miejscu oznacza dokładnie: Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Log-structured storage krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -218,7 +218,7 @@ Log-structured storage — Jak pęka
 ## teleprompter:
 Slajd 155. Log-structured storage. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Log-structured storage w tym miejscu oznacza dokładnie: Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Log-structured storage przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -239,7 +239,7 @@ Log-structured storage — Jak się bronić
 ## teleprompter:
 Slajd 156. Log-structured storage. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Log-structured storage w tym miejscu oznacza dokładnie: Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Log-structured storage musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -259,7 +259,7 @@ YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystki
 ## teleprompter:
 Slajd 157. YAFFS example. Retencja i secure deletion.
 
-Definicja i granica pojęcia. YAFFS example w tym miejscu oznacza dokładnie: YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+YAFFS example to YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -280,7 +280,7 @@ YAFFS example — Jak działa
 ## teleprompter:
 Slajd 158. YAFFS example. Retencja i secure deletion.
 
-Wejście i stan początkowy. YAFFS example w tym miejscu oznacza dokładnie: YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg YAFFS example krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -301,7 +301,7 @@ YAFFS example — Jak pęka
 ## teleprompter:
 Slajd 159. YAFFS example. Retencja i secure deletion.
 
-Warunek powodzenia ataku. YAFFS example w tym miejscu oznacza dokładnie: YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym YAFFS example przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -322,7 +322,7 @@ YAFFS example — Jak się bronić
 ## teleprompter:
 Slajd 160. YAFFS example. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. YAFFS example w tym miejscu oznacza dokładnie: YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla YAFFS example musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -342,7 +342,7 @@ FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu.
 ## teleprompter:
 Slajd 161. FTL mapping. Retencja i secure deletion.
 
-Definicja i granica pojęcia. FTL mapping w tym miejscu oznacza dokładnie: FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+FTL mapping to FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -363,7 +363,7 @@ FTL mapping — Jak działa
 ## teleprompter:
 Slajd 162. FTL mapping. Retencja i secure deletion.
 
-Wejście i stan początkowy. FTL mapping w tym miejscu oznacza dokładnie: FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg FTL mapping krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -384,7 +384,7 @@ FTL mapping — Jak pęka
 ## teleprompter:
 Slajd 163. FTL mapping. Retencja i secure deletion.
 
-Warunek powodzenia ataku. FTL mapping w tym miejscu oznacza dokładnie: FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym FTL mapping przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -405,7 +405,7 @@ FTL mapping — Jak się bronić
 ## teleprompter:
 Slajd 164. FTL mapping. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. FTL mapping w tym miejscu oznacza dokładnie: FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla FTL mapping musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -425,7 +425,7 @@ Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, któr
 ## teleprompter:
 Slajd 165. Overwrite problem. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Overwrite problem w tym miejscu oznacza dokładnie: Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Overwrite problem to Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -446,7 +446,7 @@ Overwrite problem — Jak działa
 ## teleprompter:
 Slajd 166. Overwrite problem. Retencja i secure deletion.
 
-Wejście i stan początkowy. Overwrite problem w tym miejscu oznacza dokładnie: Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Overwrite problem krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -467,7 +467,7 @@ Overwrite problem — Jak pęka
 ## teleprompter:
 Slajd 167. Overwrite problem. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Overwrite problem w tym miejscu oznacza dokładnie: Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Overwrite problem przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -488,7 +488,7 @@ Overwrite problem — Jak się bronić
 ## teleprompter:
 Slajd 168. Overwrite problem. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Overwrite problem w tym miejscu oznacza dokładnie: Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Overwrite problem musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -508,7 +508,7 @@ Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne.
 ## teleprompter:
 Slajd 169. Encryption limitation. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Encryption limitation w tym miejscu oznacza dokładnie: Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Encryption limitation to Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -529,7 +529,7 @@ Encryption limitation — Jak działa
 ## teleprompter:
 Slajd 170. Encryption limitation. Retencja i secure deletion.
 
-Wejście i stan początkowy. Encryption limitation w tym miejscu oznacza dokładnie: Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Encryption limitation krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -550,7 +550,7 @@ Encryption limitation — Jak pęka
 ## teleprompter:
 Slajd 171. Encryption limitation. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Encryption limitation w tym miejscu oznacza dokładnie: Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Encryption limitation przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -571,7 +571,7 @@ Encryption limitation — Jak się bronić
 ## teleprompter:
 Slajd 172. Encryption limitation. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Encryption limitation w tym miejscu oznacza dokładnie: Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Encryption limitation musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -591,7 +591,7 @@ Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być p
 ## teleprompter:
 Slajd 173. Purge algorithm. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Purge algorithm w tym miejscu oznacza dokładnie: Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Purge algorithm to Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -612,7 +612,7 @@ Purge algorithm — Jak działa
 ## teleprompter:
 Slajd 174. Purge algorithm. Retencja i secure deletion.
 
-Wejście i stan początkowy. Purge algorithm w tym miejscu oznacza dokładnie: Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Purge algorithm krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -633,7 +633,7 @@ Purge algorithm — Jak pęka
 ## teleprompter:
 Slajd 175. Purge algorithm. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Purge algorithm w tym miejscu oznacza dokładnie: Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Purge algorithm przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -654,7 +654,7 @@ Purge algorithm — Jak się bronić
 ## teleprompter:
 Slajd 176. Purge algorithm. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Purge algorithm w tym miejscu oznacza dokładnie: Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Purge algorithm musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -674,7 +674,7 @@ Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu.
 ## teleprompter:
 Slajd 177. Ballooning algorithm. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Ballooning algorithm w tym miejscu oznacza dokładnie: Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Ballooning algorithm to Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -695,7 +695,7 @@ Ballooning algorithm — Jak działa
 ## teleprompter:
 Slajd 178. Ballooning algorithm. Retencja i secure deletion.
 
-Wejście i stan początkowy. Ballooning algorithm w tym miejscu oznacza dokładnie: Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Ballooning algorithm krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -716,7 +716,7 @@ Ballooning algorithm — Jak pęka
 ## teleprompter:
 Slajd 179. Ballooning algorithm. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Ballooning algorithm w tym miejscu oznacza dokładnie: Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Ballooning algorithm przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -737,7 +737,7 @@ Ballooning algorithm — Jak się bronić
 ## teleprompter:
 Slajd 180. Ballooning algorithm. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Ballooning algorithm w tym miejscu oznacza dokładnie: Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Ballooning algorithm musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -757,7 +757,7 @@ Zero overwriting wypełnia obszar i potem vacuumuje resztki.
 ## teleprompter:
 Slajd 181. Zero overwriting. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Zero overwriting w tym miejscu oznacza dokładnie: Zero overwriting wypełnia obszar i potem vacuumuje resztki. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Zero overwriting to Zero overwriting wypełnia obszar i potem vacuumuje resztki. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -778,7 +778,7 @@ Zero overwriting — Jak działa
 ## teleprompter:
 Slajd 182. Zero overwriting. Retencja i secure deletion.
 
-Wejście i stan początkowy. Zero overwriting w tym miejscu oznacza dokładnie: Zero overwriting wypełnia obszar i potem vacuumuje resztki. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Zero overwriting krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -799,7 +799,7 @@ Zero overwriting — Jak pęka
 ## teleprompter:
 Slajd 183. Zero overwriting. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Zero overwriting w tym miejscu oznacza dokładnie: Zero overwriting wypełnia obszar i potem vacuumuje resztki. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Zero overwriting przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -820,7 +820,7 @@ Zero overwriting — Jak się bronić
 ## teleprompter:
 Slajd 184. Zero overwriting. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Zero overwriting w tym miejscu oznacza dokładnie: Zero overwriting wypełnia obszar i potem vacuumuje resztki. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Zero overwriting musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -840,7 +840,7 @@ Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istniej�
 ## teleprompter:
 Slajd 185. Versioned file system. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Versioned file system w tym miejscu oznacza dokładnie: Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Versioned file system to Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -861,7 +861,7 @@ Versioned file system — Jak działa
 ## teleprompter:
 Slajd 186. Versioned file system. Retencja i secure deletion.
 
-Wejście i stan początkowy. Versioned file system w tym miejscu oznacza dokładnie: Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Versioned file system krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -882,7 +882,7 @@ Versioned file system — Jak pęka
 ## teleprompter:
 Slajd 187. Versioned file system. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Versioned file system w tym miejscu oznacza dokładnie: Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Versioned file system przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -903,7 +903,7 @@ Versioned file system — Jak się bronić
 ## teleprompter:
 Slajd 188. Versioned file system. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Versioned file system w tym miejscu oznacza dokładnie: Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Versioned file system musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -923,7 +923,7 @@ Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać tre�
 ## teleprompter:
 Slajd 189. Forensic verification. Retencja i secure deletion.
 
-Definicja i granica pojęcia. Forensic verification w tym miejscu oznacza dokładnie: Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Forensic verification to Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -944,7 +944,7 @@ Forensic verification — Jak działa
 ## teleprompter:
 Slajd 190. Forensic verification. Retencja i secure deletion.
 
-Wejście i stan początkowy. Forensic verification w tym miejscu oznacza dokładnie: Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Najpierw rozpisz przebieg Forensic verification krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -965,7 +965,7 @@ Forensic verification — Jak pęka
 ## teleprompter:
 Slajd 191. Forensic verification. Retencja i secure deletion.
 
-Warunek powodzenia ataku. Forensic verification w tym miejscu oznacza dokładnie: Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Tu interesuje nas dokładnie moment, w którym Forensic verification przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -986,7 +986,7 @@ Forensic verification — Jak się bronić
 ## teleprompter:
 Slajd 192. Forensic verification. Retencja i secure deletion.
 
-Reguła i miejsce egzekwowania. Forensic verification w tym miejscu oznacza dokładnie: Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady. Na tle tego bloku chodzi o: Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika.
+Obrona dla Forensic verification musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 

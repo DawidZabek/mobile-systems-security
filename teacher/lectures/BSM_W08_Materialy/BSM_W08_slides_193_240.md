@@ -10,7 +10,7 @@ Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharin
 ## teleprompter:
 Slajd 193. Continuity overview. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Continuity overview w tym miejscu oznacza dokładnie: Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Continuity overview to Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -31,7 +31,7 @@ Continuity overview — Jak działa
 ## teleprompter:
 Slajd 194. Continuity overview. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Continuity overview w tym miejscu oznacza dokładnie: Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Continuity overview krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -52,7 +52,7 @@ Continuity overview — Jak pęka
 ## teleprompter:
 Slajd 195. Continuity overview. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Continuity overview w tym miejscu oznacza dokładnie: Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Continuity overview przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -73,7 +73,7 @@ Continuity overview — Jak się bronić
 ## teleprompter:
 Slajd 196. Continuity overview. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Continuity overview w tym miejscu oznacza dokładnie: Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Continuity overview musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -93,7 +93,7 @@ Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continu
 ## teleprompter:
 Slajd 197. Handoff discovery. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Handoff discovery w tym miejscu oznacza dokładnie: Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Handoff discovery to Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -114,7 +114,7 @@ Handoff discovery — Jak działa
 ## teleprompter:
 Slajd 198. Handoff discovery. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Handoff discovery w tym miejscu oznacza dokładnie: Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Handoff discovery krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -135,7 +135,7 @@ Handoff discovery — Jak pęka
 ## teleprompter:
 Slajd 199. Handoff discovery. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Handoff discovery w tym miejscu oznacza dokładnie: Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Handoff discovery przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -156,7 +156,7 @@ Handoff discovery — Jak się bronić
 ## teleprompter:
 Slajd 200. Handoff discovery. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Handoff discovery w tym miejscu oznacza dokładnie: Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Handoff discovery musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -176,7 +176,7 @@ AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi.
 ## teleprompter:
 Slajd 201. AirDrop discovery. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. AirDrop discovery w tym miejscu oznacza dokładnie: AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+AirDrop discovery to AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -197,7 +197,7 @@ AirDrop discovery — Jak działa
 ## teleprompter:
 Slajd 202. AirDrop discovery. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. AirDrop discovery w tym miejscu oznacza dokładnie: AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg AirDrop discovery krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -218,7 +218,7 @@ AirDrop discovery — Jak pęka
 ## teleprompter:
 Slajd 203. AirDrop discovery. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. AirDrop discovery w tym miejscu oznacza dokładnie: AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym AirDrop discovery przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -239,7 +239,7 @@ AirDrop discovery — Jak się bronić
 ## teleprompter:
 Slajd 204. AirDrop discovery. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. AirDrop discovery w tym miejscu oznacza dokładnie: AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla AirDrop discovery musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -259,7 +259,7 @@ PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawnia�
 ## teleprompter:
 Slajd 205. PrivateDrop. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. PrivateDrop w tym miejscu oznacza dokładnie: PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+PrivateDrop to PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -280,7 +280,7 @@ PrivateDrop — Jak działa
 ## teleprompter:
 Slajd 206. PrivateDrop. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. PrivateDrop w tym miejscu oznacza dokładnie: PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg PrivateDrop krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -301,7 +301,7 @@ PrivateDrop — Jak pęka
 ## teleprompter:
 Slajd 207. PrivateDrop. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. PrivateDrop w tym miejscu oznacza dokładnie: PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym PrivateDrop przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -322,7 +322,7 @@ PrivateDrop — Jak się bronić
 ## teleprompter:
 Slajd 208. PrivateDrop. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. PrivateDrop w tym miejscu oznacza dokładnie: PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla PrivateDrop musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -342,7 +342,7 @@ AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika s
 ## teleprompter:
 Slajd 209. AWDL and BLE. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. AWDL and BLE w tym miejscu oznacza dokładnie: AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+AWDL and BLE to AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -363,7 +363,7 @@ AWDL and BLE — Jak działa
 ## teleprompter:
 Slajd 210. AWDL and BLE. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. AWDL and BLE w tym miejscu oznacza dokładnie: AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg AWDL and BLE krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -384,7 +384,7 @@ AWDL and BLE — Jak pęka
 ## teleprompter:
 Slajd 211. AWDL and BLE. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. AWDL and BLE w tym miejscu oznacza dokładnie: AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym AWDL and BLE przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -405,7 +405,7 @@ AWDL and BLE — Jak się bronić
 ## teleprompter:
 Slajd 212. AWDL and BLE. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. AWDL and BLE w tym miejscu oznacza dokładnie: AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla AWDL and BLE musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -425,7 +425,7 @@ Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasy
 ## teleprompter:
 Slajd 213. Cross-device identity. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Cross-device identity w tym miejscu oznacza dokładnie: Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Cross-device identity to Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -446,7 +446,7 @@ Cross-device identity — Jak działa
 ## teleprompter:
 Slajd 214. Cross-device identity. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Cross-device identity w tym miejscu oznacza dokładnie: Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Cross-device identity krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -467,7 +467,7 @@ Cross-device identity — Jak pęka
 ## teleprompter:
 Slajd 215. Cross-device identity. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Cross-device identity w tym miejscu oznacza dokładnie: Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Cross-device identity przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -488,7 +488,7 @@ Cross-device identity — Jak się bronić
 ## teleprompter:
 Slajd 216. Cross-device identity. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Cross-device identity w tym miejscu oznacza dokładnie: Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Cross-device identity musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -508,7 +508,7 @@ Atakujący może spoofować, relayować albo downgrade'ować discovery i authent
 ## teleprompter:
 Slajd 217. Spoof relay downgrade. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Spoof relay downgrade w tym miejscu oznacza dokładnie: Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Spoof relay downgrade to Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -529,7 +529,7 @@ Spoof relay downgrade — Jak działa
 ## teleprompter:
 Slajd 218. Spoof relay downgrade. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Spoof relay downgrade w tym miejscu oznacza dokładnie: Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Spoof relay downgrade krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -550,7 +550,7 @@ Spoof relay downgrade — Jak pęka
 ## teleprompter:
 Slajd 219. Spoof relay downgrade. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Spoof relay downgrade w tym miejscu oznacza dokładnie: Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Spoof relay downgrade przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -571,7 +571,7 @@ Spoof relay downgrade — Jak się bronić
 ## teleprompter:
 Slajd 220. Spoof relay downgrade. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Spoof relay downgrade w tym miejscu oznacza dokładnie: Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Spoof relay downgrade musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -591,7 +591,7 @@ Structured analysis wymaga obserwacji całego state machine na różnych vantage
 ## teleprompter:
 Slajd 221. Transport and state machine. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Transport and state machine w tym miejscu oznacza dokładnie: Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Transport and state machine to Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -612,7 +612,7 @@ Transport and state machine — Jak działa
 ## teleprompter:
 Slajd 222. Transport and state machine. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Transport and state machine w tym miejscu oznacza dokładnie: Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Transport and state machine krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -633,7 +633,7 @@ Transport and state machine — Jak pęka
 ## teleprompter:
 Slajd 223. Transport and state machine. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Transport and state machine w tym miejscu oznacza dokładnie: Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Transport and state machine przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -654,7 +654,7 @@ Transport and state machine — Jak się bronić
 ## teleprompter:
 Slajd 224. Transport and state machine. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Transport and state machine w tym miejscu oznacza dokładnie: Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Transport and state machine musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -674,7 +674,7 @@ Packet captures pokazują, które pola są szyfrowane, a które metadata lecą j
 ## teleprompter:
 Slajd 225. Packet analysis. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Packet analysis w tym miejscu oznacza dokładnie: Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Packet analysis to Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -695,7 +695,7 @@ Packet analysis — Jak działa
 ## teleprompter:
 Slajd 226. Packet analysis. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Packet analysis w tym miejscu oznacza dokładnie: Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Packet analysis krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -716,7 +716,7 @@ Packet analysis — Jak pęka
 ## teleprompter:
 Slajd 227. Packet analysis. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Packet analysis w tym miejscu oznacza dokładnie: Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Packet analysis przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -737,7 +737,7 @@ Packet analysis — Jak się bronić
 ## teleprompter:
 Slajd 228. Packet analysis. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Packet analysis w tym miejscu oznacza dokładnie: Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Packet analysis musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -757,7 +757,7 @@ PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności
 ## teleprompter:
 Slajd 229. Mitigations. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Mitigations w tym miejscu oznacza dokładnie: PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Mitigations to PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -778,7 +778,7 @@ Mitigations — Jak działa
 ## teleprompter:
 Slajd 230. Mitigations. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Mitigations w tym miejscu oznacza dokładnie: PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Mitigations krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -799,7 +799,7 @@ Mitigations — Jak pęka
 ## teleprompter:
 Slajd 231. Mitigations. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Mitigations w tym miejscu oznacza dokładnie: PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Mitigations przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -820,7 +820,7 @@ Mitigations — Jak się bronić
 ## teleprompter:
 Slajd 232. Mitigations. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Mitigations w tym miejscu oznacza dokładnie: PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Mitigations musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -840,7 +840,7 @@ Dobry test matrix zmienia stan urządzenia, odległość i użyty transport.
 ## teleprompter:
 Slajd 233. Test matrix. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Test matrix w tym miejscu oznacza dokładnie: Dobry test matrix zmienia stan urządzenia, odległość i użyty transport. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Test matrix to Dobry test matrix zmienia stan urządzenia, odległość i użyty transport. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -861,7 +861,7 @@ Test matrix — Jak działa
 ## teleprompter:
 Slajd 234. Test matrix. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Test matrix w tym miejscu oznacza dokładnie: Dobry test matrix zmienia stan urządzenia, odległość i użyty transport. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Test matrix krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -882,7 +882,7 @@ Test matrix — Jak pęka
 ## teleprompter:
 Slajd 235. Test matrix. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Test matrix w tym miejscu oznacza dokładnie: Dobry test matrix zmienia stan urządzenia, odległość i użyty transport. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Test matrix przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -903,7 +903,7 @@ Test matrix — Jak się bronić
 ## teleprompter:
 Slajd 236. Test matrix. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Test matrix w tym miejscu oznacza dokładnie: Dobry test matrix zmienia stan urządzenia, odległość i użyty transport. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Test matrix musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -923,7 +923,7 @@ Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kana�
 ## teleprompter:
 Slajd 237. Android comparison. Apple continuity i cross-device services.
 
-Definicja i granica pojęcia. Android comparison w tym miejscu oznacza dokładnie: Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Android comparison to Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
 
 Dlaczego to nie jest tylko hasło. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -944,7 +944,7 @@ Android comparison — Jak działa
 ## teleprompter:
 Slajd 238. Android comparison. Apple continuity i cross-device services.
 
-Wejście i stan początkowy. Android comparison w tym miejscu oznacza dokładnie: Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Najpierw rozpisz przebieg Android comparison krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -965,7 +965,7 @@ Android comparison — Jak pęka
 ## teleprompter:
 Slajd 239. Android comparison. Apple continuity i cross-device services.
 
-Warunek powodzenia ataku. Android comparison w tym miejscu oznacza dokładnie: Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Tu interesuje nas dokładnie moment, w którym Android comparison przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -986,7 +986,7 @@ Android comparison — Jak się bronić
 ## teleprompter:
 Slajd 240. Android comparison. Apple continuity i cross-device services.
 
-Reguła i miejsce egzekwowania. Android comparison w tym miejscu oznacza dokładnie: Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity. Na tle tego bloku chodzi o: Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi.
+Obrona dla Android comparison musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 

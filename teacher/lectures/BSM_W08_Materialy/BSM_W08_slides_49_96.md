@@ -10,7 +10,7 @@ Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych.
 ## teleprompter:
 Slajd 49. Media as data class. Selected media i photo picker.
 
-Definicja i granica pojęcia. Media as data class w tym miejscu oznacza dokładnie: Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Media as data class to Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -31,7 +31,7 @@ Media as data class — Jak działa
 ## teleprompter:
 Slajd 50. Media as data class. Selected media i photo picker.
 
-Wejście i stan początkowy. Media as data class w tym miejscu oznacza dokładnie: Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Media as data class krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -52,7 +52,7 @@ Media as data class — Jak pęka
 ## teleprompter:
 Slajd 51. Media as data class. Selected media i photo picker.
 
-Warunek powodzenia ataku. Media as data class w tym miejscu oznacza dokładnie: Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Media as data class przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -73,7 +73,7 @@ Media as data class — Jak się bronić
 ## teleprompter:
 Slajd 52. Media as data class. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Media as data class w tym miejscu oznacza dokładnie: Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Media as data class musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -93,7 +93,7 @@ Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytko
 ## teleprompter:
 Slajd 53. Selected Photos Access. Selected media i photo picker.
 
-Definicja i granica pojęcia. Selected Photos Access w tym miejscu oznacza dokładnie: Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Selected Photos Access to Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -114,7 +114,7 @@ Selected Photos Access — Jak działa
 ## teleprompter:
 Slajd 54. Selected Photos Access. Selected media i photo picker.
 
-Wejście i stan początkowy. Selected Photos Access w tym miejscu oznacza dokładnie: Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Selected Photos Access krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -135,7 +135,7 @@ Selected Photos Access — Jak pęka
 ## teleprompter:
 Slajd 55. Selected Photos Access. Selected media i photo picker.
 
-Warunek powodzenia ataku. Selected Photos Access w tym miejscu oznacza dokładnie: Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Selected Photos Access przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -156,7 +156,7 @@ Selected Photos Access — Jak się bronić
 ## teleprompter:
 Slajd 56. Selected Photos Access. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Selected Photos Access w tym miejscu oznacza dokładnie: Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Selected Photos Access musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -176,7 +176,7 @@ READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizu
 ## teleprompter:
 Slajd 57. READ_MEDIA_VISUAL_USER_SELECTED. Selected media i photo picker.
 
-Definicja i granica pojęcia. READ_MEDIA_VISUAL_USER_SELECTED w tym miejscu oznacza dokładnie: READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+READ_MEDIA_VISUAL_USER_SELECTED to READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -197,7 +197,7 @@ READ_MEDIA_VISUAL_USER_SELECTED — Jak działa
 ## teleprompter:
 Slajd 58. READ_MEDIA_VISUAL_USER_SELECTED. Selected media i photo picker.
 
-Wejście i stan początkowy. READ_MEDIA_VISUAL_USER_SELECTED w tym miejscu oznacza dokładnie: READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg READ_MEDIA_VISUAL_USER_SELECTED krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -218,7 +218,7 @@ READ_MEDIA_VISUAL_USER_SELECTED — Jak pęka
 ## teleprompter:
 Slajd 59. READ_MEDIA_VISUAL_USER_SELECTED. Selected media i photo picker.
 
-Warunek powodzenia ataku. READ_MEDIA_VISUAL_USER_SELECTED w tym miejscu oznacza dokładnie: READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym READ_MEDIA_VISUAL_USER_SELECTED przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -239,7 +239,7 @@ READ_MEDIA_VISUAL_USER_SELECTED — Jak się bronić
 ## teleprompter:
 Slajd 60. READ_MEDIA_VISUAL_USER_SELECTED. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. READ_MEDIA_VISUAL_USER_SELECTED w tym miejscu oznacza dokładnie: READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla READ_MEDIA_VISUAL_USER_SELECTED musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -259,7 +259,7 @@ Legacy app może działać w trybie kompatybilności, w którym system chroni wy
 ## teleprompter:
 Slajd 61. Compatibility mode. Selected media i photo picker.
 
-Definicja i granica pojęcia. Compatibility mode w tym miejscu oznacza dokładnie: Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Compatibility mode to Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -280,7 +280,7 @@ Compatibility mode — Jak działa
 ## teleprompter:
 Slajd 62. Compatibility mode. Selected media i photo picker.
 
-Wejście i stan początkowy. Compatibility mode w tym miejscu oznacza dokładnie: Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Compatibility mode krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -301,7 +301,7 @@ Compatibility mode — Jak pęka
 ## teleprompter:
 Slajd 63. Compatibility mode. Selected media i photo picker.
 
-Warunek powodzenia ataku. Compatibility mode w tym miejscu oznacza dokładnie: Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Compatibility mode przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -322,7 +322,7 @@ Compatibility mode — Jak się bronić
 ## teleprompter:
 Slajd 64. Compatibility mode. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Compatibility mode w tym miejscu oznacza dokładnie: Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Compatibility mode musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -342,7 +342,7 @@ Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspoz
 ## teleprompter:
 Slajd 65. Permission matrix. Selected media i photo picker.
 
-Definicja i granica pojęcia. Permission matrix w tym miejscu oznacza dokładnie: Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Permission matrix to Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -363,7 +363,7 @@ Permission matrix — Jak działa
 ## teleprompter:
 Slajd 66. Permission matrix. Selected media i photo picker.
 
-Wejście i stan początkowy. Permission matrix w tym miejscu oznacza dokładnie: Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Permission matrix krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -384,7 +384,7 @@ Permission matrix — Jak pęka
 ## teleprompter:
 Slajd 67. Permission matrix. Selected media i photo picker.
 
-Warunek powodzenia ataku. Permission matrix w tym miejscu oznacza dokładnie: Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Permission matrix przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -405,7 +405,7 @@ Permission matrix — Jak się bronić
 ## teleprompter:
 Slajd 68. Permission matrix. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Permission matrix w tym miejscu oznacza dokładnie: Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Permission matrix musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -425,7 +425,7 @@ Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI.
 ## teleprompter:
 Slajd 69. Latest selection only. Selected media i photo picker.
 
-Definicja i granica pojęcia. Latest selection only w tym miejscu oznacza dokładnie: Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Latest selection only to Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -446,7 +446,7 @@ Latest selection only — Jak działa
 ## teleprompter:
 Slajd 70. Latest selection only. Selected media i photo picker.
 
-Wejście i stan początkowy. Latest selection only w tym miejscu oznacza dokładnie: Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Latest selection only krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -467,7 +467,7 @@ Latest selection only — Jak pęka
 ## teleprompter:
 Slajd 71. Latest selection only. Selected media i photo picker.
 
-Warunek powodzenia ataku. Latest selection only w tym miejscu oznacza dokładnie: Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Latest selection only przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -488,7 +488,7 @@ Latest selection only — Jak się bronić
 ## teleprompter:
 Slajd 72. Latest selection only. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Latest selection only w tym miejscu oznacza dokładnie: Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Latest selection only musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -508,7 +508,7 @@ Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostę
 ## teleprompter:
 Slajd 73. Upgrade behavior. Selected media i photo picker.
 
-Definicja i granica pojęcia. Upgrade behavior w tym miejscu oznacza dokładnie: Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Upgrade behavior to Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -529,7 +529,7 @@ Upgrade behavior — Jak działa
 ## teleprompter:
 Slajd 74. Upgrade behavior. Selected media i photo picker.
 
-Wejście i stan początkowy. Upgrade behavior w tym miejscu oznacza dokładnie: Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Upgrade behavior krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -550,7 +550,7 @@ Upgrade behavior — Jak pęka
 ## teleprompter:
 Slajd 75. Upgrade behavior. Selected media i photo picker.
 
-Warunek powodzenia ataku. Upgrade behavior w tym miejscu oznacza dokładnie: Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Upgrade behavior przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -571,7 +571,7 @@ Upgrade behavior — Jak się bronić
 ## teleprompter:
 Slajd 76. Upgrade behavior. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Upgrade behavior w tym miejscu oznacza dokładnie: Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Upgrade behavior musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -591,7 +591,7 @@ Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do sto
 ## teleprompter:
 Slajd 77. Photo picker contract. Selected media i photo picker.
 
-Definicja i granica pojęcia. Photo picker contract w tym miejscu oznacza dokładnie: Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Photo picker contract to Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -612,7 +612,7 @@ Photo picker contract — Jak działa
 ## teleprompter:
 Slajd 78. Photo picker contract. Selected media i photo picker.
 
-Wejście i stan początkowy. Photo picker contract w tym miejscu oznacza dokładnie: Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Photo picker contract krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -633,7 +633,7 @@ Photo picker contract — Jak pęka
 ## teleprompter:
 Slajd 79. Photo picker contract. Selected media i photo picker.
 
-Warunek powodzenia ataku. Photo picker contract w tym miejscu oznacza dokładnie: Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Photo picker contract przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -654,7 +654,7 @@ Photo picker contract — Jak się bronić
 ## teleprompter:
 Slajd 80. Photo picker contract. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Photo picker contract w tym miejscu oznacza dokładnie: Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Photo picker contract musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -674,7 +674,7 @@ Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrak
 ## teleprompter:
 Slajd 81. Backport path. Selected media i photo picker.
 
-Definicja i granica pojęcia. Backport path w tym miejscu oznacza dokładnie: Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Backport path to Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -695,7 +695,7 @@ Backport path — Jak działa
 ## teleprompter:
 Slajd 82. Backport path. Selected media i photo picker.
 
-Wejście i stan początkowy. Backport path w tym miejscu oznacza dokładnie: Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Backport path krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -716,7 +716,7 @@ Backport path — Jak pęka
 ## teleprompter:
 Slajd 83. Backport path. Selected media i photo picker.
 
-Warunek powodzenia ataku. Backport path w tym miejscu oznacza dokładnie: Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Backport path przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -737,7 +737,7 @@ Backport path — Jak się bronić
 ## teleprompter:
 Slajd 84. Backport path. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Backport path w tym miejscu oznacza dokładnie: Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Backport path musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -757,7 +757,7 @@ Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym w
 ## teleprompter:
 Slajd 85. Cloud media providers. Selected media i photo picker.
 
-Definicja i granica pojęcia. Cloud media providers w tym miejscu oznacza dokładnie: Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Cloud media providers to Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -778,7 +778,7 @@ Cloud media providers — Jak działa
 ## teleprompter:
 Slajd 86. Cloud media providers. Selected media i photo picker.
 
-Wejście i stan początkowy. Cloud media providers w tym miejscu oznacza dokładnie: Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Cloud media providers krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -799,7 +799,7 @@ Cloud media providers — Jak pęka
 ## teleprompter:
 Slajd 87. Cloud media providers. Selected media i photo picker.
 
-Warunek powodzenia ataku. Cloud media providers w tym miejscu oznacza dokładnie: Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Cloud media providers przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -820,7 +820,7 @@ Cloud media providers — Jak się bronić
 ## teleprompter:
 Slajd 88. Cloud media providers. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Cloud media providers w tym miejscu oznacza dokładnie: Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Cloud media providers musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -840,7 +840,7 @@ MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fing
 ## teleprompter:
 Slajd 89. MediaStore version lockdown. Selected media i photo picker.
 
-Definicja i granica pojęcia. MediaStore version lockdown w tym miejscu oznacza dokładnie: MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+MediaStore version lockdown to MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -861,7 +861,7 @@ MediaStore version lockdown — Jak działa
 ## teleprompter:
 Slajd 90. MediaStore version lockdown. Selected media i photo picker.
 
-Wejście i stan początkowy. MediaStore version lockdown w tym miejscu oznacza dokładnie: MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg MediaStore version lockdown krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -882,7 +882,7 @@ MediaStore version lockdown — Jak pęka
 ## teleprompter:
 Slajd 91. MediaStore version lockdown. Selected media i photo picker.
 
-Warunek powodzenia ataku. MediaStore version lockdown w tym miejscu oznacza dokładnie: MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym MediaStore version lockdown przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -903,7 +903,7 @@ MediaStore version lockdown — Jak się bronić
 ## teleprompter:
 Slajd 92. MediaStore version lockdown. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. MediaStore version lockdown w tym miejscu oznacza dokładnie: MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla MediaStore version lockdown musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -923,7 +923,7 @@ Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzym
 ## teleprompter:
 Slajd 93. Embedded photo picker. Selected media i photo picker.
 
-Definicja i granica pojęcia. Embedded photo picker w tym miejscu oznacza dokładnie: Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Embedded photo picker to Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
 
 Dlaczego to nie jest tylko hasło. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -944,7 +944,7 @@ Embedded photo picker — Jak działa
 ## teleprompter:
 Slajd 94. Embedded photo picker. Selected media i photo picker.
 
-Wejście i stan początkowy. Embedded photo picker w tym miejscu oznacza dokładnie: Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Najpierw rozpisz przebieg Embedded photo picker krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -965,7 +965,7 @@ Embedded photo picker — Jak pęka
 ## teleprompter:
 Slajd 95. Embedded photo picker. Selected media i photo picker.
 
-Warunek powodzenia ataku. Embedded photo picker w tym miejscu oznacza dokładnie: Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Tu interesuje nas dokładnie moment, w którym Embedded photo picker przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -986,7 +986,7 @@ Embedded photo picker — Jak się bronić
 ## teleprompter:
 Slajd 96. Embedded photo picker. Selected media i photo picker.
 
-Reguła i miejsce egzekwowania. Embedded photo picker w tym miejscu oznacza dokładnie: Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed. Na tle tego bloku chodzi o: Zdjęcia i filmy są osobną klasą danych, a nowy model dostępu ma ograniczać aplikacji widzenie całej biblioteki, gdy wystarczy wybrany zestaw URI.
+Obrona dla Embedded photo picker musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 

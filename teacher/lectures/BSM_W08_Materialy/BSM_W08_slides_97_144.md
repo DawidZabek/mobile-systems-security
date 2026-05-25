@@ -10,7 +10,7 @@ DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates.
 ## teleprompter:
 Slajd 97. Why DCL exists. Dynamic code loading.
 
-Definicja i granica pojęcia. Why DCL exists w tym miejscu oznacza dokładnie: DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Why DCL exists to DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -31,7 +31,7 @@ Why DCL exists — Jak działa
 ## teleprompter:
 Slajd 98. Why DCL exists. Dynamic code loading.
 
-Wejście i stan początkowy. Why DCL exists w tym miejscu oznacza dokładnie: DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Why DCL exists krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -52,7 +52,7 @@ Why DCL exists — Jak pęka
 ## teleprompter:
 Slajd 99. Why DCL exists. Dynamic code loading.
 
-Warunek powodzenia ataku. Why DCL exists w tym miejscu oznacza dokładnie: DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Why DCL exists przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -73,7 +73,7 @@ Why DCL exists — Jak się bronić
 ## teleprompter:
 Slajd 100. Why DCL exists. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Why DCL exists w tym miejscu oznacza dokładnie: DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Why DCL exists musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -93,7 +93,7 @@ Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub us
 ## teleprompter:
 Slajd 101. Attack surface. Dynamic code loading.
 
-Definicja i granica pojęcia. Attack surface w tym miejscu oznacza dokładnie: Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Attack surface to Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -114,7 +114,7 @@ Attack surface — Jak działa
 ## teleprompter:
 Slajd 102. Attack surface. Dynamic code loading.
 
-Wejście i stan początkowy. Attack surface w tym miejscu oznacza dokładnie: Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Attack surface krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -135,7 +135,7 @@ Attack surface — Jak pęka
 ## teleprompter:
 Slajd 103. Attack surface. Dynamic code loading.
 
-Warunek powodzenia ataku. Attack surface w tym miejscu oznacza dokładnie: Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Attack surface przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -156,7 +156,7 @@ Attack surface — Jak się bronić
 ## teleprompter:
 Slajd 104. Attack surface. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Attack surface w tym miejscu oznacza dokładnie: Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Attack surface musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -176,7 +176,7 @@ Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Go
 ## teleprompter:
 Slajd 105. Remote source risk. Dynamic code loading.
 
-Definicja i granica pojęcia. Remote source risk w tym miejscu oznacza dokładnie: Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Remote source risk to Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -197,7 +197,7 @@ Remote source risk — Jak działa
 ## teleprompter:
 Slajd 106. Remote source risk. Dynamic code loading.
 
-Wejście i stan początkowy. Remote source risk w tym miejscu oznacza dokładnie: Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Remote source risk krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -218,7 +218,7 @@ Remote source risk — Jak pęka
 ## teleprompter:
 Slajd 107. Remote source risk. Dynamic code loading.
 
-Warunek powodzenia ataku. Remote source risk w tym miejscu oznacza dokładnie: Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Remote source risk przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -239,7 +239,7 @@ Remote source risk — Jak się bronić
 ## teleprompter:
 Slajd 108. Remote source risk. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Remote source risk w tym miejscu oznacza dokładnie: Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Remote source risk musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -259,7 +259,7 @@ Kod, który ma być później ładowany, powinien lądować w internal storage a
 ## teleprompter:
 Slajd 109. Trusted storage. Dynamic code loading.
 
-Definicja i granica pojęcia. Trusted storage w tym miejscu oznacza dokładnie: Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Trusted storage to Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -280,7 +280,7 @@ Trusted storage — Jak działa
 ## teleprompter:
 Slajd 110. Trusted storage. Dynamic code loading.
 
-Wejście i stan początkowy. Trusted storage w tym miejscu oznacza dokładnie: Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Trusted storage krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -301,7 +301,7 @@ Trusted storage — Jak pęka
 ## teleprompter:
 Slajd 111. Trusted storage. Dynamic code loading.
 
-Warunek powodzenia ataku. Trusted storage w tym miejscu oznacza dokładnie: Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Trusted storage przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -322,7 +322,7 @@ Trusted storage — Jak się bronić
 ## teleprompter:
 Slajd 112. Trusted storage. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Trusted storage w tym miejscu oznacza dokładnie: Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Trusted storage musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -342,7 +342,7 @@ Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykony
 ## teleprompter:
 Slajd 113. External storage risk. Dynamic code loading.
 
-Definicja i granica pojęcia. External storage risk w tym miejscu oznacza dokładnie: Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+External storage risk to Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -363,7 +363,7 @@ External storage risk — Jak działa
 ## teleprompter:
 Slajd 114. External storage risk. Dynamic code loading.
 
-Wejście i stan początkowy. External storage risk w tym miejscu oznacza dokładnie: Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg External storage risk krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -384,7 +384,7 @@ External storage risk — Jak pęka
 ## teleprompter:
 Slajd 115. External storage risk. Dynamic code loading.
 
-Warunek powodzenia ataku. External storage risk w tym miejscu oznacza dokładnie: Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym External storage risk przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -405,7 +405,7 @@ External storage risk — Jak się bronić
 ## teleprompter:
 Slajd 116. External storage risk. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. External storage risk w tym miejscu oznacza dokładnie: Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla External storage risk musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -425,7 +425,7 @@ Bezpieczny wzorzec to verify-before-load, a nie load-first.
 ## teleprompter:
 Slajd 117. Integrity before load. Dynamic code loading.
 
-Definicja i granica pojęcia. Integrity before load w tym miejscu oznacza dokładnie: Bezpieczny wzorzec to verify-before-load, a nie load-first. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Integrity before load to Bezpieczny wzorzec to verify-before-load, a nie load-first. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -446,7 +446,7 @@ Integrity before load — Jak działa
 ## teleprompter:
 Slajd 118. Integrity before load. Dynamic code loading.
 
-Wejście i stan początkowy. Integrity before load w tym miejscu oznacza dokładnie: Bezpieczny wzorzec to verify-before-load, a nie load-first. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Integrity before load krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -467,7 +467,7 @@ Integrity before load — Jak pęka
 ## teleprompter:
 Slajd 119. Integrity before load. Dynamic code loading.
 
-Warunek powodzenia ataku. Integrity before load w tym miejscu oznacza dokładnie: Bezpieczny wzorzec to verify-before-load, a nie load-first. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Integrity before load przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -488,7 +488,7 @@ Integrity before load — Jak się bronić
 ## teleprompter:
 Slajd 120. Integrity before load. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Integrity before load w tym miejscu oznacza dokładnie: Bezpieczny wzorzec to verify-before-load, a nie load-first. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Integrity before load musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -508,7 +508,7 @@ SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplika
 ## teleprompter:
 Slajd 121. SHA-256 checker. Dynamic code loading.
 
-Definicja i granica pojęcia. SHA-256 checker w tym miejscu oznacza dokładnie: SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+SHA-256 checker to SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -529,7 +529,7 @@ SHA-256 checker — Jak działa
 ## teleprompter:
 Slajd 122. SHA-256 checker. Dynamic code loading.
 
-Wejście i stan początkowy. SHA-256 checker w tym miejscu oznacza dokładnie: SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg SHA-256 checker krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -550,7 +550,7 @@ SHA-256 checker — Jak pęka
 ## teleprompter:
 Slajd 123. SHA-256 checker. Dynamic code loading.
 
-Warunek powodzenia ataku. SHA-256 checker w tym miejscu oznacza dokładnie: SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym SHA-256 checker przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -571,7 +571,7 @@ SHA-256 checker — Jak się bronić
 ## teleprompter:
 Slajd 124. SHA-256 checker. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. SHA-256 checker w tym miejscu oznacza dokładnie: SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla SHA-256 checker musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -591,7 +591,7 @@ Podpis kodu dodaje podpis kryptograficzny i zaufany public key.
 ## teleprompter:
 Slajd 125. Code signing. Dynamic code loading.
 
-Definicja i granica pojęcia. Code signing w tym miejscu oznacza dokładnie: Podpis kodu dodaje podpis kryptograficzny i zaufany public key. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Code signing to Podpis kodu dodaje podpis kryptograficzny i zaufany public key. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -612,7 +612,7 @@ Code signing — Jak działa
 ## teleprompter:
 Slajd 126. Code signing. Dynamic code loading.
 
-Wejście i stan początkowy. Code signing w tym miejscu oznacza dokładnie: Podpis kodu dodaje podpis kryptograficzny i zaufany public key. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Code signing krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -633,7 +633,7 @@ Code signing — Jak pęka
 ## teleprompter:
 Slajd 127. Code signing. Dynamic code loading.
 
-Warunek powodzenia ataku. Code signing w tym miejscu oznacza dokładnie: Podpis kodu dodaje podpis kryptograficzny i zaufany public key. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Code signing przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -654,7 +654,7 @@ Code signing — Jak się bronić
 ## teleprompter:
 Slajd 128. Code signing. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Code signing w tym miejscu oznacza dokładnie: Podpis kodu dodaje podpis kryptograficzny i zaufany public key. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Code signing musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -674,7 +674,7 @@ Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok same
 ## teleprompter:
 Slajd 129. Hash storage. Dynamic code loading.
 
-Definicja i granica pojęcia. Hash storage w tym miejscu oznacza dokładnie: Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Hash storage to Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -695,7 +695,7 @@ Hash storage — Jak działa
 ## teleprompter:
 Slajd 130. Hash storage. Dynamic code loading.
 
-Wejście i stan początkowy. Hash storage w tym miejscu oznacza dokładnie: Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Hash storage krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -716,7 +716,7 @@ Hash storage — Jak pęka
 ## teleprompter:
 Slajd 131. Hash storage. Dynamic code loading.
 
-Warunek powodzenia ataku. Hash storage w tym miejscu oznacza dokładnie: Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Hash storage przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -737,7 +737,7 @@ Hash storage — Jak się bronić
 ## teleprompter:
 Slajd 132. Hash storage. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Hash storage w tym miejscu oznacza dokładnie: Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Hash storage musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -757,7 +757,7 @@ Niebezpieczna ścieżka to download, write, verify, load i execute.
 ## teleprompter:
 Slajd 133. Path to execution. Dynamic code loading.
 
-Definicja i granica pojęcia. Path to execution w tym miejscu oznacza dokładnie: Niebezpieczna ścieżka to download, write, verify, load i execute. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Path to execution to Niebezpieczna ścieżka to download, write, verify, load i execute. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -778,7 +778,7 @@ Path to execution — Jak działa
 ## teleprompter:
 Slajd 134. Path to execution. Dynamic code loading.
 
-Wejście i stan początkowy. Path to execution w tym miejscu oznacza dokładnie: Niebezpieczna ścieżka to download, write, verify, load i execute. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Path to execution krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -799,7 +799,7 @@ Path to execution — Jak pęka
 ## teleprompter:
 Slajd 135. Path to execution. Dynamic code loading.
 
-Warunek powodzenia ataku. Path to execution w tym miejscu oznacza dokładnie: Niebezpieczna ścieżka to download, write, verify, load i execute. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Path to execution przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -820,7 +820,7 @@ Path to execution — Jak się bronić
 ## teleprompter:
 Slajd 136. Path to execution. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Path to execution w tym miejscu oznacza dokładnie: Niebezpieczna ścieżka to download, write, verify, load i execute. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Path to execution musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -840,7 +840,7 @@ DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, sk�
 ## teleprompter:
 Slajd 137. Class loader choices. Dynamic code loading.
 
-Definicja i granica pojęcia. Class loader choices w tym miejscu oznacza dokładnie: DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Class loader choices to DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -861,7 +861,7 @@ Class loader choices — Jak działa
 ## teleprompter:
 Slajd 138. Class loader choices. Dynamic code loading.
 
-Wejście i stan początkowy. Class loader choices w tym miejscu oznacza dokładnie: DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Class loader choices krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -882,7 +882,7 @@ Class loader choices — Jak pęka
 ## teleprompter:
 Slajd 139. Class loader choices. Dynamic code loading.
 
-Warunek powodzenia ataku. Class loader choices w tym miejscu oznacza dokładnie: DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Class loader choices przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -903,7 +903,7 @@ Class loader choices — Jak się bronić
 ## teleprompter:
 Slajd 140. Class loader choices. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Class loader choices w tym miejscu oznacza dokładnie: DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Class loader choices musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -923,7 +923,7 @@ Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex.
 ## teleprompter:
 Slajd 141. Native versus Java. Dynamic code loading.
 
-Definicja i granica pojęcia. Native versus Java w tym miejscu oznacza dokładnie: Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Native versus Java to Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -944,7 +944,7 @@ Native versus Java — Jak działa
 ## teleprompter:
 Slajd 142. Native versus Java. Dynamic code loading.
 
-Wejście i stan początkowy. Native versus Java w tym miejscu oznacza dokładnie: Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Najpierw rozpisz przebieg Native versus Java krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
 
 Krok po kroku przez przepływ. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -965,7 +965,7 @@ Native versus Java — Jak pęka
 ## teleprompter:
 Slajd 143. Native versus Java. Dynamic code loading.
 
-Warunek powodzenia ataku. Native versus Java w tym miejscu oznacza dokładnie: Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Tu interesuje nas dokładnie moment, w którym Native versus Java przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
 
 Co kontroluje atakujący. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -986,7 +986,7 @@ Native versus Java — Jak się bronić
 ## teleprompter:
 Slajd 144. Native versus Java. Dynamic code loading.
 
-Reguła i miejsce egzekwowania. Native versus Java w tym miejscu oznacza dokładnie: Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex. Na tle tego bloku chodzi o: Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła.
+Obrona dla Native versus Java musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
 
 Minimalny zakres dostępu. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
