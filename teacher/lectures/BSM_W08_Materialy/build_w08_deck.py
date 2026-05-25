@@ -184,29 +184,25 @@ def bullets_for(block: dict, subtopic: str, aspect: str) -> list[str]:
     if aspect == "Co to jest":
         return [
             specific,
-            f"Granica: {lead}",
-            f"Miejsce w modelu zagrożeń: {mechanics}",
-            "Dlaczego to jest istotne właśnie w mobilu",
+            "Granica i zakres",
+            "Ryzyko",
         ]
     if aspect == "Jak działa":
         return [
-            f"Krok 1: {specific}",
-            f"Krok 2: {mechanics}",
-            "Krok 3: decyzja systemu lub stan pośredni",
-            "Krok 4: wynik i konsekwencja dla aplikacji",
+            "Wejście",
+            "Przebieg",
+            "Wynik",
         ]
     if aspect == "Jak pęka":
         return [
-            f"Warunek powodzenia: {specific}",
-            f"Kontrola atakującego: {attack}",
-            "Ufa się za dużo lokalnym odpowiedziom, stanom albo parametrom",
-            "Skutek: wyciek, przejęcie, podmiana lub odmowa usługi",
+            "Warunek",
+            "Kontrola",
+            "Skutek",
         ]
     return [
-        f"Reguła: {defense}",
-        "Egzekwowanie: w manifeście, API, pickerze albo parserze",
-        "Zakres: tylko to, co naprawdę potrzebne",
-        "Test: przypadek zły odpada, przypadek dobry przechodzi",
+        "Reguła",
+        "Egzekwowanie",
+        "Test",
     ]
 
 
@@ -219,37 +215,30 @@ def teleprompter(num: int, block: dict, subtopic: str, aspect: str) -> str:
     if aspect == "Co to jest":
         first = specific
     elif aspect == "Jak działa":
-        first = (
-            f"Przebieg {subtopic} krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku."
-        )
+        first = f"{subtopic} zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu."
     elif aspect == "Jak pęka":
-        first = (
-            f"{subtopic} przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane."
-        )
+        first = f"{subtopic} przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane."
     else:
-        first = (
-            f"Obrona dla {subtopic} wymaga konkretnej reguły i miejsca egzekwowania."
-        )
+        first = f"{subtopic} wymaga konkretnej reguły i miejsca egzekwowania."
 
     if aspect == "Co to jest":
-        p2 = block["mechanics"]
-        p3 = block["attack"]
-        p4 = block["defense"]
+        p2 = f"{lead} {mechanics}"
+        p3 = f"{attack} {specific} pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał."
+        p4 = f"{defense} Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation."
     elif aspect == "Jak działa":
         p2 = f"{block['mechanics']} Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji."
-        p3 = "Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku."
-        p4 = "Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany."
+        p3 = "Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa."
+        p4 = "Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem."
     elif aspect == "Jak pęka":
         p2 = block["attack"]
-        p3 = "Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost."
-        p4 = "Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi."
+        p3 = "Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany."
+        p4 = "Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi."
     else:
         p2 = block["defense"]
-        p3 = "Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu."
-        p4 = "Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne."
+        p3 = "Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu."
+        p4 = "Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie."
 
     return (
-        f"Slajd {num}. {subtopic}. {block['title']}.\n\n"
         f"{first}\n"
         f"{p2}\n"
         f"{p3}\n"
