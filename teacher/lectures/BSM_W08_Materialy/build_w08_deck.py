@@ -217,7 +217,7 @@ def teleprompter(num: int, block: dict, subtopic: str, aspect: str) -> str:
     attack = block["attack"]
     defense = block["defense"]
     if aspect == "Co to jest":
-        first = f"{specific} To jest punkt startowy do zrozumienia, jak działa cały blok o {block['title'].lower()}."
+        first = specific
     elif aspect == "Jak działa":
         first = (
             f"Najpierw rozpisz przebieg {subtopic} krok po kroku. "

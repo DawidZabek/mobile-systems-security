@@ -12,7 +12,7 @@ Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharin
 ## teleprompter:
 Slajd 193. Continuity overview. Apple continuity i cross-device services.
 
-Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -103,7 +103,7 @@ Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continu
 ## teleprompter:
 Slajd 197. Handoff discovery. Apple continuity i cross-device services.
 
-Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -194,7 +194,7 @@ AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi.
 ## teleprompter:
 Slajd 201. AirDrop discovery. Apple continuity i cross-device services.
 
-AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -285,7 +285,7 @@ PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawnia�
 ## teleprompter:
 Slajd 205. PrivateDrop. Apple continuity i cross-device services.
 
-PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -376,7 +376,7 @@ AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika s
 ## teleprompter:
 Slajd 209. AWDL and BLE. Apple continuity i cross-device services.
 
-AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -467,7 +467,7 @@ Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasy
 ## teleprompter:
 Slajd 213. Cross-device identity. Apple continuity i cross-device services.
 
-Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -558,7 +558,7 @@ Atakujący może spoofować, relayować albo downgrade'ować discovery i authent
 ## teleprompter:
 Slajd 217. Spoof relay downgrade. Apple continuity i cross-device services.
 
-Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -649,7 +649,7 @@ Structured analysis wymaga obserwacji całego state machine na różnych vantage
 ## teleprompter:
 Slajd 221. Transport and state machine. Apple continuity i cross-device services.
 
-Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -740,7 +740,7 @@ Packet captures pokazują, które pola są szyfrowane, a które metadata lecą j
 ## teleprompter:
 Slajd 225. Packet analysis. Apple continuity i cross-device services.
 
-Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -831,7 +831,7 @@ PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności
 ## teleprompter:
 Slajd 229. Mitigations. Apple continuity i cross-device services.
 
-PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -922,7 +922,7 @@ Dobry test matrix zmienia stan urządzenia, odległość i użyty transport.
 ## teleprompter:
 Slajd 233. Test matrix. Apple continuity i cross-device services.
 
-Dobry test matrix zmienia stan urządzenia, odległość i użyty transport. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+Dobry test matrix zmienia stan urządzenia, odległość i użyty transport.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -1013,7 +1013,7 @@ Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kana�
 ## teleprompter:
 Slajd 237. Android comparison. Apple continuity i cross-device services.
 
-Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity. To jest punkt startowy do zrozumienia, jak działa cały blok o apple continuity i cross-device services.
+Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity.
 
 W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 

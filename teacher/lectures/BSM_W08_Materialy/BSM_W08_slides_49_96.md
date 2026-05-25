@@ -12,7 +12,7 @@ Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych.
 ## teleprompter:
 Slajd 49. Media as data class. Selected media i photo picker.
 
-Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -103,7 +103,7 @@ Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytko
 ## teleprompter:
 Slajd 53. Selected Photos Access. Selected media i photo picker.
 
-Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -194,7 +194,7 @@ READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizu
 ## teleprompter:
 Slajd 57. READ_MEDIA_VISUAL_USER_SELECTED. Selected media i photo picker.
 
-READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -285,7 +285,7 @@ Legacy app może działać w trybie kompatybilności, w którym system chroni wy
 ## teleprompter:
 Slajd 61. Compatibility mode. Selected media i photo picker.
 
-Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -376,7 +376,7 @@ Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspoz
 ## teleprompter:
 Slajd 65. Permission matrix. Selected media i photo picker.
 
-Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -467,7 +467,7 @@ Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI.
 ## teleprompter:
 Slajd 69. Latest selection only. Selected media i photo picker.
 
-Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -558,7 +558,7 @@ Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostę
 ## teleprompter:
 Slajd 73. Upgrade behavior. Selected media i photo picker.
 
-Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -649,7 +649,7 @@ Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do sto
 ## teleprompter:
 Slajd 77. Photo picker contract. Selected media i photo picker.
 
-Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -740,7 +740,7 @@ Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrak
 ## teleprompter:
 Slajd 81. Backport path. Selected media i photo picker.
 
-Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -831,7 +831,7 @@ Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym w
 ## teleprompter:
 Slajd 85. Cloud media providers. Selected media i photo picker.
 
-Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -922,7 +922,7 @@ MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fing
 ## teleprompter:
 Slajd 89. MediaStore version lockdown. Selected media i photo picker.
 
-MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
@@ -1013,7 +1013,7 @@ Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzym
 ## teleprompter:
 Slajd 93. Embedded photo picker. Selected media i photo picker.
 
-Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed. To jest punkt startowy do zrozumienia, jak działa cały blok o selected media i photo picker.
+Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed.
 
 Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
 
