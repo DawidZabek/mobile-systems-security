@@ -14,11 +14,11 @@ Slajd 145. Retention vs disposal. Retencja i secure deletion.
 
 Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 146
 ## layout
@@ -35,13 +35,13 @@ Jak działa
 ## teleprompter:
 Slajd 146. Retention vs disposal. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Retention vs disposal krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Retention vs disposal krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 147
 ## layout
@@ -58,9 +58,9 @@ Jak pęka
 ## teleprompter:
 Slajd 147. Retention vs disposal. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Retention vs disposal przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Retention vs disposal przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -81,9 +81,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 148. Retention vs disposal. Retencja i secure deletion.
 
-Obrona dla Retention vs disposal musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Retention vs disposal wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -105,11 +105,11 @@ Slajd 149. Why delete fails. Retencja i secure deletion.
 
 Delete zawodzi przez remanencję danych i metadanych.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 150
 ## layout
@@ -126,13 +126,13 @@ Jak działa
 ## teleprompter:
 Slajd 150. Why delete fails. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Why delete fails krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Why delete fails krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 151
 ## layout
@@ -149,9 +149,9 @@ Jak pęka
 ## teleprompter:
 Slajd 151. Why delete fails. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Why delete fails przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Why delete fails przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -172,9 +172,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 152. Why delete fails. Retencja i secure deletion.
 
-Obrona dla Why delete fails musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Why delete fails wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -196,11 +196,11 @@ Slajd 153. Log-structured storage. Retencja i secure deletion.
 
 Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 154
 ## layout
@@ -217,13 +217,13 @@ Jak działa
 ## teleprompter:
 Slajd 154. Log-structured storage. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Log-structured storage krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Log-structured storage krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 155
 ## layout
@@ -240,9 +240,9 @@ Jak pęka
 ## teleprompter:
 Slajd 155. Log-structured storage. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Log-structured storage przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Log-structured storage przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -263,9 +263,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 156. Log-structured storage. Retencja i secure deletion.
 
-Obrona dla Log-structured storage musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Log-structured storage wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -287,11 +287,11 @@ Slajd 157. YAFFS example. Retencja i secure deletion.
 
 YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 158
 ## layout
@@ -308,13 +308,13 @@ Jak działa
 ## teleprompter:
 Slajd 158. YAFFS example. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg YAFFS example krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg YAFFS example krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 159
 ## layout
@@ -331,9 +331,9 @@ Jak pęka
 ## teleprompter:
 Slajd 159. YAFFS example. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym YAFFS example przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+YAFFS example przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -354,9 +354,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 160. YAFFS example. Retencja i secure deletion.
 
-Obrona dla YAFFS example musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla YAFFS example wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -378,11 +378,11 @@ Slajd 161. FTL mapping. Retencja i secure deletion.
 
 FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 162
 ## layout
@@ -399,13 +399,13 @@ Jak działa
 ## teleprompter:
 Slajd 162. FTL mapping. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg FTL mapping krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg FTL mapping krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 163
 ## layout
@@ -422,9 +422,9 @@ Jak pęka
 ## teleprompter:
 Slajd 163. FTL mapping. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym FTL mapping przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+FTL mapping przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -445,9 +445,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 164. FTL mapping. Retencja i secure deletion.
 
-Obrona dla FTL mapping musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla FTL mapping wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -469,11 +469,11 @@ Slajd 165. Overwrite problem. Retencja i secure deletion.
 
 Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 166
 ## layout
@@ -490,13 +490,13 @@ Jak działa
 ## teleprompter:
 Slajd 166. Overwrite problem. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Overwrite problem krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Overwrite problem krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 167
 ## layout
@@ -513,9 +513,9 @@ Jak pęka
 ## teleprompter:
 Slajd 167. Overwrite problem. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Overwrite problem przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Overwrite problem przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -536,9 +536,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 168. Overwrite problem. Retencja i secure deletion.
 
-Obrona dla Overwrite problem musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Overwrite problem wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -560,11 +560,11 @@ Slajd 169. Encryption limitation. Retencja i secure deletion.
 
 Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 170
 ## layout
@@ -581,13 +581,13 @@ Jak działa
 ## teleprompter:
 Slajd 170. Encryption limitation. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Encryption limitation krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Encryption limitation krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 171
 ## layout
@@ -604,9 +604,9 @@ Jak pęka
 ## teleprompter:
 Slajd 171. Encryption limitation. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Encryption limitation przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Encryption limitation przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -627,9 +627,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 172. Encryption limitation. Retencja i secure deletion.
 
-Obrona dla Encryption limitation musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Encryption limitation wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -651,11 +651,11 @@ Slajd 173. Purge algorithm. Retencja i secure deletion.
 
 Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 174
 ## layout
@@ -672,13 +672,13 @@ Jak działa
 ## teleprompter:
 Slajd 174. Purge algorithm. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Purge algorithm krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Purge algorithm krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 175
 ## layout
@@ -695,9 +695,9 @@ Jak pęka
 ## teleprompter:
 Slajd 175. Purge algorithm. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Purge algorithm przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Purge algorithm przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -718,9 +718,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 176. Purge algorithm. Retencja i secure deletion.
 
-Obrona dla Purge algorithm musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Purge algorithm wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -742,11 +742,11 @@ Slajd 177. Ballooning algorithm. Retencja i secure deletion.
 
 Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 178
 ## layout
@@ -763,13 +763,13 @@ Jak działa
 ## teleprompter:
 Slajd 178. Ballooning algorithm. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Ballooning algorithm krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Ballooning algorithm krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 179
 ## layout
@@ -786,9 +786,9 @@ Jak pęka
 ## teleprompter:
 Slajd 179. Ballooning algorithm. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Ballooning algorithm przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Ballooning algorithm przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -809,9 +809,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 180. Ballooning algorithm. Retencja i secure deletion.
 
-Obrona dla Ballooning algorithm musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Ballooning algorithm wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -833,11 +833,11 @@ Slajd 181. Zero overwriting. Retencja i secure deletion.
 
 Zero overwriting wypełnia obszar i potem vacuumuje resztki.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 182
 ## layout
@@ -854,13 +854,13 @@ Jak działa
 ## teleprompter:
 Slajd 182. Zero overwriting. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Zero overwriting krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Zero overwriting krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 183
 ## layout
@@ -877,9 +877,9 @@ Jak pęka
 ## teleprompter:
 Slajd 183. Zero overwriting. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Zero overwriting przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Zero overwriting przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -900,9 +900,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 184. Zero overwriting. Retencja i secure deletion.
 
-Obrona dla Zero overwriting musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Zero overwriting wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -924,11 +924,11 @@ Slajd 185. Versioned file system. Retencja i secure deletion.
 
 Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 186
 ## layout
@@ -945,13 +945,13 @@ Jak działa
 ## teleprompter:
 Slajd 186. Versioned file system. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Versioned file system krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Versioned file system krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 187
 ## layout
@@ -968,9 +968,9 @@ Jak pęka
 ## teleprompter:
 Slajd 187. Versioned file system. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Versioned file system przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Versioned file system przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -991,9 +991,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 188. Versioned file system. Retencja i secure deletion.
 
-Obrona dla Versioned file system musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Versioned file system wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -1015,11 +1015,11 @@ Slajd 189. Forensic verification. Retencja i secure deletion.
 
 Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 #slide 190
 ## layout
@@ -1036,13 +1036,13 @@ Jak działa
 ## teleprompter:
 Slajd 190. Forensic verification. Retencja i secure deletion.
 
-Najpierw rozpisz przebieg Forensic verification krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Forensic verification krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 191
 ## layout
@@ -1059,9 +1059,9 @@ Jak pęka
 ## teleprompter:
 Slajd 191. Forensic verification. Retencja i secure deletion.
 
-Tu interesuje nas dokładnie moment, w którym Forensic verification przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Forensic verification przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -1082,9 +1082,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 192. Forensic verification. Retencja i secure deletion.
 
-Obrona dla Forensic verification musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Forensic verification wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 

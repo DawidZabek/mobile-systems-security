@@ -14,11 +14,11 @@ Slajd 1. mDNS record anatomy. Lokalna sieć i discovery.
 
 mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 2
 ## layout
@@ -35,13 +35,13 @@ Jak działa
 ## teleprompter:
 Slajd 2. mDNS record anatomy. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg mDNS record anatomy krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg mDNS record anatomy krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 3
 ## layout
@@ -58,9 +58,9 @@ Jak pęka
 ## teleprompter:
 Slajd 3. mDNS record anatomy. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym mDNS record anatomy przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+mDNS record anatomy przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -81,9 +81,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 4. mDNS record anatomy. Lokalna sieć i discovery.
 
-Obrona dla mDNS record anatomy musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla mDNS record anatomy wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -105,11 +105,11 @@ Slajd 5. SSDP discovery. Lokalna sieć i discovery.
 
 SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 6
 ## layout
@@ -126,13 +126,13 @@ Jak działa
 ## teleprompter:
 Slajd 6. SSDP discovery. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg SSDP discovery krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg SSDP discovery krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 7
 ## layout
@@ -149,9 +149,9 @@ Jak pęka
 ## teleprompter:
 Slajd 7. SSDP discovery. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym SSDP discovery przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+SSDP discovery przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -172,9 +172,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 8. SSDP discovery. Lokalna sieć i discovery.
 
-Obrona dla SSDP discovery musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla SSDP discovery wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -196,11 +196,11 @@ Slajd 9. IPv6 link-local. Lokalna sieć i discovery.
 
 IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 10
 ## layout
@@ -217,13 +217,13 @@ Jak działa
 ## teleprompter:
 Slajd 10. IPv6 link-local. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg IPv6 link-local krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg IPv6 link-local krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 11
 ## layout
@@ -240,9 +240,9 @@ Jak pęka
 ## teleprompter:
 Slajd 11. IPv6 link-local. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym IPv6 link-local przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+IPv6 link-local przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -263,9 +263,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 12. IPv6 link-local. Lokalna sieć i discovery.
 
-Obrona dla IPv6 link-local musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla IPv6 link-local wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -287,11 +287,11 @@ Slajd 13. Raw socket access. Lokalna sieć i discovery.
 
 Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 14
 ## layout
@@ -308,13 +308,13 @@ Jak działa
 ## teleprompter:
 Slajd 14. Raw socket access. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg Raw socket access krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Raw socket access krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 15
 ## layout
@@ -331,9 +331,9 @@ Jak pęka
 ## teleprompter:
 Slajd 15. Raw socket access. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym Raw socket access przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Raw socket access przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -354,9 +354,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 16. Raw socket access. Lokalna sieć i discovery.
 
-Obrona dla Raw socket access musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Raw socket access wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -378,11 +378,11 @@ Slajd 17. NsdManager. Lokalna sieć i discovery.
 
 NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 18
 ## layout
@@ -399,13 +399,13 @@ Jak działa
 ## teleprompter:
 Slajd 18. NsdManager. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg NsdManager krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg NsdManager krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 19
 ## layout
@@ -422,9 +422,9 @@ Jak pęka
 ## teleprompter:
 Slajd 19. NsdManager. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym NsdManager przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+NsdManager przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -445,9 +445,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 20. NsdManager. Lokalna sieć i discovery.
 
-Obrona dla NsdManager musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla NsdManager wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -469,11 +469,11 @@ Slajd 21. Casting path. Lokalna sieć i discovery.
 
 Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 22
 ## layout
@@ -490,13 +490,13 @@ Jak działa
 ## teleprompter:
 Slajd 22. Casting path. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg Casting path krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Casting path krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 23
 ## layout
@@ -513,9 +513,9 @@ Jak pęka
 ## teleprompter:
 Slajd 23. Casting path. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym Casting path przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Casting path przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -536,9 +536,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 24. Casting path. Lokalna sieć i discovery.
 
-Obrona dla Casting path musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Casting path wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -560,11 +560,11 @@ Slajd 25. Android 16 opt-in. Lokalna sieć i discovery.
 
 Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 26
 ## layout
@@ -581,13 +581,13 @@ Jak działa
 ## teleprompter:
 Slajd 26. Android 16 opt-in. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg Android 16 opt-in krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Android 16 opt-in krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 27
 ## layout
@@ -604,9 +604,9 @@ Jak pęka
 ## teleprompter:
 Slajd 27. Android 16 opt-in. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym Android 16 opt-in przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Android 16 opt-in przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -627,9 +627,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 28. Android 16 opt-in. Lokalna sieć i discovery.
 
-Obrona dla Android 16 opt-in musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Android 16 opt-in wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -651,11 +651,11 @@ Slajd 29. Android 17 enforcement. Lokalna sieć i discovery.
 
 Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 30
 ## layout
@@ -672,13 +672,13 @@ Jak działa
 ## teleprompter:
 Slajd 30. Android 17 enforcement. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg Android 17 enforcement krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Android 17 enforcement krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 31
 ## layout
@@ -695,9 +695,9 @@ Jak pęka
 ## teleprompter:
 Slajd 31. Android 17 enforcement. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym Android 17 enforcement przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Android 17 enforcement przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -718,9 +718,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 32. Android 17 enforcement. Lokalna sieć i discovery.
 
-Obrona dla Android 17 enforcement musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Android 17 enforcement wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -742,11 +742,11 @@ Slajd 33. Permission split. Lokalna sieć i discovery.
 
 Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 34
 ## layout
@@ -763,13 +763,13 @@ Jak działa
 ## teleprompter:
 Slajd 34. Permission split. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg Permission split krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Permission split krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 35
 ## layout
@@ -786,9 +786,9 @@ Jak pęka
 ## teleprompter:
 Slajd 35. Permission split. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym Permission split przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Permission split przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -809,9 +809,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 36. Permission split. Lokalna sieć i discovery.
 
-Obrona dla Permission split musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Permission split wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -833,11 +833,11 @@ Slajd 37. Broad access path. Lokalna sieć i discovery.
 
 Broad access path to klasyczny runtime permission request dla lokalnej sieci.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 38
 ## layout
@@ -854,13 +854,13 @@ Jak działa
 ## teleprompter:
 Slajd 38. Broad access path. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg Broad access path krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Broad access path krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 39
 ## layout
@@ -877,9 +877,9 @@ Jak pęka
 ## teleprompter:
 Slajd 39. Broad access path. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym Broad access path przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Broad access path przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -900,9 +900,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 40. Broad access path. Lokalna sieć i discovery.
 
-Obrona dla Broad access path musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Broad access path wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -924,11 +924,11 @@ Slajd 41. Privacy-preserving picker. Lokalna sieć i discovery.
 
 System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 42
 ## layout
@@ -945,13 +945,13 @@ Jak działa
 ## teleprompter:
 Slajd 42. Privacy-preserving picker. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg Privacy-preserving picker krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Privacy-preserving picker krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 43
 ## layout
@@ -968,9 +968,9 @@ Jak pęka
 ## teleprompter:
 Slajd 43. Privacy-preserving picker. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym Privacy-preserving picker przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Privacy-preserving picker przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -991,9 +991,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 44. Privacy-preserving picker. Lokalna sieć i discovery.
 
-Obrona dla Privacy-preserving picker musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Privacy-preserving picker wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
@@ -1015,11 +1015,11 @@ Slajd 45. Host app inheritance. Lokalna sieć i discovery.
 
 WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 #slide 46
 ## layout
@@ -1036,13 +1036,13 @@ Jak działa
 ## teleprompter:
 Slajd 46. Host app inheritance. Lokalna sieć i discovery.
 
-Najpierw rozpisz przebieg Host app inheritance krok po kroku. Zacznij od stanu początkowego i pokaż, co robi aplikacja, a co robi system.
+Przebieg Host app inheritance krok po kroku zaczyna się od stanu początkowego i kończy na konkretnym wyniku.
 
-W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji.
+W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
 
 Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku.
 
-Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
+Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany.
 
 #slide 47
 ## layout
@@ -1059,9 +1059,9 @@ Jak pęka
 ## teleprompter:
 Slajd 47. Host app inheritance. Lokalna sieć i discovery.
 
-Tu interesuje nas dokładnie moment, w którym Host app inheritance przestaje być bezpieczny. Skup się na tym, co kontroluje przeciwnik i jaki sygnał system błędnie uznaje za zaufany.
+Host app inheritance przestaje być bezpieczny w momencie, gdy przeciwnik przejmuje kontrolę nad sygnałem albo danymi, które system uznaje za zaufane.
 
-Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane. Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe.
+Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
 
 Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost.
 
@@ -1082,9 +1082,9 @@ Jak się bronić
 ## teleprompter:
 Slajd 48. Host app inheritance. Lokalna sieć i discovery.
 
-Obrona dla Host app inheritance musi być praktyczna, nie deklaratywna. Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł.
+Obrona dla Host app inheritance wymaga konkretnej reguły i miejsca egzekwowania.
 
-Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance. Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik.
+Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 
 Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu.
 
