@@ -216,8 +216,6 @@ def teleprompter(num: int, block: dict, subtopic: str, aspect: str) -> str:
     mechanics = block["mechanics"]
     attack = block["attack"]
     defense = block["defense"]
-    opening, middle, breach, close = aspect_block(aspect)
-
     if aspect == "Co to jest":
         first = f"{specific} To jest punkt startowy do zrozumienia, jak działa cały blok o {block['title'].lower()}."
     elif aspect == "Jak działa":
@@ -236,15 +234,29 @@ def teleprompter(num: int, block: dict, subtopic: str, aspect: str) -> str:
             f"Pokaż, gdzie reguła jest egzekwowana i co musi się nie udać, żeby atak nie przeszedł."
         )
 
+    if aspect == "Co to jest":
+        p2 = f"{block['mechanics']} To właśnie tutaj widać, jak ten mechanizm wchodzi w realny przepływ systemu i aplikacji."
+        p3 = f"{block['attack']} Atak zaczyna się tam, gdzie ktoś traktuje lokalny sygnał, wybrane URI albo rekord protokołu jak już zweryfikowany."
+        p4 = f"{block['defense']} To oznacza, że w obronie trzeba wskazać dokładny punkt egzekwowania i test, który potwierdzi odmowę albo ograniczenie."
+    elif aspect == "Jak działa":
+        p2 = f"{block['mechanics']} W tej części trzeba pokazać kolejność zdarzeń, bo właśnie kolejność zdradza, gdzie system przejmuje kontrolę, a gdzie zostawia decyzję aplikacji."
+        p3 = f"Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać jego pola, kolejność i to, który element decyduje o następnym kroku."
+        p4 = f"Na końcu tej sekwencji masz konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany."
+    elif aspect == "Jak pęka":
+        p2 = f"{block['attack']} Tu interesuje nas dokładnie punkt, w którym przeciwnik zaczyna sterować danymi, które potem system bierze za prawdziwe."
+        p3 = "Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost."
+        p4 = "Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi."
+    else:
+        p2 = f"{block['defense']} Obrona ma znaczyć więcej niż 'zablokować'. Trzeba podać warunek, wersję systemu, flagę albo mechanizm, który faktycznie zmienia wynik."
+        p3 = "Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu."
+        p4 = "Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne."
+
     return (
         f"Slajd {num}. {subtopic}. {block['title']}.\n\n"
         f"{first}\n\n"
-        f"{middle}. {mechanics} "
-        f"Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.\n\n"
-        f"{breach}. {attack} "
-        f"Tu nie opowiadasz o idei, tylko o tym, co dokładnie robi przeciwnik, jak wchodzi w przepływ i co dostaje na końcu.\n\n"
-        f"{close}. {defense} "
-        f"Na końcu zawsze ma być test: co ma zostać zablokowane, co ma przejść, i który log albo stan ma to potwierdzić."
+        f"{p2}\n\n"
+        f"{p3}\n\n"
+        f"{p4}"
     )
 
 
