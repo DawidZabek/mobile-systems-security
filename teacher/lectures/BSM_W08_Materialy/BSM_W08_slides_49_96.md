@@ -23,9 +23,10 @@ Media as data class
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Media as data class zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -40,9 +41,10 @@ Media as data class
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Media as data class przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -57,9 +59,10 @@ Media as data class
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Media as data class wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -91,9 +94,10 @@ Selected Photos Access
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Selected Photos Access zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -108,9 +112,10 @@ Selected Photos Access
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Selected Photos Access przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -125,9 +130,10 @@ Selected Photos Access
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Selected Photos Access wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -159,9 +165,10 @@ READ_MEDIA_VISUAL_USER_SELECTED
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 READ_MEDIA_VISUAL_USER_SELECTED zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -176,9 +183,10 @@ READ_MEDIA_VISUAL_USER_SELECTED
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 READ_MEDIA_VISUAL_USER_SELECTED przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -193,9 +201,10 @@ READ_MEDIA_VISUAL_USER_SELECTED
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 READ_MEDIA_VISUAL_USER_SELECTED wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -227,9 +236,10 @@ Compatibility mode
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Compatibility mode zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -244,9 +254,10 @@ Compatibility mode
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Compatibility mode przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -261,9 +272,10 @@ Compatibility mode
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Compatibility mode wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -295,9 +307,10 @@ Permission matrix
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Permission matrix zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -312,9 +325,10 @@ Permission matrix
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Permission matrix przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -329,9 +343,10 @@ Permission matrix
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Permission matrix wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -363,9 +378,10 @@ Latest selection only
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Latest selection only zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -380,9 +396,10 @@ Latest selection only
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Latest selection only przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -397,9 +414,10 @@ Latest selection only
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Latest selection only wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -431,9 +449,10 @@ Upgrade behavior
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Upgrade behavior zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -448,9 +467,10 @@ Upgrade behavior
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Upgrade behavior przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -465,9 +485,10 @@ Upgrade behavior
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Upgrade behavior wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -499,9 +520,10 @@ Photo picker contract
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Photo picker contract zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -516,9 +538,10 @@ Photo picker contract
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Photo picker contract przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -533,9 +556,10 @@ Photo picker contract
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Photo picker contract wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -567,9 +591,10 @@ Backport path
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Backport path zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -584,9 +609,10 @@ Backport path
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Backport path przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -601,9 +627,10 @@ Backport path
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Backport path wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -635,9 +662,10 @@ Cloud media providers
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Cloud media providers zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -652,9 +680,10 @@ Cloud media providers
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Cloud media providers przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -669,9 +698,10 @@ Cloud media providers
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Cloud media providers wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -703,9 +733,10 @@ MediaStore version lockdown
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 MediaStore version lockdown zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -720,9 +751,10 @@ MediaStore version lockdown
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 MediaStore version lockdown przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -737,9 +769,10 @@ MediaStore version lockdown
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 MediaStore version lockdown wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.
@@ -771,9 +804,10 @@ Embedded photo picker
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Embedded photo picker zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Android 14 wprowadza READ_MEDIA_VISUAL_USER_SELECTED jako dostęp do wybranych zdjęć i filmów, a systemowy picker zwraca content URI bez proszenia o pełen storage access. Embedded photo picker działa w SurfaceView przez setChildSurfacePackage, klient pozostaje w stanie resumed, a callbacki onUriPermissionGranted i onUriPermissionRevoked pokazują, kiedy zakres dostępu się zmienia. Cloud media providers rozszerzają wybór o biblioteki zdalne, a MediaStore#getVersion() ma być przycięty tak, by nie służył jako fingerprint aplikacji. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -788,9 +822,10 @@ Embedded photo picker
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Embedded photo picker przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Breach pojawia się wtedy, gdy aplikacja trzyma stare URI po revoke, myli partial access z pełnym dostępem, cache'uje wybór bez odświeżenia albo czyta metadane lokalizacji z ACCESS_MEDIA_LOCATION tak, jakby były neutralne. Drugim błędem jest własna galeria, która ignoruje latest selection only i nie synchronizuje selekcji z systemem.
@@ -805,9 +840,10 @@ Embedded photo picker
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Embedded photo picker wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga jawnego rozdzielenia permission matrix, odświeżania stanu po revocation, korzystania z picker contract zamiast własnego storage flow oraz ograniczenia wycieku EXIF i lokalizacji. Jeśli aplikacja wspiera starsze urządzenia, backport przez androidx.activity musi zachować ten sam model selekcji, a nie pełny dostęp do biblioteki.

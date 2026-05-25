@@ -23,9 +23,10 @@ Why DCL exists
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Why DCL exists zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -40,9 +41,10 @@ Why DCL exists
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Why DCL exists przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -57,9 +59,10 @@ Why DCL exists
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Why DCL exists wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -91,9 +94,10 @@ Attack surface
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Attack surface zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -108,9 +112,10 @@ Attack surface
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Attack surface przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -125,9 +130,10 @@ Attack surface
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Attack surface wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -159,9 +165,10 @@ Remote source risk
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Remote source risk zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -176,9 +183,10 @@ Remote source risk
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Remote source risk przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -193,9 +201,10 @@ Remote source risk
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Remote source risk wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -227,9 +236,10 @@ Trusted storage
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Trusted storage zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -244,9 +254,10 @@ Trusted storage
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Trusted storage przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -261,9 +272,10 @@ Trusted storage
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Trusted storage wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -295,9 +307,10 @@ External storage risk
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 External storage risk zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -312,9 +325,10 @@ External storage risk
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 External storage risk przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -329,9 +343,10 @@ External storage risk
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 External storage risk wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -363,9 +378,10 @@ Integrity before load
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Integrity before load zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -380,9 +396,10 @@ Integrity before load
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Integrity before load przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -397,9 +414,10 @@ Integrity before load
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Integrity before load wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -431,9 +449,10 @@ SHA-256 checker
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 SHA-256 checker zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -448,9 +467,10 @@ SHA-256 checker
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 SHA-256 checker przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -465,9 +485,10 @@ SHA-256 checker
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 SHA-256 checker wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -499,9 +520,10 @@ Code signing
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Code signing zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -516,9 +538,10 @@ Code signing
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Code signing przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -533,9 +556,10 @@ Code signing
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Code signing wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -567,9 +591,10 @@ Hash storage
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Hash storage zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -584,9 +609,10 @@ Hash storage
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Hash storage przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -601,9 +627,10 @@ Hash storage
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Hash storage wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -635,9 +662,10 @@ Path to execution
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Path to execution zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -652,9 +680,10 @@ Path to execution
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Path to execution przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -669,9 +698,10 @@ Path to execution
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Path to execution wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -703,9 +733,10 @@ Class loader choices
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Class loader choices zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -720,9 +751,10 @@ Class loader choices
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Class loader choices przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -737,9 +769,10 @@ Class loader choices
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Class loader choices wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
@@ -771,9 +804,10 @@ Native versus Java
 ## subtitle
 Jak działa
 ## bullets
-- Wejście
-- Przebieg
-- Wynik
+- Wejście do mechanizmu
+- Kolejność decyzji
+- Stan pośredni
+- Wynik operacji
 ## teleprompter:
 Native versus Java zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -788,9 +822,10 @@ Native versus Java
 ## subtitle
 Jak pęka
 ## bullets
-- Warunek
-- Kontrola
-- Skutek
+- Warunek ataku
+- Co kontroluje przeciwnik
+- Punkt ufania systemu
+- Skutek ataku
 ## teleprompter:
 Native versus Java przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
 Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
@@ -805,9 +840,10 @@ Native versus Java
 ## subtitle
 Jak się bronić
 ## bullets
-- Reguła
-- Egzekwowanie
-- Test
+- Reguła egzekwowania
+- Miejsce kontroli
+- Ograniczony zakres
+- Test regresyjny
 ## teleprompter:
 Native versus Java wymaga konkretnej reguły i miejsca egzekwowania.
 Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.

@@ -184,25 +184,29 @@ def bullets_for(block: dict, subtopic: str, aspect: str) -> list[str]:
     if aspect == "Co to jest":
         return [
             specific,
-            "Granica i zakres",
-            "Ryzyko",
+            "Granica pojęcia",
+            "Zakres działania",
+            "Ryzyko dla aplikacji",
         ]
     if aspect == "Jak działa":
         return [
-            "Wejście",
-            "Przebieg",
-            "Wynik",
+            "Wejście do mechanizmu",
+            "Kolejność decyzji",
+            "Stan pośredni",
+            "Wynik operacji",
         ]
     if aspect == "Jak pęka":
         return [
-            "Warunek",
-            "Kontrola",
-            "Skutek",
+            "Warunek ataku",
+            "Co kontroluje przeciwnik",
+            "Punkt ufania systemu",
+            "Skutek ataku",
         ]
     return [
-        "Reguła",
-        "Egzekwowanie",
-        "Test",
+        "Reguła egzekwowania",
+        "Miejsce kontroli",
+        "Ograniczony zakres",
+        "Test regresyjny",
     ]
 
 
