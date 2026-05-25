@@ -10,7 +10,7 @@ Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu
 ## teleprompter:
 Slajd 145. Retention vs disposal. Retencja i secure deletion.
 
-Retention vs disposal to Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -93,7 +93,7 @@ Delete zawodzi przez remanencję danych i metadanych.
 ## teleprompter:
 Slajd 149. Why delete fails. Retencja i secure deletion.
 
-Why delete fails to Delete zawodzi przez remanencję danych i metadanych. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Delete zawodzi przez remanencję danych i metadanych. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -176,7 +176,7 @@ Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero późn
 ## teleprompter:
 Slajd 153. Log-structured storage. Retencja i secure deletion.
 
-Log-structured storage to Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -259,7 +259,7 @@ YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystki
 ## teleprompter:
 Slajd 157. YAFFS example. Retencja i secure deletion.
 
-YAFFS example to YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -342,7 +342,7 @@ FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu.
 ## teleprompter:
 Slajd 161. FTL mapping. Retencja i secure deletion.
 
-FTL mapping to FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -425,7 +425,7 @@ Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, któr
 ## teleprompter:
 Slajd 165. Overwrite problem. Retencja i secure deletion.
 
-Overwrite problem to Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -508,7 +508,7 @@ Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne.
 ## teleprompter:
 Slajd 169. Encryption limitation. Retencja i secure deletion.
 
-Encryption limitation to Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -591,7 +591,7 @@ Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być p
 ## teleprompter:
 Slajd 173. Purge algorithm. Retencja i secure deletion.
 
-Purge algorithm to Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -674,7 +674,7 @@ Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu.
 ## teleprompter:
 Slajd 177. Ballooning algorithm. Retencja i secure deletion.
 
-Ballooning algorithm to Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -757,7 +757,7 @@ Zero overwriting wypełnia obszar i potem vacuumuje resztki.
 ## teleprompter:
 Slajd 181. Zero overwriting. Retencja i secure deletion.
 
-Zero overwriting to Zero overwriting wypełnia obszar i potem vacuumuje resztki. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Zero overwriting wypełnia obszar i potem vacuumuje resztki. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -840,7 +840,7 @@ Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istniej�
 ## teleprompter:
 Slajd 185. Versioned file system. Retencja i secure deletion.
 
-Versioned file system to Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -923,7 +923,7 @@ Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać tre�
 ## teleprompter:
 Slajd 189. Forensic verification. Retencja i secure deletion.
 
-Forensic verification to Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
+Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady. To jest punkt startowy do zrozumienia, jak działa cały blok o retencja i secure deletion.
 
 Dlaczego to nie jest tylko hasło. Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 

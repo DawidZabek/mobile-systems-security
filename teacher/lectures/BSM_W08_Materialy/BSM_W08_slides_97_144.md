@@ -10,7 +10,7 @@ DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates.
 ## teleprompter:
 Slajd 97. Why DCL exists. Dynamic code loading.
 
-Why DCL exists to DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -93,7 +93,7 @@ Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub us
 ## teleprompter:
 Slajd 101. Attack surface. Dynamic code loading.
 
-Attack surface to Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -176,7 +176,7 @@ Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Go
 ## teleprompter:
 Slajd 105. Remote source risk. Dynamic code loading.
 
-Remote source risk to Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -259,7 +259,7 @@ Kod, który ma być później ładowany, powinien lądować w internal storage a
 ## teleprompter:
 Slajd 109. Trusted storage. Dynamic code loading.
 
-Trusted storage to Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -342,7 +342,7 @@ Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykony
 ## teleprompter:
 Slajd 113. External storage risk. Dynamic code loading.
 
-External storage risk to Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -425,7 +425,7 @@ Bezpieczny wzorzec to verify-before-load, a nie load-first.
 ## teleprompter:
 Slajd 117. Integrity before load. Dynamic code loading.
 
-Integrity before load to Bezpieczny wzorzec to verify-before-load, a nie load-first. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Bezpieczny wzorzec to verify-before-load, a nie load-first. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -508,7 +508,7 @@ SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplika
 ## teleprompter:
 Slajd 121. SHA-256 checker. Dynamic code loading.
 
-SHA-256 checker to SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -591,7 +591,7 @@ Podpis kodu dodaje podpis kryptograficzny i zaufany public key.
 ## teleprompter:
 Slajd 125. Code signing. Dynamic code loading.
 
-Code signing to Podpis kodu dodaje podpis kryptograficzny i zaufany public key. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Podpis kodu dodaje podpis kryptograficzny i zaufany public key. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -674,7 +674,7 @@ Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok same
 ## teleprompter:
 Slajd 129. Hash storage. Dynamic code loading.
 
-Hash storage to Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -757,7 +757,7 @@ Niebezpieczna ścieżka to download, write, verify, load i execute.
 ## teleprompter:
 Slajd 133. Path to execution. Dynamic code loading.
 
-Path to execution to Niebezpieczna ścieżka to download, write, verify, load i execute. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Niebezpieczna ścieżka to download, write, verify, load i execute. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -840,7 +840,7 @@ DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, sk�
 ## teleprompter:
 Slajd 137. Class loader choices. Dynamic code loading.
 
-Class loader choices to DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -923,7 +923,7 @@ Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex.
 ## teleprompter:
 Slajd 141. Native versus Java. Dynamic code loading.
 
-Native versus Java to Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
+Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex. To jest punkt startowy do zrozumienia, jak działa cały blok o dynamic code loading.
 
 Dlaczego to nie jest tylko hasło. W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 

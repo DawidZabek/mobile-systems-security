@@ -10,7 +10,7 @@ mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353.
 ## teleprompter:
 Slajd 1. mDNS record anatomy. Lokalna sieć i discovery.
 
-mDNS record anatomy to mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -93,7 +93,7 @@ SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION.
 ## teleprompter:
 Slajd 5. SSDP discovery. Lokalna sieć i discovery.
 
-SSDP discovery to SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -176,7 +176,7 @@ IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::
 ## teleprompter:
 Slajd 9. IPv6 link-local. Lokalna sieć i discovery.
 
-IPv6 link-local to IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -259,7 +259,7 @@ Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma t
 ## teleprompter:
 Slajd 13. Raw socket access. Lokalna sieć i discovery.
 
-Raw socket access to Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -342,7 +342,7 @@ NsdManager jest frameworkowym API do discovery, które odciąża aplikację od r
 ## teleprompter:
 Slajd 17. NsdManager. Lokalna sieć i discovery.
 
-NsdManager to NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -425,7 +425,7 @@ Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast
 ## teleprompter:
 Slajd 21. Casting path. Lokalna sieć i discovery.
 
-Casting path to Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -508,7 +508,7 @@ Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawni�
 ## teleprompter:
 Slajd 25. Android 16 opt-in. Lokalna sieć i discovery.
 
-Android 16 opt-in to Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -591,7 +591,7 @@ Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NET
 ## teleprompter:
 Slajd 29. Android 17 enforcement. Lokalna sieć i discovery.
 
-Android 17 enforcement to Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -674,7 +674,7 @@ Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do 
 ## teleprompter:
 Slajd 33. Permission split. Lokalna sieć i discovery.
 
-Permission split to Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -757,7 +757,7 @@ Broad access path to klasyczny runtime permission request dla lokalnej sieci.
 ## teleprompter:
 Slajd 37. Broad access path. Lokalna sieć i discovery.
 
-Broad access path to Broad access path to klasyczny runtime permission request dla lokalnej sieci. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+Broad access path to klasyczny runtime permission request dla lokalnej sieci. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -840,7 +840,7 @@ System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej
 ## teleprompter:
 Slajd 41. Privacy-preserving picker. Lokalna sieć i discovery.
 
-Privacy-preserving picker to System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
@@ -923,7 +923,7 @@ WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta.
 ## teleprompter:
 Slajd 45. Host app inheritance. Lokalna sieć i discovery.
 
-Host app inheritance to WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
+WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta. To jest punkt startowy do zrozumienia, jak działa cały blok o lokalna sieć i discovery.
 
 Dlaczego to nie jest tylko hasło. W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć. Jeżeli źródło podaje rekord, API, callback, permission albo stan, to trzeba go rozłożyć na części i nazwać po kolei.
 
