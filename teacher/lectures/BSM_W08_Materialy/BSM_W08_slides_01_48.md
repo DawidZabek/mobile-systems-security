@@ -277,12 +277,11 @@ Co to jest
 ## term
 NsdManager
 ## definition
-NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN.
+NsdManager jest Androidowym API do network service discovery: aplikacja zgłasza typ usługi, system znajduje odpowiedzi w LAN, a potem zwraca host, port i TXT przez callback.
 ## teleprompter:
-NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+Discovery w NsdManager nie daje transportu. Najpierw pojawia się typ usługi i nazwa instancji, potem resolve do hosta i portu, a dopiero później osobne połączenie po TCP albo UDP.
+mDNS nadaje przez UDP 5353 rekordy PTR, SRV i TXT. PTR wskazuje instancję, SRV niesie host i port, TXT dopisuje atrybuty. To są trzy różne warstwy decyzji, a nie jeden rekord do zaufania.
+W Android 16 tryb RESTRICT_LOCAL_NETWORK pozwala zobaczyć, gdzie aplikacja ukrycie zależy od LAN. Jeśli socket, biblioteka albo WebView przestają działać, ta zależność nie jest teoretyczna.
 
 #slide 18
 ## layout
@@ -292,9 +291,9 @@ NsdManager
 ## subtitle
 Jak działa
 ## bullets
-- NsdManager: mDNS używa rekordów PTR SRV i TXT na…
-- NsdManager: mDNS SSDP i link-local IPv6 pokazują że sama…
-- NsdManager: LAN powinien być odcięty od Internetu na poziomie…
+- discovery, resolve, connect
+- host, port, TXT
+- callbacki z LAN
 ## teleprompter:
 NsdManager zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -309,14 +308,13 @@ NsdManager
 ## subtitle
 Jak pęka
 ## bullets
-- NsdManager: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- NsdManager: mDNS używa rekordów PTR SRV i TXT na…
-- NsdManager: mDNS SSDP i link-local IPv6 pokazują że sama…
+- spoofowany PTR
+- fałszywy SRV
+- zły TXT
 ## teleprompter:
-NsdManager przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Fałszywy PTR wystarcza, żeby aplikacja zobaczyła cudzą usługę jako właściwą. Potem fałszywy SRV podstawia host i port, a zły TXT dopina atrybuty, które parser potraktuje jak stan usługi.
+Jeżeli aplikacja zapisuje wynik resolve do cache bez ponownej walidacji, spoofing zostaje dłużej niż sam atak w sieci. Błąd nie musi trwać ciągle, żeby zostawić trwały zły endpoint.
+Słaby punkt jest zwykle prosty: zaufanie do lokalnego rekordu bez sprawdzenia, czy host, port i typ usługi faktycznie odpowiadają oczekiwanej usłudze.
 
 #slide 20
 ## layout
@@ -326,14 +324,13 @@ NsdManager
 ## subtitle
 Jak się bronić
 ## bullets
-- NsdManager: LAN powinien być odcięty od Internetu na poziomie…
-- NsdManager: mDNS używa rekordów PTR SRV i TXT na…
-- NsdManager: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- jawny dostęp do LAN
+- walidacja hosta i portu
+- test z RESTRICT_LOCAL_NETWORK
 ## teleprompter:
-NsdManager wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Najpierw trzeba świadomie przyznać dostęp do LAN. Jeśli discovery nie jest potrzebne, nie ma powodu zostawiać go jako przypadkowej konsekwencji innej funkcji.
+Po resolve trzeba sprawdzić, czy host, port i typ usługi naprawdę pasują do oczekiwanej usługi. Dopiero wtedy można przejść do transportu.
+W Android 16 tryb RESTRICT_LOCAL_NETWORK jest testem tego, co aplikacja robi ukrycie. Jeżeli w tym trybie przestaje działać socket, WebView albo biblioteka, obrona musi być w konfiguracji i logice, nie w deklaracji.
 
 #slide 21
 ## layout
@@ -345,12 +342,11 @@ Co to jest
 ## term
 Casting path
 ## definition
-Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług.
+Casting path to przepływ, w którym aplikacja wybiera urządzenie wyjściowe przez systemowy interfejs, zamiast sama skanować i łączyć się z usługą w LAN.
 ## teleprompter:
-Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+Casting path zaczyna się od wyboru odbiornika. System pokazuje tylko te urządzenia, które nadają się do konkretnej ścieżki wyjściowej, więc aplikacja nie musi sama enumerować całego LAN.
+Po wyborze endpointu pojawia się sesja: identyfikator urządzenia, negocjacja połączenia i dopiero potem transport treści. Ten podział oddziela discovery od samego przesyłu.
+Jeśli aplikacja omija systemowy wybór i sama buduje listę odbiorników, wraca do problemów surowego discovery: fałszywy rekord, zły endpoint i błędna selekcja.
 
 #slide 22
 ## layout
@@ -360,9 +356,9 @@ Casting path
 ## subtitle
 Jak działa
 ## bullets
-- Casting path: mDNS używa rekordów PTR SRV i TXT na…
-- Casting path: mDNS SSDP i link-local IPv6 pokazują że sama…
-- Casting path: LAN powinien być odcięty od Internetu na poziomie…
+- wybór odbiornika
+- start sesji
+- transport treści
 ## teleprompter:
 Casting path zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
 mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
@@ -377,14 +373,13 @@ Casting path
 ## subtitle
 Jak pęka
 ## bullets
-- Casting path: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- Casting path: mDNS używa rekordów PTR SRV i TXT na…
-- Casting path: mDNS SSDP i link-local IPv6 pokazują że sama…
+- fałszywy odbiornik
+- korelacja broadcastów
+- zły endpoint
 ## teleprompter:
-Casting path przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Fałszywy odbiornik działa wtedy, gdy aplikacja ufa nazwie lub wizualnej prezentacji zamiast sprawdzić parametry wybranej sesji. To wystarczy, żeby wybrać zły endpoint.
+Korelacja broadcastów pozwala zbudować obraz urządzenia z kilku słabszych sygnałów: mDNS, SSDP i innych odpowiedzi lokalnych. Atak nie potrzebuje jednego perfekcyjnego rekordu, jeśli potrafi złożyć kilka spójnych sygnałów.
+Skutek to nie tylko błędny wybór w interfejsie. Jeśli treść trafia do złego odbiornika, wyciek jest realny, a nie kosmetyczny.
 
 #slide 24
 ## layout
@@ -394,14 +389,13 @@ Casting path
 ## subtitle
 Jak się bronić
 ## bullets
-- Casting path: LAN powinien być odcięty od Internetu na poziomie…
-- Casting path: mDNS używa rekordów PTR SRV i TXT na…
-- Casting path: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- systemowy wybór odbiornika
+- bez własnego skanera
+- fałszywy endpoint test
 ## teleprompter:
-Casting path wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Systemowy wybór odbiornika powinien być jedynym miejscem selekcji. Jeśli aplikacja sama buduje listę urządzeń, sama robi sobie problem z fałszywym endpointem.
+Bez własnego skanera zostaje mniej danych do korelacji i mniej miejsc, w których można podsunąć zły wynik. To jest prosta redukcja powierzchni ataku.
+Test obrony musi podać fałszywy endpoint i sprawdzić, czy aplikacja odrzuca go przed wysłaniem treści. Jeśli nie odrzuca, obrona jest tylko deklaracją.
 
 #slide 25
 ## layout
@@ -415,10 +409,9 @@ Android 16 opt-in
 ## definition
 Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN.
 ## teleprompter:
-Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+RESTRICT_LOCAL_NETWORK nie służy do produkcyjnej blokady, tylko do wykrycia ukrytych zależności od LAN przed migracją.
+Jeśli socket, biblioteka albo WebView przestają działać po włączeniu tego trybu, znaczy to, że aplikacja korzysta z lokalnej sieci bez jawnej decyzji projektowej.
+To jest test do znalezienia miejsc, gdzie discovery było wbudowane po cichu, a nie świadomie użyte.
 
 #slide 26
 ## layout
@@ -428,15 +421,13 @@ Android 16 opt-in
 ## subtitle
 Jak działa
 ## bullets
-- Android 16 opt-in: mDNS używa rekordów PTR SRV i TXT na…
-- Android 16 opt-in: mDNS SSDP i link-local IPv6 pokazują że sama…
-- Android 16 opt-in: LAN powinien być odcięty od Internetu na poziomie…
+- wykrycie zależności
+- uruchomienie trybu
+- obserwacja awarii
 ## teleprompter:
-Android 16 opt-in zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Najpierw włącza się tryb wykrywania, potem obserwuje, które ścieżki przestają działać, gdy LAN nie jest już domyślnie dostępny.
+To odsłania sockety, biblioteki i WebView, które wcześniej korzystały z lokalnej sieci bez jawnego punktu decyzji.
+Wynik ma być konkretny: albo aplikacja nadal działa po świadomym dopięciu dostępu, albo trzeba usunąć ukryte zależności.
 #slide 27
 ## layout
 bullet
@@ -445,14 +436,13 @@ Android 16 opt-in
 ## subtitle
 Jak pęka
 ## bullets
-- Android 16 opt-in: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- Android 16 opt-in: mDNS używa rekordów PTR SRV i TXT na…
-- Android 16 opt-in: mDNS SSDP i link-local IPv6 pokazują że sama…
+- fake endpoint
+- ukryty LAN dependency
+- błędny fallback
 ## teleprompter:
-Android 16 opt-in przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Atak na ten tryb zwykle nie polega na łamaniu polityki, tylko na wykorzystaniu tego, że aplikacja wcześniej zakładała LAN bez sprawdzenia konsekwencji.
+Jeśli po włączeniu trybu pojawia się zły fallback, trzeba to traktować jako realny błąd projektu, nie jako drobną awarię.
+Breach widać tam, gdzie aplikacja nadal ufa lokalnemu endpointowi, mimo że system już pokazał, że zależność od LAN nie była jawna.
 
 #slide 28
 ## layout
@@ -462,14 +452,13 @@ Android 16 opt-in
 ## subtitle
 Jak się bronić
 ## bullets
-- Android 16 opt-in: LAN powinien być odcięty od Internetu na poziomie…
-- Android 16 opt-in: mDNS używa rekordów PTR SRV i TXT na…
-- Android 16 opt-in: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- jawna zgoda na LAN
+- asercja hosta i portu
+- kontrola po compat toggle
 ## teleprompter:
-Android 16 opt-in wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Jeśli aplikacja naprawdę potrzebuje LAN, zgoda powinna być jawna i ograniczona do konkretnej funkcji.
+Host i port trzeba asercyjnie sprawdzić po resolve, zamiast ufać jednemu rekordowi albo jednej odpowiedzi sieci.
+Test z compat toggle ma pokazać, że aplikacja działa poprawnie tylko wtedy, gdy LAN jest decyzją projektową, a nie przypadkiem włączonym przez zależną bibliotekę.
 
 #slide 29
 ## layout
@@ -483,10 +472,9 @@ Android 17 enforcement
 ## definition
 Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK.
 ## teleprompter:
-Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+ACCESS_LOCAL_NETWORK nie jest nazwą alternatywną dla starego broad access. To nowy punkt egzekwowania, który ma domyślnie blokować LAN dla nowych aplikacji.
+Podniesienie targetSdk do 37+ nie powinno tylko odblokować starego zachowania. Ma wymusić świadome przejście przez nowy model i nowy dialog.
+Jeśli aplikacja nadal działa bez ponownej walidacji po wejściu w ten model, to znaczy, że obrona jest niepełna albo obejście ukryło się w bibliotece pomocniczej.
 
 #slide 30
 ## layout
@@ -496,15 +484,13 @@ Android 17 enforcement
 ## subtitle
 Jak działa
 ## bullets
-- Android 17 enforcement: mDNS używa rekordów PTR SRV i TXT na…
-- Android 17 enforcement: mDNS SSDP i link-local IPv6 pokazują że sama…
-- Android 17 enforcement: LAN powinien być odcięty od Internetu na poziomie…
+- blokada domyślna
+- nowy dialog
+- status przed transportem
 ## teleprompter:
-Android 17 enforcement zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Najpierw pojawia się nowy punkt kontroli, potem system decyduje, czy LAN w ogóle przejdzie do transportu.
+Blokada domyślna nie jest tylko ostrzejszym promptem. To zmiana stanu, którą aplikacja musi obsłużyć przed wysłaniem danych.
+Jeżeli nie ma świadomej zgody, ścieżka ma zakończyć się wcześniej, zanim endpoint dostanie jakikolwiek ruch.
 #slide 31
 ## layout
 bullet
@@ -513,14 +499,13 @@ Android 17 enforcement
 ## subtitle
 Jak pęka
 ## bullets
-- Android 17 enforcement: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- Android 17 enforcement: mDNS używa rekordów PTR SRV i TXT na…
-- Android 17 enforcement: mDNS SSDP i link-local IPv6 pokazują że sama…
+- zły fallback
+- fałszywy endpoint
+- ukryta zależność
 ## teleprompter:
-Android 17 enforcement przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Wymuszenie nie psuje aplikacji samo z siebie. Psuje ją tylko wtedy, gdy wcześniej opierała się na LAN bez jawnej decyzji i bez poprawnego fallbacku.
+Jeśli po blokadzie pojawia się fałszywy endpoint albo aplikacja dalej próbuje korzystać z lokalnej usługi, to problem jest w projekcie, nie w platformie.
+Najważniejszy sygnał to miejsce, w którym zły rekord albo brak dostępu nadal prowadzą do połączenia zamiast do odrzucenia.
 
 #slide 32
 ## layout
@@ -530,14 +515,13 @@ Android 17 enforcement
 ## subtitle
 Jak się bronić
 ## bullets
-- Android 17 enforcement: LAN powinien być odcięty od Internetu na poziomie…
-- Android 17 enforcement: mDNS używa rekordów PTR SRV i TXT na…
-- Android 17 enforcement: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- jawne żądanie LAN
+- test po migracji
+- odrzucenie po błędzie
 ## teleprompter:
-Android 17 enforcement wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Jeśli aplikacja ma używać LAN, musi to zrobić jawnie i tylko tam, gdzie naprawdę tego potrzebuje.
+Po migracji trzeba sprawdzić, czy błędna ścieżka nie przechodzi dalej do transportu. Odrzucenie ma nastąpić przed połączeniem, nie po nim.
+Dobry test pokazuje, że aplikacja potrafi odmówić własnemu błędnemu endpointowi i nie otwiera po cichu szerszego dostępu.
 
 #slide 33
 ## layout
@@ -549,12 +533,11 @@ Co to jest
 ## term
 Permission split
 ## definition
-Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES.
+Permission split to przejściowy model, w którym lokalna sieć ma osobny, jawny krok dostępu zamiast być ukryta w zwykłym Wi-Fi.
 ## teleprompter:
-Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+Permission split rozdziela dwa różne pytania: czy aplikacja ma internet i czy może dotknąć lokalnej sieci.
+To ważne, bo discovery w LAN nie jest tym samym co zwykły dostęp do serwera zewnętrznego. Aplikacja może mieć łączność i nadal nie mieć prawa do broadcastów, resolve ani lokalnych usług.
+Zmiana modelu pokazuje, gdzie wcześniej lokalna sieć była traktowana jako oczywistość, a gdzie powinna być osobną decyzją.
 
 #slide 34
 ## layout
@@ -564,14 +547,13 @@ Permission split
 ## subtitle
 Jak działa
 ## bullets
-- Permission split: mDNS używa rekordów PTR SRV i TXT na…
-- Permission split: mDNS SSDP i link-local IPv6 pokazują że sama…
-- Permission split: LAN powinien być odcięty od Internetu na poziomie…
+- osobny krok dla LAN
+- różne ścieżki dostępu
+- lokalna sieć nie jest domyślna
 ## teleprompter:
-Permission split zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
+Najpierw aplikacja próbuje dostać dostęp przez stary lub przejściowy model, a dopiero potem przechodzi do nowego punktu dostępu dla LAN.
+Jeśli platforma widzi, że aplikacja korzysta z lokalnej sieci, rozróżnia zwykły internet od sieci pobliskiej, bo skutki prywatności są inne.
+Ten krok ma zmusić aplikację do jawnego opowiedzenia, po co w ogóle potrzebuje discovery.
 
 #slide 35
 ## layout
@@ -581,14 +563,13 @@ Permission split
 ## subtitle
 Jak pęka
 ## bullets
-- Permission split: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- Permission split: mDNS używa rekordów PTR SRV i TXT na…
-- Permission split: mDNS SSDP i link-local IPv6 pokazują że sama…
+- stary kod zakłada LAN
+- biblioteka omija decyzję
+- fallback wraca do broadcastów
 ## teleprompter:
-Permission split przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Atak pojawia się wtedy, gdy stary kod albo biblioteka nadal zachowują się tak, jakby LAN był zawsze dostępny.
+Wtedy nowy model nie wymusza realnej zmiany, tylko odsłania to, że decyzja została ominięta w środku stosu.
+Najbardziej zdradliwy jest fallback, który po odmowie wraca do własnego skanowania broadcastów i odzyskuje to, co miało być jawnie ograniczone.
 
 #slide 36
 ## layout
@@ -598,14 +579,13 @@ Permission split
 ## subtitle
 Jak się bronić
 ## bullets
-- Permission split: LAN powinien być odcięty od Internetu na poziomie…
-- Permission split: mDNS używa rekordów PTR SRV i TXT na…
-- Permission split: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- jawny wybór ścieżki
+- osobny test dla LAN
+- kontrola po revocation
 ## teleprompter:
-Permission split wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Obrona zaczyna się od tego, że aplikacja nie traktuje LAN jako domyślnego dodatku do Wi-Fi.
+Każdy przypadek powinien mieć osobny test: sukces, odmowę i stan po revocation.
+Jeśli po cofnięciu dostępu aplikacja nadal trafia do lokalnej usługi, to kontrola nie objęła całej ścieżki.
 
 #slide 37
 ## layout
@@ -617,12 +597,11 @@ Co to jest
 ## term
 Broad access path
 ## definition
-Broad access path to klasyczny runtime permission request dla lokalnej sieci.
+Broad access path to klasyczny runtime request o dostęp do lokalnej sieci.
 ## teleprompter:
-Broad access path to klasyczny runtime permission request dla lokalnej sieci.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. Broad access path to klasyczny runtime permission request dla lokalnej sieci. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+Broad access path oznacza jawny dialog, w którym aplikacja prosi o dostęp do lokalnej sieci w czasie działania.
+To jest model bardziej bezpośredni niż ukryte użycie LAN: użytkownik widzi prośbę, a aplikacja dostaje wynik decyzji wprost.
+Tu liczy się nie sam dialog, tylko to, co aplikacja robi z odmową, zgodą i późniejszym cofnięciem.
 
 #slide 38
 ## layout
@@ -632,14 +611,13 @@ Broad access path
 ## subtitle
 Jak działa
 ## bullets
-- Broad access path: mDNS używa rekordów PTR SRV i TXT na…
-- Broad access path: mDNS SSDP i link-local IPv6 pokazują że sama…
-- Broad access path: LAN powinien być odcięty od Internetu na poziomie…
+- request, grant, revoke
+- wynik wraca do aplikacji
+- decyzja wpływa na sockety
 ## teleprompter:
-Broad access path zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
+Najpierw aplikacja wywołuje żądanie, potem system pokazuje użytkownikowi decyzję, a na końcu wynik wraca do kodu.
+Grant otwiera dostęp do ścieżek, które wcześniej były blokowane. Revoke zamyka je ponownie i powinien odciąć kolejne próby połączenia.
+Dobrze zaprojektowana aplikacja nie traktuje grantu jako stałej cechy środowiska, tylko jako chwilowy stan, który może zniknąć.
 
 #slide 39
 ## layout
@@ -649,14 +627,13 @@ Broad access path
 ## subtitle
 Jak pęka
 ## bullets
-- Broad access path: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- Broad access path: mDNS używa rekordów PTR SRV i TXT na…
-- Broad access path: mDNS SSDP i link-local IPv6 pokazują że sama…
+- zbyt szeroki grant
+- stary cache po revoke
+- błędny fallback do własnego skanera
 ## teleprompter:
-Broad access path przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Broad access path pęka, gdy aplikacja po grancie rozszerza użycie LAN bardziej niż trzeba.
+Drugim błędem jest cache, który przeżywa revoke i nadal prowadzi do lokalnego endpointu.
+Trzeci błąd to fallback do własnego skanera, który działa nawet wtedy, gdy użytkownik cofnął zgodę.
 
 #slide 40
 ## layout
@@ -666,14 +643,13 @@ Broad access path
 ## subtitle
 Jak się bronić
 ## bullets
-- Broad access path: LAN powinien być odcięty od Internetu na poziomie…
-- Broad access path: mDNS używa rekordów PTR SRV i TXT na…
-- Broad access path: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- sprawdzenie po odnowieniu stanu
+- brak trwałego cache
+- obsługa revoke w kodzie
 ## teleprompter:
-Broad access path wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Obrona polega na tym, że każda próba wejścia w LAN sprawdza aktualny stan, a nie pamięta jednego dawnego pozwolenia.
+Po revoke aplikacja musi czyścić cache, odświeżać stan i odcinać połączenia, które już nie mają prawa istnieć.
+Jeśli po cofnięciu zgody endpoint wciąż działa, to znaczy, że model dostępu nie został zaimplementowany do końca.
 
 #slide 41
 ## layout
@@ -685,12 +661,11 @@ Co to jest
 ## term
 Privacy-preserving picker
 ## definition
-System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej.
+Privacy-preserving picker to systemowy wybór zasobu, który nie wymaga szerokiego grantu dla lokalnej sieci.
 ## teleprompter:
-System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+Picker ma ograniczyć ilość danych, które aplikacja musi sama zbierać z sieci.
+W praktyce chodzi o to, żeby system wykonał część selekcji, a aplikacja dostała tylko gotowy wynik, zamiast własnoręcznie mapować cały LAN.
+To jest sposób na uniknięcie sytuacji, w której sama wygoda discovery zamienia się w szerokie, niepotrzebne uprawnienie.
 
 #slide 42
 ## layout
@@ -700,14 +675,13 @@ Privacy-preserving picker
 ## subtitle
 Jak działa
 ## bullets
-- Privacy-preserving picker: mDNS używa rekordów PTR SRV i TXT na…
-- Privacy-preserving picker: mDNS SSDP i link-local IPv6 pokazują że sama…
-- Privacy-preserving picker: LAN powinien być odcięty od Internetu na poziomie…
+- system wybiera wynik
+- aplikacja nie widzi całej sieci
+- selekcja nie daje broad grant
 ## teleprompter:
-Privacy-preserving picker zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
+System bierze na siebie selekcję i ogranicza widoczność tego, co aplikacja może zobaczyć.
+Aplikacja dostaje wynik, nie cały katalog lokalnych usług.
+To odcina część błędów, które pojawiają się wtedy, gdy aplikacja sama musi mieć pełny ogląd na LAN, żeby wykonać prosty wybór.
 
 #slide 43
 ## layout
@@ -717,14 +691,13 @@ Privacy-preserving picker
 ## subtitle
 Jak pęka
 ## bullets
-- Privacy-preserving picker: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- Privacy-preserving picker: mDNS używa rekordów PTR SRV i TXT na…
-- Privacy-preserving picker: mDNS SSDP i link-local IPv6 pokazują że sama…
+- picker wraca do własnego skanera
+- wynik jest nadpisywany
+- systemowy wybór omijany
 ## teleprompter:
-Privacy-preserving picker przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Picker pęka, gdy aplikacja mimo wszystko zaczyna budować własną listę wyników i omija systemową selekcję.
+Wtedy wynik pickerowego wyboru nie ogranicza już widoczności, bo aplikacja i tak robi sobie pełny podgląd sieci.
+To jest dokładnie ten moment, w którym prywatność znika przez obejście, a nie przez sam mechanizm.
 
 #slide 44
 ## layout
@@ -734,14 +707,13 @@ Privacy-preserving picker
 ## subtitle
 Jak się bronić
 ## bullets
-- Privacy-preserving picker: LAN powinien być odcięty od Internetu na poziomie…
-- Privacy-preserving picker: mDNS używa rekordów PTR SRV i TXT na…
-- Privacy-preserving picker: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- systemowy wynik bez korelacji
+- brak własnego skanowania
+- test odmowy broad access
 ## teleprompter:
-Privacy-preserving picker wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Obrona polega na tym, że aplikacja używa tylko wyniku z systemu i nie miesza go z własnym skanerem.
+Jeśli trzeba odpytać LAN, to nie powinno być robione jako cicha, dodatkowa ścieżka obok pickera.
+Test ma pokazać, że po odmowie broad access picker nadal działa jako ograniczony wybór, a nie jako pretekst do pełnego skanowania.
 
 #slide 45
 ## layout
@@ -753,12 +725,11 @@ Co to jest
 ## term
 Host app inheritance
 ## definition
-WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta.
+Host app inheritance oznacza, że WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta.
 ## teleprompter:
-WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta.
-mDNS, SSDP i link-local IPv6 pokazują, że sama obecność w LAN daje aplikacji bardzo dużo informacji o pobliskich usługach i urządzeniach. mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi. WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+WebView nie zawsze ma własną, oddzielną decyzję o LAN.
+Jeśli host ma dostęp albo go nie ma, osadzony komponent może odziedziczyć ten stan i zachowywać się tak, jakby był częścią aplikacji nadrzędnej.
+To ważne, bo komunikacja przez WebView może wyglądać jak zwykły rendering, a faktycznie dotyka lokalnej sieci.
 
 #slide 46
 ## layout
@@ -768,14 +739,13 @@ Host app inheritance
 ## subtitle
 Jak działa
 ## bullets
-- Host app inheritance: mDNS używa rekordów PTR SRV i TXT na…
-- Host app inheritance: mDNS SSDP i link-local IPv6 pokazują że sama…
-- Host app inheritance: LAN powinien być odcięty od Internetu na poziomie…
+- host decyduje o stanie
+- WebView dziedziczy wynik
+- sprawdzany jest ten sam dostęp
 ## teleprompter:
-Host app inheritance zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-mDNS używa rekordów PTR, SRV i TXT na UDP 5353. SSDP używa M-SEARCH i NOTIFY z nagłówkiem LOCATION. Link-local IPv6 działa tylko w obrębie jednego segmentu i używa zakresu fe80::/10. Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby zobaczyć, które sockety, biblioteki i WebView naprawdę korzystają z LAN, a Android 17 ma ten dostęp blokować domyślnie dla targetSdk 37+. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
+Stan dostępu powstaje po stronie hosta i jest później widoczny w osadzonym komponencie.
+To znaczy, że WebView może korzystać z tego samego wyniku decyzji, który host już przeszedł.
+Jeśli host nie przeszedł przez jawny model LAN, osadzona treść też nie powinna go omijać.
 
 #slide 47
 ## layout
@@ -785,14 +755,13 @@ Host app inheritance
 ## subtitle
 Jak pęka
 ## bullets
-- Host app inheritance: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
-- Host app inheritance: mDNS używa rekordów PTR SRV i TXT na…
-- Host app inheritance: mDNS SSDP i link-local IPv6 pokazują że sama…
+- host ma ukryty dostęp
+- WebView robi LAN bez zgody
+- stan nie jest odświeżony
 ## teleprompter:
-Host app inheritance przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Spoofing odpowiedzi, korelacja broadcastów i akceptowanie lokalnych rekordów bez własnej walidacji wystarczają, żeby wyjąć nazwę hosta, typ usługi, punkt końcowy albo logiczny identyfikator urządzenia. Gdy aplikacja używa raw socketów albo NsdManager, błąd często kończy się timeoutem TCP, EPERM dla UDP albo błędnym rozpoznaniem usługi.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Atak zaczyna się wtedy, gdy host ma dostęp do LAN ukryty w swojej logice, a osadzony WebView przejmuje go bez osobnej kontroli.
+Wtedy wydaje się, że to tylko rendering strony, ale w praktyce komponent dalej korzysta z lokalnej sieci.
+Jeśli stan nie jest odświeżony po revocation, osadzona treść może dalej widzieć endpointy, które powinny być już zamknięte.
 
 #slide 48
 ## layout
@@ -802,11 +771,10 @@ Host app inheritance
 ## subtitle
 Jak się bronić
 ## bullets
-- Host app inheritance: LAN powinien być odcięty od Internetu na poziomie…
-- Host app inheritance: mDNS używa rekordów PTR SRV i TXT na…
-- Host app inheritance: Spoofing odpowiedzi korelacja broadcastów i akceptowanie lokalnych rekordów…
+- osobna walidacja stanu
+- aktualizacja po revoke
+- brak cichego dziedziczenia
 ## teleprompter:
-Host app inheritance wymaga konkretnej reguły i miejsca egzekwowania.
-LAN powinien być odcięty od Internetu na poziomie polityki, a broad access ma sens tylko wtedy, gdy aplikacja naprawdę potrzebuje discovery. W praktyce oznacza to deklarację NEARBY_WIFI_DEVICES albo ACCESS_LOCAL_NETWORK, testy z adb compat toggle i użycie android_getnetworkblockedreason(int sockFd) po stronie NDK.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Host i WebView nie powinny zakładać, że jeden stan wystarczy na zawsze.
+Po revoke trzeba odświeżyć decyzję i sprawdzić, czy osadzony komponent nadal ma prawo do lokalnej sieci.
+Jeżeli nie ma osobnej walidacji, to dziedziczenie staje się ukrytą luką, a nie wygodnym skrótem.

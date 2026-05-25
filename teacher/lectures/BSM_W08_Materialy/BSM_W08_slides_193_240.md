@@ -10,11 +10,7 @@ Continuity overview
 ## definition
 Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing.
 ## teleprompter:
-Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Continuity łączy Handoff, Universal Clipboard i Wi-Fi Password Sharing przez BLE, AWDL i Wi-Fi. Reverse engineering i packet capture z macOS pokazują, że te funkcje mają własne ścieżki discovery, transfer i auth, a ich formaty wiadomości potrafią ujawniać typ urządzenia, wersję systemu i stan aktywności.
 #slide 194
 ## layout
 bullet
@@ -27,11 +23,7 @@ Jak działa
 - Continuity overview: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Continuity overview: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Continuity overview zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg rozdziela się na discovery, transfer i state sync. BLE wykrywa sąsiednie urządzenia, AWDL daje niskopoziomowy kanał wymiany, a warstwa aplikacyjna przenosi aktywność, schowek albo dane logowania między urządzeniami.
 #slide 195
 ## layout
 bullet
@@ -44,11 +36,7 @@ Jak pęka
 - Continuity overview: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Continuity overview: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Continuity overview przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Punkt pęknięcia jest prosty: identyfikatory i metadane wciąż pojawiają się w ruchu, więc pasywny obserwator może powiązać urządzenia, aktywność i stan systemu. Badania pokazują także spoofing, relay i DoS na discovery oraz transport.
 #slide 196
 ## layout
 bullet
@@ -61,11 +49,7 @@ Jak się bronić
 - Continuity overview: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Continuity overview: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Continuity overview wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona w tej rodzinie polega na ograniczeniu tego, co trafia do discovery, i na przeniesieniu weryfikacji kontaktu do PSI. PrivateDrop pokazuje, że można zredukować wyciek identyfikatorów bez rozwalania czasu odpowiedzi.
 #slide 197
 ## layout
 definition
@@ -78,11 +62,7 @@ Handoff discovery
 ## definition
 Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity.
 ## teleprompter:
-Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Handoff startuje od BLE discovery: urządzenia wymieniają sygnały bliskości i reklamują bieżącą aktywność, którą można przejąć na drugim urządzeniu. W praktyce to nie jest zwykły transfer pliku, tylko przeniesienie stanu pracy.
 #slide 198
 ## layout
 bullet
@@ -95,11 +75,7 @@ Jak działa
 - Handoff discovery: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Handoff discovery: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Handoff discovery zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Discovery opiera się na krótkich ogłoszeniach BLE i na stanie aktywności, który widzi druga strona. Kiedy urządzenie jest w zasięgu, druga maszyna może podjąć aktywność bez pełnego ręcznego parowania.
 #slide 199
 ## layout
 bullet
@@ -112,11 +88,7 @@ Jak pęka
 - Handoff discovery: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Handoff discovery: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Handoff discovery przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Handoff pęka tam, gdzie format ogłoszenia zdradza więcej niż powinien: typ urządzenia, wersję OS albo wzorzec zachowania. Pasywny słuchacz dostaje korelację między urządzeniami bez potrzeby wejścia w sesję.
 #slide 200
 ## layout
 bullet
@@ -129,11 +101,7 @@ Jak się bronić
 - Handoff discovery: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Handoff discovery: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Handoff discovery wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Bezpieczna wersja Handoff wymaga zmniejszenia ujawnianych metadanych i kontroli, kto może interpretować discovery. Sam BLE nie jest problemem; problemem jest to, co wychodzi poza niezbędne minimum.
 #slide 201
 ## layout
 definition
@@ -146,11 +114,7 @@ AirDrop discovery
 ## definition
 AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi.
 ## teleprompter:
-AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+AirDrop używa BLE, AWDL i Wi-Fi: BLE znajduje sąsiadów, AWDL buduje szybki kanał lokalny, a Wi-Fi przenosi właściwy transfer. To trzy różne warstwy, które razem tworzą jedną ścieżkę wymiany.
 #slide 202
 ## layout
 bullet
@@ -163,11 +127,7 @@ Jak działa
 - AirDrop discovery: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - AirDrop discovery: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-AirDrop discovery zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Po discovery następuje uwierzytelnienie i decyzja, czy transfer w ogóle rusza. Jeśli contact discovery jest zrobione źle, sam etap wyboru odbiorcy może ujawnić identyfikatory kontaktów.
 #slide 203
 ## layout
 bullet
@@ -180,11 +140,7 @@ Jak pęka
 - AirDrop discovery: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - AirDrop discovery: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-AirDrop discovery przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Błędy w AirDrop nie muszą wyglądać jak klasyczny exploit. Wystarczy, że kontakt lub urządzenie zostanie ujawnione przez odpowiedź discovery, albo że obserwator zobaczy wzorzec prób i odrzuceń.
 #slide 204
 ## layout
 bullet
@@ -197,11 +153,7 @@ Jak się bronić
 - AirDrop discovery: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - AirDrop discovery: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-AirDrop discovery wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+PrivateDrop pokazuje, jak usunąć kontakt discovery z jawnego kanału. Mutual authentication idzie przez PSI, a celem jest ograniczenie przecieku identyfikatorów przy zachowaniu sensownej opóźnionosci.
 #slide 205
 ## layout
 definition
@@ -214,11 +166,7 @@ PrivateDrop
 ## definition
 PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email.
 ## teleprompter:
-PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+PrivateDrop zamienia kruche contact checks na PSI, żeby nie ujawniać telefonu ani maila. To inny model niż zwykły broadcast: porównanie zbiorów odbywa się bez wypisywania kontaktów na zewnątrz.
 #slide 206
 ## layout
 bullet
@@ -231,11 +179,7 @@ Jak działa
 - PrivateDrop: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - PrivateDrop: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-PrivateDrop zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg PrivateDrop ma trzy etapy: ukryte porównanie kontaktów, wybór zgodnego partnera i dopiero potem transfer. W badaniach pokazano, że da się utrzymać odpowiedź poniżej jednej sekundy.
 #slide 207
 ## layout
 bullet
@@ -248,11 +192,7 @@ Jak pęka
 - PrivateDrop: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - PrivateDrop: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-PrivateDrop przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak na PrivateDrop wraca do tego samego miejsca, co w AirDrop: do discovery i kontaktów. Jeżeli którakolwiek odpowiedź ujawnia za dużo, prywatność znika mimo użycia PSI w innym kroku.
 #slide 208
 ## layout
 bullet
@@ -265,11 +205,7 @@ Jak się bronić
 - PrivateDrop: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - PrivateDrop: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-PrivateDrop wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona wymaga kontrolowania, co trafia do discovery, i ograniczenia jawnych identyfikatorów do absolutnego minimum. Jeśli analiza pakietów nadal pokazuje identyfikatory albo wzorce obecności, mechanizm trzeba poprawić.
 #slide 209
 ## layout
 definition
@@ -282,11 +218,7 @@ AWDL and BLE
 ## definition
 AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity.
 ## teleprompter:
-AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+AWDL i BLE to kanały, na których widać lokalny ruch Continuity zanim zacznie się właściwy transfer. BLE daje wykrycie, AWDL daje szybkie połączenie w pobliżu, a razem ujawniają sporo o ruchu urządzeń.
 #slide 210
 ## layout
 bullet
@@ -299,11 +231,7 @@ Jak działa
 - AWDL and BLE: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - AWDL and BLE: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-AWDL and BLE zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+W praktyce oba kanały niosą reklamę obecności i dane pomocnicze dla discovery. To znaczy, że ktoś z dostępem radiowym może złożyć obraz pobliskich urządzeń nawet bez udziału aplikacji.
 #slide 211
 ## layout
 bullet
@@ -316,11 +244,7 @@ Jak pęka
 - AWDL and BLE: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - AWDL and BLE: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-AWDL and BLE przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Punkt pęknięcia to korelacja pakietów z konkretnymi urządzeniami i zachowaniami. W samych ramkach da się wyciągnąć identyfikatory, wersje i ślady aktywności.
 #slide 212
 ## layout
 bullet
@@ -333,11 +257,7 @@ Jak się bronić
 - AWDL and BLE: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - AWDL and BLE: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-AWDL and BLE wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Ochrona polega na ograniczeniu publicznych metadanych i na przeniesieniu krytycznej weryfikacji do kanału, który nie zdradza identyfikatorów wprost. PSI rozwiązuje tylko część problemu; druga część to dyscyplina transportu.
 #slide 213
 ## layout
 definition
@@ -350,11 +270,7 @@ Cross-device identity
 ## definition
 Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi.
 ## teleprompter:
-Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Cross-device identity w Continuity ujawnia typ urządzenia, wersję systemu i wzorce użycia pasywnemu obserwatorowi. To nie jest tylko pairing, ale ciągły sygnał o obecności i stanie ekosystemu.
 #slide 214
 ## layout
 bullet
@@ -367,11 +283,7 @@ Jak działa
 - Cross-device identity: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Cross-device identity: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Cross-device identity zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Mechanika jest prosta: urządzenia reklamują siebie i swoją aktywność, a druga strona podejmuje decyzję o przejęciu stanu. Właśnie przez to ruch nie wygląda jak zwykły, jednokierunkowy transfer.
 #slide 215
 ## layout
 bullet
@@ -384,11 +296,7 @@ Jak pęka
 - Cross-device identity: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Cross-device identity: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Cross-device identity przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Pęknięcie wynika z linkability. Jeśli te same metadane powracają w kolejnych reklamach, można śledzić urządzenie i jego właściciela w czasie.
 #slide 216
 ## layout
 bullet
@@ -401,11 +309,7 @@ Jak się bronić
 - Cross-device identity: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Cross-device identity: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Cross-device identity wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona zaczyna się od redukcji reklamowanych identyfikatorów i od oddzielenia discovery od pełnej tożsamości użytkownika. PSI pomaga tylko wtedy, gdy reszta warstwy też nie zdradza za dużo.
 #slide 217
 ## layout
 definition
@@ -418,11 +322,7 @@ Spoof relay downgrade
 ## definition
 Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication.
 ## teleprompter:
-Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Spoofing, relay i downgrade działają, bo discovery i authentication są rozdzielone. Atakujący może podmienić reklamę, przekazać ją dalej albo wymusić słabszy wariant wymiany.
 #slide 218
 ## layout
 bullet
@@ -435,11 +335,7 @@ Jak działa
 - Spoof relay downgrade: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Spoof relay downgrade: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Spoof relay downgrade zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Mechanicznie to wygląda jak przejęcie pierwszej reklamy, przepuszczenie jej przez pośrednika i wymuszenie gorszej ścieżki dalszej komunikacji. Wtedy druga strona ufa nie temu partnerowi, który powinna.
 #slide 219
 ## layout
 bullet
@@ -452,11 +348,7 @@ Jak pęka
 - Spoof relay downgrade: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Spoof relay downgrade: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Spoof relay downgrade przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Pęknięcie daje pasywny odczyt albo aktywne przekierowanie ruchu. Jeśli downgrade schodzi na słabszą metodę, bezpieczeństwo transferu spada bez widocznego alarmu.
 #slide 220
 ## layout
 bullet
@@ -469,11 +361,7 @@ Jak się bronić
 - Spoof relay downgrade: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Spoof relay downgrade: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Spoof relay downgrade wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona to nie tylko PSI, ale też twarde odrzucanie relayed i downgraded ścieżek. Jeśli format wiadomości albo wybór transportu zdradza za dużo, trzeba to odciąć zanim zacznie się transfer.
 #slide 221
 ## layout
 definition
@@ -486,11 +374,7 @@ Transport and state machine
 ## definition
 Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS.
 ## teleprompter:
-Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Badanie Continuity wymaga patrzenia na cały state machine, a nie na pojedynczy pakiet. Discovery, auth i transfer mają różne punkty obserwacji, więc jeden capture nie wystarcza.
 #slide 222
 ## layout
 bullet
@@ -503,11 +387,7 @@ Jak działa
 - Transport and state machine: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Transport and state machine: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Transport and state machine zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Kolejność jest zawsze ważna: najpierw reklama i discovery, potem weryfikacja, potem właściwy transfer. Jeśli jeden etap przeskoczy poprzedni, stany zaczynają się rozjeżdżać.
 #slide 223
 ## layout
 bullet
@@ -520,11 +400,7 @@ Jak pęka
 - Transport and state machine: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Transport and state machine: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Transport and state machine przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Pęknięcia najlepiej widać, gdy korelujesz ruch z momentem przełączania stanu. Wtedy da się zobaczyć, czy urządzenie ujawnia zbyt wiele już na etapie identyfikacji.
 #slide 224
 ## layout
 bullet
@@ -537,11 +413,7 @@ Jak się bronić
 - Transport and state machine: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Transport and state machine: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Transport and state machine wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona wymaga testów, które obserwują każdy stan i każdą zmianę kanału. Bez tego nie wiadomo, czy format wiadomości jest bezpieczny, czy tylko wygląda neutralnie w jednym capture.
 #slide 225
 ## layout
 definition
@@ -554,11 +426,7 @@ Packet analysis
 ## definition
 Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie.
 ## teleprompter:
-Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Packet capture pokazuje, które pola są jawne, a które chronione. W Continuity to ważne, bo właśnie z metadanych da się wyciągnąć najwięcej informacji o urządzeniu i aktywności.
 #slide 226
 ## layout
 bullet
@@ -571,11 +439,7 @@ Jak działa
 - Packet analysis: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Packet analysis: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Packet analysis zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg analizy zaczyna się od capture, potem idzie przez rekonstrukcję state machine i porównanie ramek z zachowaniem urządzeń. Reverse engineering nie jest dodatkiem, tylko sposobem zrozumienia ukrytych przejść.
 #slide 227
 ## layout
 bullet
@@ -588,11 +452,7 @@ Jak pęka
 - Packet analysis: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Packet analysis: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Packet analysis przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak wykorzystuje te same pakiety, ale patrzy na ich powtarzalność, korelację i niejawne identyfikatory. To pozwala śledzić zachowanie bez łamania szyfrowania.
 #slide 228
 ## layout
 bullet
@@ -605,11 +465,7 @@ Jak się bronić
 - Packet analysis: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Packet analysis: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Packet analysis wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona to ograniczenie jawnych metadanych i sprawdzanie, czy capture nadal nie daje wystarczająco dużo do korelacji. Jeśli tak, protokół trzeba odchudzić.
 #slide 229
 ## layout
 definition
@@ -622,11 +478,7 @@ Mitigations
 ## definition
 PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek.
 ## teleprompter:
-PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+PSI i mocniejsza kontrola widoczności ograniczają wyciek, bo kontakt nie musi być wystawiany wprost. PrivateDrop jest właśnie przykładem takiej redukcji.
 #slide 230
 ## layout
 bullet
@@ -639,11 +491,7 @@ Jak działa
 - Mitigations: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Mitigations: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Mitigations zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg obrony polega na porównaniu zbiorów bez ujawnienia członków zbioru. Dzięki temu discovery nie wypisuje kontaktów, tylko sprawdza zgodność.
 #slide 231
 ## layout
 bullet
@@ -656,11 +504,7 @@ Jak pęka
 - Mitigations: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Mitigations: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Mitigations przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Pęknięcie wraca, gdy transport lub discovery zdradza więcej niż sam PSI. Wtedy prywatność wypada nie na etapie porównania, ale na warstwie pomocniczej.
 #slide 232
 ## layout
 bullet
@@ -673,11 +517,7 @@ Jak się bronić
 - Mitigations: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Mitigations: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Mitigations wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona jest skuteczna dopiero wtedy, gdy testy potwierdzają brak jawnych identyfikatorów, dobry czas odpowiedzi i brak relayed ścieżek.
 #slide 233
 ## layout
 definition
@@ -690,11 +530,7 @@ Test matrix
 ## definition
 Dobry test matrix zmienia stan urządzenia, odległość i użyty transport.
 ## teleprompter:
-Dobry test matrix zmienia stan urządzenia, odległość i użyty transport.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. Dobry test matrix zmienia stan urządzenia, odległość i użyty transport. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Dobrze ustawiony test matrix zmienia stan urządzenia, odległość i transport, bo tylko wtedy widać, jak protokół zachowuje się w różnych warunkach radiowych.
 #slide 234
 ## layout
 bullet
@@ -707,11 +543,7 @@ Jak działa
 - Test matrix: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Test matrix: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Test matrix zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg testów musi obejmować discovery, authentication i transfer w różnych konfiguracjach zasięgu. Jedno ustawienie pokazuje za mało.
 #slide 235
 ## layout
 bullet
@@ -724,11 +556,7 @@ Jak pęka
 - Test matrix: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Test matrix: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Test matrix przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Pęknięcie pojawia się, gdy jeden wariant ustawienia wygląda dobrze, ale inny ujawnia identyfikatory albo relayed pakiety. Bez porównania warunków nie ma oceny bezpieczeństwa.
 #slide 236
 ## layout
 bullet
@@ -741,11 +569,7 @@ Jak się bronić
 - Test matrix: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Test matrix: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Test matrix wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona wymaga pokrycia całej macierzy: zasięg, liczba urządzeń, typ transportu, stan zaufania i stan kontaktów. Dopiero wtedy wynik jest coś wart.
 #slide 237
 ## layout
 definition
@@ -758,11 +582,7 @@ Android comparison
 ## definition
 Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity.
 ## teleprompter:
-Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity.
-Continuity w ekosystemie Apple to Handoff, Universal Clipboard i Wi-Fi Password Sharing działające przez BLE, AWDL i Wi-Fi. Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów. Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Android local-network policy daje kontrast: tam dostęp do sieci lokalnej jest kontrolowany i wprost opisany, więc łatwiej zobaczyć, czego brakuje w Always-On Continuity.
 #slide 238
 ## layout
 bullet
@@ -775,11 +595,7 @@ Jak działa
 - Android comparison: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 - Android comparison: PrivateDrop jest odpowiedzią na te błędy bo przenosi…
 ## teleprompter:
-Android comparison zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Prace o Continuity pokazują, że Handoff, Universal Clipboard i Wi-Fi Password Sharing mają własne discovery, transfer i auth state machine, a analiza zwykle opiera się na reverse engineering i packet capture z macOS. Handoff zaczyna się od BLE discovery, AirDrop używa BLE, AWDL i Wi-Fi, a PrivateDrop wymienia kruche contact checks na PSI, żeby nie ujawniać phone numbers ani email addresses. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg Androida pokazuje podejście permission-first, a Continuity działa bardziej jak stały kanał discovery. To różnica w modelu zaufania, nie tylko w implementacji.
 #slide 239
 ## layout
 bullet
@@ -792,11 +608,7 @@ Jak pęka
 - Android comparison: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Android comparison: Continuity w ekosystemie Apple to Handoff Universal Clipboard…
 ## teleprompter:
-Android comparison przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Badania wskazują na leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery i transportu. W BLE Continuity można odczytać zachowania użytkownika, typ urządzenia i wersję systemu z formatów wiadomości, a w AirDrop błędy w contact discovery pozwalają wyciągać identyfikatory kontaktów.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Pęknięcie w Continuity polega na tym, że radio samo ujawnia obecność i wzorce użycia, bez osobnego runtime promptu. Androidowa polityka lokalnej sieci robi z tego twardy kontrast.
 #slide 240
 ## layout
 bullet
@@ -809,7 +621,4 @@ Jak się bronić
 - Android comparison: Prace o Continuity pokazują że Handoff Universal Clipboard…
 - Android comparison: Badania wskazują na leakage of identifying information trackability…
 ## teleprompter:
-Android comparison wymaga konkretnej reguły i miejsca egzekwowania.
-PrivateDrop jest odpowiedzią na te błędy, bo przenosi mutual authentication do PSI i zachowuje czas odpowiedzi poniżej jednej sekundy. Testy muszą obejmować różne stany zasięgu, typ transportu, liczbę identyfikatorów i ścieżki zgłoszone przez reverse engineering, bo dopiero wtedy widać, czy format wiadomości nadal przecieka.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Obrona jest prostsza do nazwania: ograniczać discovery, redukować widoczne metadane i wymagać świadomego użycia kanału. Jeśli porównanie z Androidem coś wnosi, to właśnie tę różnicę między aktywną zgodą a ciągłą reklamą obecności.

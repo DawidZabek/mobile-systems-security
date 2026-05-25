@@ -758,10 +758,9 @@ Native versus Java
 ## definition
 Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex.
 ## teleprompter:
-Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex.
-Dynamiczne ładowanie kodu jest potrzebne do pluginów i aktualizacji, ale robi się niebezpieczne, gdy kod można podmienić, uszkodzić albo pobrać z niewiarygodnego źródła. Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone.
-Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji. Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
+W Java i w native chodzi o ten sam punkt: kod można podmienić przed wykonaniem.
+Dex i biblioteki `.so` różnią się mechaniką, ale nie zmienia to ryzyka związanego z pochodzeniem payloadu.
+Jeśli ładujesz moduł, musisz wiedzieć, czy pochodzi z zaufanego storage i czy jego integralność została sprawdzona.
 
 #slide 142
 ## layout
@@ -771,14 +770,13 @@ Native versus Java
 ## subtitle
 Jak działa
 ## bullets
-- Native versus Java: Oficjalny dokument Androida mówi wprost żeby unikać dynamic…
-- Native versus Java: Dynamiczne ładowanie kodu jest potrzebne do pluginów i…
-- Native versus Java: Obrona wymaga verify-before-load sprawdzenia trusted sources odrzucenia pliku…
+- odrębne ścieżki dla dex i .so
+- verify przed load
+- trust nie może siedzieć obok payloadu
 ## teleprompter:
-Native versus Java zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-Oficjalny dokument Androida mówi wprost, żeby unikać dynamic code loading z remote sources, a jeśli kod ma być ładowany, to powinien trafić do internal storage albo scoped storage. Zanim aplikacja wykona taki plik, musi porównać digest albo podpis z zaufaną referencją, a sam plik powinien być traktowany jako artefakt read-only. Ryzyko obejmuje zarówno Dex/Java code, jak i natywny path przez biblioteki współdzielone. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
+Ścieżka Java używa loadera dla dex, a natywna ścieżka używa `dlopen` i `dlsym`.
+W obu przypadkach weryfikacja musi nastąpić przed wykonaniem.
+Referencja zaufania nie może leżeć obok pliku, który ma być ładowany, bo wtedy łatwo ją podmienić razem z payloadem.
 
 #slide 143
 ## layout
@@ -788,14 +786,13 @@ Native versus Java
 ## subtitle
 Jak pęka
 ## bullets
-- Native versus Java: Atak pojawia się w momencie gdy ktoś podmieni…
-- Native versus Java: Oficjalny dokument Androida mówi wprost żeby unikać dynamic…
-- Native versus Java: Dynamiczne ładowanie kodu jest potrzebne do pluginów i…
+- podmiana dex lub .so
+- payload w shared storage
+- internet bez kontroli pochodzenia
 ## teleprompter:
-Native versus Java przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak pojawia się w momencie, gdy ktoś podmieni payload przed verify, dopisze kod do katalogu współdzielonego albo podmieni cały plik z modułem po stronie storage. Jeśli aplikacja pobiera kod z internetu bez kontroli pochodzenia, przeciwnik może skończyć z code execution, exfiltration albo z usunięciem funkcji aplikacji.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
+Breach pojawia się wtedy, gdy ktoś podmieni dex albo bibliotekę `.so` przed weryfikacją.
+Jeśli kod leży w współdzielonym storage albo przychodzi z internetu bez kontroli pochodzenia, atakujący może wejść w code execution lub usunąć funkcję aplikacji.
+W tej ścieżce exploit jest prosty: podmiana pliku, brak verify i wykonanie zaufane tylko z nazwy.
 
 #slide 144
 ## layout
@@ -805,11 +802,10 @@ Native versus Java
 ## subtitle
 Jak się bronić
 ## bullets
-- Native versus Java: Obrona wymaga verify-before-load sprawdzenia trusted sources odrzucenia pliku…
-- Native versus Java: Oficjalny dokument Androida mówi wprost żeby unikać dynamic…
-- Native versus Java: Atak pojawia się w momencie gdy ktoś podmieni…
+- verify-before-load dla obu ścieżek
+- rollback i audit log
+- testy podmiany i braków w uprawnieniach
 ## teleprompter:
-Native versus Java wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga verify-before-load, sprawdzenia trusted sources, odrzucenia pliku po niezgodnym hash albo podpisie i trzymania referencji do kontroli integralności poza katalogiem z samym payloadem. Jeśli moduł ma być aktualizowany, trzeba mieć rollback, audit log i testy podmiany pliku, uszkodzonego digestu oraz braków w uprawnieniach do odczytu.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Obrona musi być taka sama dla Java i native: verify-before-load, sprawdzenie trusted sources i odrzucenie pliku po złym hash albo podpisie.
+Jeśli moduł aktualizuje się dynamicznie, potrzebujesz rollbacku i audit logu.
+Testy muszą obejmować podmianę pliku, uszkodzony digest i przypadek, w którym brakuje prawa do odczytu payloadu.

@@ -10,11 +10,7 @@ Retention vs disposal
 ## definition
 Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu.
 ## teleprompter:
-Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Retencja ustala, jak długo dane mogą istnieć w systemie, a disposal opisuje moment ich faktycznego wycofania z nośnika i z kopii pośrednich. W systemach log-structured sam zapis i sam delete nie są tym samym: zmienia się status logiczny, ale stare segmenty, metadane, cache i snapshoty mogą nadal trzymać treść. W flashu ten rozdźwięk rośnie przez wear leveling i translację bloków w FTL.
 #slide 146
 ## layout
 bullet
@@ -27,11 +23,7 @@ Jak działa
 - Retention vs disposal: Retencja mówi jak długo dane wolno trzymać a…
 - Retention vs disposal: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Retention vs disposal zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przepływ zaczyna się od zwykłego usunięcia w API albo w systemie plików, ale to jeszcze nie oznacza usunięcia fizycznego. Na nośniku dane mogą czekać w segmentach nieużytych, w metadanych o poprzednim stanie i w kopiach wykonanych przez synchronizację. Secure deletion musi więc opisać nie tylko delete, lecz także to, co dzieje się z blokami po garbage collection.
 #slide 147
 ## layout
 bullet
@@ -44,11 +36,7 @@ Jak pęka
 - Retention vs disposal: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Retention vs disposal: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Retention vs disposal przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak wykorzystuje to, że system uznaje dane za usunięte z punktu widzenia aplikacji, choć resztki nadal istnieją. Wystarczy odzyskać stary blok, miniaturę, cache albo kopię pośrednią z backupu. Jeśli w grę wchodzi wersjonowanie albo FTL, przeciwnik nie musi obchodzić szyfrowania, tylko musi znaleźć wcześniejszy zapis.
 #slide 148
 ## layout
 bullet
@@ -61,11 +49,7 @@ Jak się bronić
 - Retention vs disposal: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Retention vs disposal: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Retention vs disposal wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona wymaga osobnej polityki retencji i osobnej polityki disposal. Trzeba zdecydować, kiedy dane są jeszcze potrzebne, kiedy mają zniknąć logicznie, a kiedy fizycznie. Potem potrzebny jest test odzysku po kasowaniu, pomiar kosztu w wear i latency oraz sprawdzenie, czy kopie w cache i backupie nie zostają poza zasięgiem tej samej reguły.
 #slide 149
 ## layout
 definition
@@ -78,11 +62,7 @@ Why delete fails
 ## definition
 Delete zawodzi przez remanencję danych i metadanych.
 ## teleprompter:
-Delete zawodzi przez remanencję danych i metadanych.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Delete zawodzi przez remanencję danych i metadanych. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Delete fails, bo system usuwa nazwę lub wpis katalogowy, a nie zawsze faktyczne bity. Remanencja obejmuje treść, metadane, mapy alokacji, miniatury i ślady w dziennikach. Jeżeli nośnik jest flashowy, stare komórki mogą pozostać osiągalne dla warstwy poniżej filesystemu.
 #slide 150
 ## layout
 bullet
@@ -95,11 +75,7 @@ Jak działa
 - Why delete fails: Retencja mówi jak długo dane wolno trzymać a…
 - Why delete fails: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Why delete fails zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Najpierw aplikacja oznacza plik jako usunięty, potem filesystem zwalnia wpis, a dopiero później garbage collector może przenieść lub nadpisać fragmenty danych. W log-structured storage ten krok nie jest natychmiastowy, bo system zapisuje nowe wersje obok starych. To dlatego sam moment delete nie daje jeszcze gwarancji zniknięcia treści.
 #slide 151
 ## layout
 bullet
@@ -112,11 +88,7 @@ Jak pęka
 - Why delete fails: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Why delete fails: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Why delete fails przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+W ataku nie trzeba łamać kryptografii. Wystarczy odzyskać poprzedni blok danych, poprzednią wersję metadanych albo plik tymczasowy, który aplikacja uważała za nietrwały. Jeśli backup albo synchronizacja wykonały dodatkową kopię, usunięcie jednego katalogu niczego nie zmienia poza bieżącym widokiem aplikacji.
 #slide 152
 ## layout
 bullet
@@ -129,11 +101,7 @@ Jak się bronić
 - Why delete fails: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Why delete fails: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Why delete fails wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona polega na tym, że usuwanie jest projektowane tak samo świadomie jak zapis. Trzeba wiedzieć, które kopie istnieją, gdzie są trzymane, jak długo mogą żyć i czy można je odnaleźć po odtworzeniu nośnika. W praktyce potrzebne są testy odzysku, a nie tylko sprawdzenie, czy plik znika z listy.
 #slide 153
 ## layout
 definition
@@ -146,11 +114,7 @@ Log-structured storage
 ## definition
 Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później.
 ## teleprompter:
-Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Log-structured storage dopisuje nowe dane zamiast nadpisywać stare miejsce. To daje dobrą wydajność zapisu i prostsze kolejkowanie zmian, ale tworzy historię starych segmentów. Usuwanie nie usuwa natychmiast wszystkich śladów, bo stary zapis pozostaje w blokach, dopóki garbage collection nie uzna ich za zbędne.
 #slide 154
 ## layout
 bullet
@@ -163,11 +127,7 @@ Jak działa
 - Log-structured storage: Retencja mówi jak długo dane wolno trzymać a…
 - Log-structured storage: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Log-structured storage zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Sekwencja pracy jest prosta: najpierw powstaje nowa wersja danych, potem stara wersja traci aktualność, a dopiero później system odzyskuje przestrzeń. W międzyczasie mogą istnieć równolegle segment aktywny i segment już niepotrzebny. To właśnie w tym oknie stare treści są nadal odzyskiwalne.
 #slide 155
 ## layout
 bullet
@@ -180,11 +140,7 @@ Jak pęka
 - Log-structured storage: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Log-structured storage: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Log-structured storage przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Przeciwnik wykorzystuje fakt, że stare segmenty nie znikają w chwili zmiany widoku logicznego. Jeśli do tego dołożysz cache, miniatury, dzienniki i kopie w synchronizacji, to recovery dostaje wiele punktów zaczepienia. Atak staje się prosty: znaleźć nieaktualny, ale nadal zapisany stan.
 #slide 156
 ## layout
 bullet
@@ -197,11 +153,7 @@ Jak się bronić
 - Log-structured storage: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Log-structured storage: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Log-structured storage wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona musi uwzględnić cały cykl życia danych, nie tylko nazwę pliku. Trzeba sprawdzić, które katalogi są cache, które są backupem, które są tymczasowe, a które naprawdę można czyścić agresywnie. W log-structured storage bezpieczeństwo kasowania zależy od tego, czy polityka wie o wszystkich miejscach, w których dane się rozszczepiają.
 #slide 157
 ## layout
 definition
@@ -214,11 +166,7 @@ YAFFS example
 ## definition
 YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu.
 ## teleprompter:
-YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+YAFFS pokazuje problem bardzo wprost: system jest projektowany pod flash, więc zapis i kasowanie są rozdzielone przez wear leveling i garbage collection. Stary blok może przeżyć kilka kolejnych zmian widoku logicznego, zanim zostanie fizycznie zwolniony. To czyni każde secure deletion zależnym od zachowania warstwy niższej niż filesystem.
 #slide 158
 ## layout
 bullet
@@ -231,11 +179,7 @@ Jak działa
 - YAFFS example: Retencja mówi jak długo dane wolno trzymać a…
 - YAFFS example: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-YAFFS example zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+W praktyce aplikacja widzi zwykły delete, ale YAFFS może tylko oznaczyć dane jako nieaktualne i przesunąć prawdziwe czyszczenie na później. Jeżeli w międzyczasie nośnik wykona dodatkowe przeniesienia, odzysk może trafić nie w jeden blok, tylko w kilka historycznych kopii. To właśnie dlatego laboratoria secure deletion na YAFFS mierzą skuteczność w czasie, a nie tylko w chwili wywołania API.
 #slide 159
 ## layout
 bullet
@@ -248,11 +192,7 @@ Jak pęka
 - YAFFS example: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - YAFFS example: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-YAFFS example przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak na YAFFS nie musi wyglądać spektakularnie. Wystarczy zrzut nośnika, analiza poprzednich segmentów i szukanie bloków, które po stronie systemu są już wolne, ale nie zostały jeszcze fizycznie wyczyszczone. Jeśli pojawiają się też backupy lub pliki tymczasowe, odzysk staje się jeszcze prostszy.
 #slide 160
 ## layout
 bullet
@@ -265,11 +205,7 @@ Jak się bronić
 - YAFFS example: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - YAFFS example: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-YAFFS example wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona dla YAFFS musi liczyć się z ceną kasowania. Im agresywniejsze wymazywanie, tym większy wpływ na wear, czas i stabilność zapisu. Sensowne zabezpieczenie wymaga więc polityki, która wie, kiedy warto usunąć natychmiast, a kiedy lepiej przechować dane szyfrowane do czasu naturalnego wygaszenia.
 #slide 161
 ## layout
 definition
@@ -282,11 +218,7 @@ FTL mapping
 ## definition
 FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu.
 ## teleprompter:
-FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+FTL stoi między filesystemem a fizycznymi komórkami pamięci. System plików mówi „usuń ten blok”, ale FTL może przenieść dane w inne miejsce, zostawiając poprzedni zapis jako resztkę do późniejszego garbage collection. To dlatego logiczny adres nie odpowiada jednemu, stałemu fizycznemu blokowi.
 #slide 162
 ## layout
 bullet
@@ -299,11 +231,7 @@ Jak działa
 - FTL mapping: Retencja mówi jak długo dane wolno trzymać a…
 - FTL mapping: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-FTL mapping zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Gdy aplikacja nadpisuje rekord albo usuwa plik, FTL może zmapować nowy zapis do świeżego miejsca, a stary blok zostawić do sprzątnięcia później. W efekcie w urządzeniu powstają dwie warstwy prawdy: ta widoczna dla systemu i ta istniejąca fizycznie do czasu wewnętrznego porządkowania.
 #slide 163
 ## layout
 bullet
@@ -316,11 +244,7 @@ Jak pęka
 - FTL mapping: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - FTL mapping: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-FTL mapping przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Przeciwnik wykorzystuje tę różnicę, gdy szuka starego układu bloków na nośniku. Nadpisanie logiczne nie oznacza nadpisania dokładnie tego samego miejsca na kościach flash. Jeżeli do tego dojdą snapshoty albo cache, to odzysk z poziomu niższego niż filesystem zaczyna być realny.
 #slide 164
 ## layout
 bullet
@@ -333,11 +257,7 @@ Jak się bronić
 - FTL mapping: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - FTL mapping: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-FTL mapping wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona przeciw FTL nie polega na samym delete. Potrzebne są procedury, które wiedzą, kiedy fizyczne wyczyszczenie jest naprawdę zakończone, a kiedy system tylko oddał blok do ponownego użycia. Bez takiej wiedzy secure deletion jest tylko deklaracją z poziomu API.
 #slide 165
 ## layout
 definition
@@ -350,11 +270,7 @@ Overwrite problem
 ## definition
 Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć.
 ## teleprompter:
-Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Overwrite problem polega na tym, że program myśli w kategoriach pliku, a nośnik pracuje w kategoriach bloków i stron. W log-structured lub flashowym systemie plików nadpisanie może trafić w nowy blok, a stary pozostać nienaruszony. Samo „wpisanie zera” nie daje więc gwarancji fizycznego wymazania.
 #slide 166
 ## layout
 bullet
@@ -367,11 +283,7 @@ Jak działa
 - Overwrite problem: Retencja mówi jak długo dane wolno trzymać a…
 - Overwrite problem: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Overwrite problem zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg jest podstępny: system zapisuje nową wersję w nowym miejscu, katalog wskazuje już na świeży rekord, a stary rekord nadal leży w tle. To oznacza, że przy kasowaniu trzeba patrzeć nie tylko na widok logiczny, ale też na ścieżkę migracji danych przez warstwę pośrednią.
 #slide 167
 ## layout
 bullet
@@ -384,11 +296,7 @@ Jak pęka
 - Overwrite problem: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Overwrite problem: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Overwrite problem przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak polega na tym, że ktoś czyta stary blok, do którego filesystem przestał się odwoływać, ale który wciąż istnieje fizycznie. Gdy do tego dołożysz logi, cache, miniatury i kopie synchronizowane, skala resztek rośnie bardzo szybko. Wtedy overwrite okazuje się tylko zmianą referencji, nie czyszczeniem nośnika.
 #slide 168
 ## layout
 bullet
@@ -401,11 +309,7 @@ Jak się bronić
 - Overwrite problem: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Overwrite problem: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Overwrite problem wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona wymaga sprawdzenia, że wymazanie nie kończy się tylko na logicznym update katalogu. Trzeba wykonać test odzysku, porównać zachowanie na różnych nośnikach i odnieść koszt do oczekiwanej skuteczności. Jeśli nośnik jest flashowy, najważniejsze jest to, co dzieje się poniżej warstwy plików.
 #slide 169
 ## layout
 definition
@@ -418,11 +322,7 @@ Encryption limitation
 ## definition
 Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne.
 ## teleprompter:
-Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Szyfrowanie nie rozwiązuje problemu kasowania, jeśli stare kopie i stare klucze nadal istnieją. Dane mogą być zaszyfrowane, a mimo to nadal obecne w innych blokach, w snapshotach albo w backupie. Secure deletion musi więc objąć zarówno treść, jak i ślady po niej.
 #slide 170
 ## layout
 bullet
@@ -435,11 +335,7 @@ Jak działa
 - Encryption limitation: Retencja mówi jak długo dane wolno trzymać a…
 - Encryption limitation: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Encryption limitation zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+W praktyce przebieg wygląda tak: aplikacja usuwa rekord, filesystem zwalnia miejsce logicznie, ale fizyczna kopia zostaje, dopóki system jej nie porzuci. Jeżeli backup albo cache mają własne cykle życia, klucz szyfrujący też nie wystarcza, bo kopia nadal może zostać odtworzona z innego miejsca.
 #slide 171
 ## layout
 bullet
@@ -452,11 +348,7 @@ Jak pęka
 - Encryption limitation: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Encryption limitation: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Encryption limitation przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak na „same encryption” zwykle polega na odzyskaniu starszej wersji zaszyfrowanego pliku albo odtworzeniu klucza z miejsca, które nie zostało wyczyszczone. Jeśli zniknie tylko jedna ścieżka, a zostanie druga, dane pozostają dostępne. To dlatego szyfrowanie jest ochroną poufności, ale nie automatycznie usuwaniem.
 #slide 172
 ## layout
 bullet
@@ -469,11 +361,7 @@ Jak się bronić
 - Encryption limitation: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Encryption limitation: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Encryption limitation wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona musi połączyć usuwanie treści z usuwaniem śladów operacyjnych. Trzeba wiedzieć, gdzie są kopie, jak długo żyją i co robi system po zmianie kluczy. Bez tego szyfrowanie daje fałszywe poczucie zakończenia, mimo że fizyczne resztki nadal są obecne.
 #slide 173
 ## layout
 definition
@@ -486,11 +374,7 @@ Purge algorithm
 ## definition
 Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne.
 ## teleprompter:
-Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Purge algorithm ma doprowadzić nośnik do stanu, w którym odzysk przestaje być praktyczny. To oznacza albo fizyczne zniszczenie danych, albo takie przeniesienie i nadpisanie bloków, żeby nie dało się już odtworzyć spójnej treści. W badaniach nad secure deletion purge jest najbliżej twardego wymazywania.
 #slide 174
 ## layout
 bullet
@@ -503,11 +387,7 @@ Jak działa
 - Purge algorithm: Retencja mówi jak długo dane wolno trzymać a…
 - Purge algorithm: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Purge algorithm zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Krok purge polega na identyfikacji bloków, ich przeniesieniu lub oznaczeniu do zniszczenia i doprowadzeniu garbage collection do faktycznego oczyszczenia. W log-structured storage ten proces trwa, bo system nie usuwa bloków natychmiast. Dopiero gdy kopie znikną z aktywnego obiegu, można mówić o realnym kasowaniu.
 #slide 175
 ## layout
 bullet
@@ -520,11 +400,7 @@ Jak pęka
 - Purge algorithm: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Purge algorithm: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Purge algorithm przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Przeciwnik szuka momentu, w którym purge jeszcze nie skończył sprzątania. Jeśli stary blok pozostaje poza aktywnym widokiem, ale nie został fizycznie wymazany, odzysk nadal jest możliwy. Zewnętrzny backup albo cache tylko zwiększa liczbę miejsc, które trzeba oczyścić.
 #slide 176
 ## layout
 bullet
@@ -537,11 +413,7 @@ Jak się bronić
 - Purge algorithm: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Purge algorithm: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Purge algorithm wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona przy purge wymaga sprawdzenia, czy system naprawdę doprowadził sprzątanie do końca. Sama deklaracja usunięcia nie wystarcza, potrzebny jest test po czasie i na różnych warstwach nośnika. To szczególnie ważne tam, gdzie garbage collection działa w tle i nie kończy się w chwili wywołania API.
 #slide 177
 ## layout
 definition
@@ -554,11 +426,7 @@ Ballooning algorithm
 ## definition
 Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu.
 ## teleprompter:
-Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Ballooning to metoda wymuszania sprzątania przez zjadanie wolnego miejsca. System wypełnia pamięć dodatkowymi zapisami, aż nośnik musi wyrzucić wcześniejszy blok albo go przenieść. Dzięki temu można zmusić warstwę pod spodem do pracy nad usunięciem wskazanego fragmentu.
 #slide 178
 ## layout
 bullet
@@ -571,11 +439,7 @@ Jak działa
 - Ballooning algorithm: Retencja mówi jak długo dane wolno trzymać a…
 - Ballooning algorithm: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Ballooning algorithm zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg ballooningu jest pośredni: najpierw pojawiają się sztuczne zapisy, potem rośnie presja na garbage collection, a na końcu blok celu zostaje wypchnięty lub zastąpiony. To nie jest jednorazowe „usuń”, tylko kontrolowane zatkanie przestrzeni, żeby system sam wykonał fizyczne sprzątanie.
 #slide 179
 ## layout
 bullet
@@ -588,11 +452,7 @@ Jak pęka
 - Ballooning algorithm: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Ballooning algorithm: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Ballooning algorithm przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak na ballooning wykorzystuje moment, w którym presja jeszcze nie doprowadziła do pełnego wyczyszczenia. Jeżeli stare segmenty nadal istnieją, a kolejne zapisy tylko przesuwają granicę, odzysk może się udać z wcześniejszej wersji nośnika. Im więcej kopii pośrednich, tym większa szansa, że jedna z nich przetrwa.
 #slide 180
 ## layout
 bullet
@@ -605,11 +465,7 @@ Jak się bronić
 - Ballooning algorithm: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Ballooning algorithm: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Ballooning algorithm wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona musi weryfikować, czy ballooning faktycznie wymusił likwidację celu, a nie tylko zajęcie dodatkowego miejsca. Jeśli test pokazuje stale odzyskiwalne fragmenty, metoda nie spełnia swojej roli. Do sensownego użycia potrzebne są też limity kosztu, bo zbyt agresywne zjadanie miejsca wpływa na wydajność całego urządzenia.
 #slide 181
 ## layout
 definition
@@ -622,11 +478,7 @@ Zero overwriting
 ## definition
 Zero overwriting wypełnia obszar i potem vacuumuje resztki.
 ## teleprompter:
-Zero overwriting wypełnia obszar i potem vacuumuje resztki.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Zero overwriting wypełnia obszar i potem vacuumuje resztki. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Zero overwriting polega na wypełnieniu obszaru kontrolowanym wzorcem, a potem wymuszeniu vacuumingu i usunięcia resztek. Celem jest wypchnięcie starych danych tak, żeby nie zostały w aktywnym obiegu ani w łatwo dostępnej kopii. Ta technika próbuje zbliżyć się do fizycznego wymazania bez prostego nadpisania jednego adresu.
 #slide 182
 ## layout
 bullet
@@ -639,11 +491,7 @@ Jak działa
 - Zero overwriting: Retencja mówi jak długo dane wolno trzymać a…
 - Zero overwriting: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Zero overwriting zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg wymaga zwykle kilku kroków: najpierw zapis wypełniający, potem odczyt i porównanie, potem czyszczenie resztek i sprawdzenie, czy nośnik oddał miejsce do ponownego użycia. W systemie flash liczy się jednak to, czy pod spodem nie zostały nadal stare komórki, które nie weszły jeszcze do obiegu.
 #slide 183
 ## layout
 bullet
@@ -656,11 +504,7 @@ Jak pęka
 - Zero overwriting: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Zero overwriting: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Zero overwriting przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak na zero overwriting wykorzystuje to, że czyszczenie może nie objąć wszystkich warstw naraz. Jeżeli część danych została przeniesiona w trakcie porządkowania, a część czeka jeszcze na garbage collection, odzysk może nastąpić z kilku chwilowych stanów naraz. Wtedy samo wypełnienie nie daje pełnej gwarancji.
 #slide 184
 ## layout
 bullet
@@ -673,11 +517,7 @@ Jak się bronić
 - Zero overwriting: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Zero overwriting: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Zero overwriting wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona wymaga nie tylko techniki, ale i dowodu skuteczności. Trzeba sprawdzić, czy po całym cyklu nie da się już odzyskać sensownej treści, oraz policzyć koszt operacji w zużyciu nośnika i czasie. Jeśli testy pokazują resztki, technika nie jest jeszcze bezpieczna dla tego konkretnego nośnika.
 #slide 185
 ## layout
 definition
@@ -690,11 +530,7 @@ Versioned file system
 ## definition
 Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją.
 ## teleprompter:
-Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Wersjonowany filesystem zachowuje historię zmian, więc stare stany istnieją obok nowego. Snapshoty i gałęzie dają wygodę odtwarzania, ale komplikują kasowanie, bo usunięcie bieżącej wersji nie usuwa automatycznie poprzednich.
 #slide 186
 ## layout
 bullet
@@ -707,11 +543,7 @@ Jak działa
 - Versioned file system: Retencja mówi jak długo dane wolno trzymać a…
 - Versioned file system: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Versioned file system zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg w systemie wersjonowanym jest taki, że nowe dane trafiają do aktualnego widoku, a stare wersje pozostają pod spodem jako punkty przywracania. Jeżeli nie ma osobnego procesu usuwania historii, delete dotyka tylko bieżącej gałęzi. W praktyce trzeba więc czyścić także to, co użytkownik już przestał widzieć.
 #slide 187
 ## layout
 bullet
@@ -724,11 +556,7 @@ Jak pęka
 - Versioned file system: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Versioned file system: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Versioned file system przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak na system wersjonowany jest prosty: odzyskuje się poprzedni snapshot, nieaktualną gałąź albo stare metadane. Jeśli aplikacja lub backup zatrzymały wcześniejszą wersję, osoba atakująca nie potrzebuje łamać bieżącej kopii. Wystarczy sięgnąć po historię, którą system nadal przechowuje.
 #slide 188
 ## layout
 bullet
@@ -741,11 +569,7 @@ Jak się bronić
 - Versioned file system: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Versioned file system: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Versioned file system wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
-
+Obrona wymaga polityki, która wie, które wersje są potrzebne, a które muszą zniknąć naprawdę. To oznacza osobne zarządzanie historią, testy odzysku i kontrolę, czy stare wersje nie przetrwają w miejscach pomocniczych. Bez tego wersjonowanie staje się ukrytą kopią zapasową.
 #slide 189
 ## layout
 definition
@@ -758,11 +582,7 @@ Forensic verification
 ## definition
 Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady.
 ## teleprompter:
-Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady.
-Retencja mówi, jak długo dane wolno trzymać, a secure deletion próbuje sprawić, by po usunięciu nie dało się ich odzyskać z nośnika. W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki. Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady. pokazuje, gdzie systemowi wolno ufać, a gdzie powinien odrzucić lokalny sygnał.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych. Weryfikacja musi obejmować przypadek błędny, przypadek poprawny i stan po revocation.
-
+Forensic verification sprawdza, czy po wymazaniu można jeszcze odzyskać treść albo jej ślady. To nie jest ocena deklaracji, tylko praktyczny test na nośniku, segmentach, metadanych i artefaktach pośrednich. Jeśli odzysk działa, secure deletion nie zadziałało w tej konfiguracji.
 #slide 190
 ## layout
 bullet
@@ -775,11 +595,7 @@ Jak działa
 - Forensic verification: Retencja mówi jak długo dane wolno trzymać a…
 - Forensic verification: Obrona wymaga polityki retention oddzielonej od disposal testów…
 ## teleprompter:
-Forensic verification zaczyna się od stanu początkowego i kończy na wyniku, który można zaobserwować w API, callbacku albo rekordzie protokołu.
-W log-structured filesystems delete zwykle oznacza tylko oznaczenie danych jako wolnych, a nie fizyczne zniknięcie. YAFFS i podobne systemy na flashu muszą żyć z wear leveling, garbage collection i translacją bloków przez FTL, więc stare wersje danych potrafią zostać w nośniku dłużej niż aplikacja zakłada. Badania nad secure deletion pokazują trzy klasy mechanizmów: purging, ballooning i zero overwriting. Kolejność zdarzeń pokazuje, gdzie system przejmuje kontrolę, a gdzie pozostawia decyzję aplikacji.
-Jeżeli źródło opisuje API, callback albo rekord protokołu, trzeba podać pola, kolejność i to, który element decyduje o następnym kroku. Port, flaga, nagłówek albo callback nie są ozdobą, tylko częścią decyzji bezpieczeństwa.
-Na końcu sekwencji pojawia się konkretny stan: dostęp przyznany, dostęp odrzucony, URI zgrantowane, pakiet wysłany albo kod załadowany. To jest miejsce, w którym widać różnicę między poprawnym przepływem a obejściem.
-
+Przebieg takiego sprawdzenia zwykle obejmuje próbę odczytu pozostałości po delete, analizę metadanych, badanie snapshotów i porównanie wyniku z oczekiwaniem. Na flashu trzeba dodatkowo uwzględnić czas pracy garbage collection, bo resztki nie zawsze znikają od razu. To test, który musi uwzględnić opóźnienie, a nie tylko chwilę wywołania.
 #slide 191
 ## layout
 bullet
@@ -792,11 +608,7 @@ Jak pęka
 - Forensic verification: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Forensic verification: Retencja mówi jak długo dane wolno trzymać a…
 ## teleprompter:
-Forensic verification przestaje być bezpieczny, gdy przeciwnik przejmuje sygnał albo dane uznane przez system za zaufane.
-Atak nie musi łamać szyfrowania, wystarczy że odzyska stare bloki, metadane, miniatury, cache albo kopie pośrednie po synchronizacji i backupie. W systemach wersjonowanych stare snapshoty potrafią przechowywać treść jeszcze długo po logice delete, a forensic scan nadal znajduje resztki.
-Jeśli exploit path opiera się na podmianie, spoofingu, stale cache albo zbyt szerokim zakresie dostępu, trzeba to nazwać wprost. Bez wskazania wejścia i punktu przejęcia atak nie jest opisany, tylko zasugerowany.
-Skutek ma być policzalny: wyciek danych, przejęcie zasobu, obejście ograniczenia albo awaria usługi. Trzeba też powiedzieć, czy atak daje odczyt, zapis, pełne wykonanie albo tylko degradację usługi.
-
+Atak w tym obszarze polega na tym, że ktoś korzysta z okna, w którym resztki jeszcze istnieją. Nie trzeba łamać szyfrowania, jeśli da się odzyskać blok, kopię pośrednią albo wersję ze snapshotu. Weryfikacja kryminalistyczna właśnie po to istnieje, żeby ten stan wykryć.
 #slide 192
 ## layout
 bullet
@@ -809,7 +621,4 @@ Jak się bronić
 - Forensic verification: W log-structured filesystems delete zwykle oznacza tylko oznaczenie…
 - Forensic verification: Atak nie musi łamać szyfrowania wystarczy że odzyska…
 ## teleprompter:
-Forensic verification wymaga konkretnej reguły i miejsca egzekwowania.
-Obrona wymaga polityki retention oddzielonej od disposal, testów odzysku po kasowaniu, dobrania metody usuwania do nośnika i kontroli kosztu w wear, latency oraz space. Jeśli aplikacja trzyma cache lub backup, trzeba je uwzględnić osobno, bo secure deletion jednego katalogu nie czyści całego cyklu życia danych.
-Jeżeli obrona zależy od parsera, manifestu, systemowego pickera albo odświeżenia stanu, to właśnie to jest rdzeń tego slajdu. Trzeba jeszcze wskazać, czy reguła działa przed wejściem, po wejściu czy dopiero przy użyciu zasobu.
-Test musi pokazać, że przypadek zły odpadł, a dobry przeszedł bez otwierania szerszego dostępu niż to konieczne. Bez testu nie wiadomo, czy reguła działa, czy tylko wygląda dobrze na slajdzie.
+Obrona wymaga testów po czasie i na realnym nośniku, nie tylko w emulatorze czy na pustym katalogu. Trzeba potwierdzić, że po całym cyklu nie ma już sensownej treści do odzyskania i że koszt takiego usuwania jest akceptowalny. Bez tego każda deklaracja secure deletion pozostaje tylko deklaracją.
