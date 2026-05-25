@@ -2,7 +2,9 @@
 ## layout
 definition
 ## slide title
-Retention vs disposal — Co to jest
+Retention vs disposal
+## subtitle
+Co to jest
 ## term
 Retention vs disposal
 ## definition
@@ -22,7 +24,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Retention vs disposal — Jak działa
+Retention vs disposal
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -43,7 +47,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Retention vs disposal — Jak pęka
+Retention vs disposal
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Retencja decyduje o czasie życia danych, a disposal o ich fizycznym zniknięciu.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -64,7 +70,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Retention vs disposal — Jak się bronić
+Retention vs disposal
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -85,7 +93,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Why delete fails — Co to jest
+Why delete fails
+## subtitle
+Co to jest
 ## term
 Why delete fails
 ## definition
@@ -105,7 +115,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Why delete fails — Jak działa
+Why delete fails
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Delete zawodzi przez remanencję danych i metadanych.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -126,7 +138,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Why delete fails — Jak pęka
+Why delete fails
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Delete zawodzi przez remanencję danych i metadanych.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -147,7 +161,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Why delete fails — Jak się bronić
+Why delete fails
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -168,7 +184,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Log-structured storage — Co to jest
+Log-structured storage
+## subtitle
+Co to jest
 ## term
 Log-structured storage
 ## definition
@@ -188,7 +206,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Log-structured storage — Jak działa
+Log-structured storage
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -209,7 +229,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Log-structured storage — Jak pęka
+Log-structured storage
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Log-structured filesystems dopisują nowe bloki i czyszczą stare dopiero później.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -230,7 +252,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Log-structured storage — Jak się bronić
+Log-structured storage
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -251,7 +275,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-YAFFS example — Co to jest
+YAFFS example
+## subtitle
+Co to jest
 ## term
 YAFFS example
 ## definition
@@ -271,7 +297,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-YAFFS example — Jak działa
+YAFFS example
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -292,7 +320,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-YAFFS example — Jak pęka
+YAFFS example
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: YAFFS na flashu zostawia stare wersje, bo garbage collection nie kasuje wszystkiego od razu.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -313,7 +343,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-YAFFS example — Jak się bronić
+YAFFS example
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -334,7 +366,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-FTL mapping — Co to jest
+FTL mapping
+## subtitle
+Co to jest
 ## term
 FTL mapping
 ## definition
@@ -354,7 +388,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-FTL mapping — Jak działa
+FTL mapping
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -375,7 +411,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-FTL mapping — Jak pęka
+FTL mapping
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: FTL mapuje logiczne bloki na fizyczne bloki poza kontrolą filesystemu.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -396,7 +434,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-FTL mapping — Jak się bronić
+FTL mapping
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -417,7 +457,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Overwrite problem — Co to jest
+Overwrite problem
+## subtitle
+Co to jest
 ## term
 Overwrite problem
 ## definition
@@ -437,7 +479,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Overwrite problem — Jak działa
+Overwrite problem
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -458,7 +502,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Overwrite problem — Jak pęka
+Overwrite problem
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Overwrite nie daje gwarancji, że nadpiszesz dokładnie ten fizyczny blok, który chcesz usunąć.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -479,7 +525,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Overwrite problem — Jak się bronić
+Overwrite problem
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -500,7 +548,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Encryption limitation — Co to jest
+Encryption limitation
+## subtitle
+Co to jest
 ## term
 Encryption limitation
 ## definition
@@ -520,7 +570,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Encryption limitation — Jak działa
+Encryption limitation
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -541,7 +593,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Encryption limitation — Jak pęka
+Encryption limitation
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Sama kryptografia nie pomaga, jeśli stare kopie lub klucze nadal są dostępne.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -562,7 +616,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Encryption limitation — Jak się bronić
+Encryption limitation
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -583,7 +639,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Purge algorithm — Co to jest
+Purge algorithm
+## subtitle
+Co to jest
 ## term
 Purge algorithm
 ## definition
@@ -603,7 +661,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Purge algorithm — Jak działa
+Purge algorithm
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -624,7 +684,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Purge algorithm — Jak pęka
+Purge algorithm
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Purge chce realnie zniszczyć lub przenieść dane aż recovery przestaje być praktyczne.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -645,7 +707,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Purge algorithm — Jak się bronić
+Purge algorithm
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -666,7 +730,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Ballooning algorithm — Co to jest
+Ballooning algorithm
+## subtitle
+Co to jest
 ## term
 Ballooning algorithm
 ## definition
@@ -686,7 +752,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Ballooning algorithm — Jak działa
+Ballooning algorithm
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -707,7 +775,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Ballooning algorithm — Jak pęka
+Ballooning algorithm
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Ballooning zjada wolne miejsce, by wymusić wypchnięcie bloku celu.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -728,7 +798,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Ballooning algorithm — Jak się bronić
+Ballooning algorithm
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -749,7 +821,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Zero overwriting — Co to jest
+Zero overwriting
+## subtitle
+Co to jest
 ## term
 Zero overwriting
 ## definition
@@ -769,7 +843,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Zero overwriting — Jak działa
+Zero overwriting
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Zero overwriting wypełnia obszar i potem vacuumuje resztki.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -790,7 +866,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Zero overwriting — Jak pęka
+Zero overwriting
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Zero overwriting wypełnia obszar i potem vacuumuje resztki.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -811,7 +889,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Zero overwriting — Jak się bronić
+Zero overwriting
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -832,7 +912,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Versioned file system — Co to jest
+Versioned file system
+## subtitle
+Co to jest
 ## term
 Versioned file system
 ## definition
@@ -852,7 +934,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Versioned file system — Jak działa
+Versioned file system
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -873,7 +957,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Versioned file system — Jak pęka
+Versioned file system
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Snapshoty i historia wersji komplikują kasowanie, bo stare stany nadal istnieją.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -894,7 +980,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Versioned file system — Jak się bronić
+Versioned file system
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -915,7 +1003,9 @@ Test i regresja. Obrona to dobór mechanizmu usuwania do klasy nośnika, testy f
 ## layout
 definition
 ## slide title
-Forensic verification — Co to jest
+Forensic verification
+## subtitle
+Co to jest
 ## term
 Forensic verification
 ## definition
@@ -935,7 +1025,9 @@ Dlaczego ten mechanizm istnieje. Obrona to dobór mechanizmu usuwania do klasy n
 ## layout
 bullet
 ## slide title
-Forensic verification — Jak działa
+Forensic verification
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady.
 - Krok 2: Tu wchodzą log-structured storage, YAFFS, flash translation layer, snapshoty, purge, ballooning i zero overwriting.
@@ -956,7 +1048,9 @@ Wynik oraz konsekwencja. Obrona to dobór mechanizmu usuwania do klasy nośnika,
 ## layout
 bullet
 ## slide title
-Forensic verification — Jak pęka
+Forensic verification
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Forensic verification sprawdza, czy po usunięciu da się jeszcze odzyskać treść lub jej ślady.
 - Kontrola atakującego: Breach jest banalny: delete nie usuwa tego, co już zostało przesunięte przez garbage collection, wear leveling albo snapshot history.
@@ -977,7 +1071,9 @@ Skutek dla danych lub dostępu. Obrona to dobór mechanizmu usuwania do klasy no
 ## layout
 bullet
 ## slide title
-Forensic verification — Jak się bronić
+Forensic verification
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to dobór mechanizmu usuwania do klasy nośnika, testy forensyczne po kasowaniu i polityka retention z audytem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze

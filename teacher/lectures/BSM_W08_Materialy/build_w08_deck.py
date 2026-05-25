@@ -255,7 +255,9 @@ def render_slide(num: int, block: dict, subtopic: str, aspect: str) -> str:
         "## layout",
         layout,
         "## slide title",
-        f"{subtopic} — {aspect}",
+        subtopic,
+        "## subtitle",
+        aspect,
     ]
     if aspect == "Co to jest":
         lines += [

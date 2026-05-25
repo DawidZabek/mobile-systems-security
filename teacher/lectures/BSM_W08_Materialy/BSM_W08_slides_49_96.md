@@ -2,7 +2,9 @@
 ## layout
 definition
 ## slide title
-Media as data class — Co to jest
+Media as data class
+## subtitle
+Co to jest
 ## term
 Media as data class
 ## definition
@@ -22,7 +24,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Media as data class — Jak działa
+Media as data class
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -43,7 +47,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Media as data class — Jak pęka
+Media as data class
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Zdjęcia i filmy są traktowane jako osobna klasa prywatnych danych.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -64,7 +70,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Media as data class — Jak się bronić
+Media as data class
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -85,7 +93,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Selected Photos Access — Co to jest
+Selected Photos Access
+## subtitle
+Co to jest
 ## term
 Selected Photos Access
 ## definition
@@ -105,7 +115,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Selected Photos Access — Jak działa
+Selected Photos Access
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -126,7 +138,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Selected Photos Access — Jak pęka
+Selected Photos Access
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Android 14 może dać dostęp tylko do zdjęć i filmów wybranych przez użytkownika.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -147,7 +161,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Selected Photos Access — Jak się bronić
+Selected Photos Access
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -168,7 +184,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-READ_MEDIA_VISUAL_USER_SELECTED — Co to jest
+READ_MEDIA_VISUAL_USER_SELECTED
+## subtitle
+Co to jest
 ## term
 READ_MEDIA_VISUAL_USER_SELECTED
 ## definition
@@ -188,7 +206,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-READ_MEDIA_VISUAL_USER_SELECTED — Jak działa
+READ_MEDIA_VISUAL_USER_SELECTED
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -209,7 +229,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-READ_MEDIA_VISUAL_USER_SELECTED — Jak pęka
+READ_MEDIA_VISUAL_USER_SELECTED
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: READ_MEDIA_VISUAL_USER_SELECTED oznacza partial access do wybranych mediów wizualnych.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -230,7 +252,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-READ_MEDIA_VISUAL_USER_SELECTED — Jak się bronić
+READ_MEDIA_VISUAL_USER_SELECTED
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -251,7 +275,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Compatibility mode — Co to jest
+Compatibility mode
+## subtitle
+Co to jest
 ## term
 Compatibility mode
 ## definition
@@ -271,7 +297,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Compatibility mode — Jak działa
+Compatibility mode
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -292,7 +320,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Compatibility mode — Jak pęka
+Compatibility mode
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Legacy app może działać w trybie kompatybilności, w którym system chroni wybrany podzbiór mediów.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -313,7 +343,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Compatibility mode — Jak się bronić
+Compatibility mode
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -334,7 +366,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Permission matrix — Co to jest
+Permission matrix
+## subtitle
+Co to jest
 ## term
 Permission matrix
 ## definition
@@ -354,7 +388,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Permission matrix — Jak działa
+Permission matrix
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -375,7 +411,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Permission matrix — Jak pęka
+Permission matrix
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Obrazy, filmy i metadane lokalizacji mają różne ścieżki uprawnień i ekspozycji.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -396,7 +434,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Permission matrix — Jak się bronić
+Permission matrix
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -417,7 +457,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Latest selection only — Co to jest
+Latest selection only
+## subtitle
+Co to jest
 ## term
 Latest selection only
 ## definition
@@ -437,7 +479,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Latest selection only — Jak działa
+Latest selection only
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -458,7 +502,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Latest selection only — Jak pęka
+Latest selection only
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Latest-selection query zwraca tylko najbardziej aktualny wybrany zestaw URI.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -479,7 +525,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Latest selection only — Jak się bronić
+Latest selection only
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -500,7 +548,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Upgrade behavior — Co to jest
+Upgrade behavior
+## subtitle
+Co to jest
 ## term
 Upgrade behavior
 ## definition
@@ -520,7 +570,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Upgrade behavior — Jak działa
+Upgrade behavior
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -541,7 +593,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Upgrade behavior — Jak pęka
+Upgrade behavior
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Upgrade behavior decyduje, czy wcześniej zainstalowana aplikacja zachowa dostęp, czy ma go przeliczyć od nowa.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -562,7 +616,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Upgrade behavior — Jak się bronić
+Upgrade behavior
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -583,7 +639,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Photo picker contract — Co to jest
+Photo picker contract
+## subtitle
+Co to jest
 ## term
 Photo picker contract
 ## definition
@@ -603,7 +661,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Photo picker contract — Jak działa
+Photo picker contract
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -624,7 +684,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Photo picker contract — Jak pęka
+Photo picker contract
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Systemowy photo picker zwraca content URI bez proszenia o szeroki dostęp do storage.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -645,7 +707,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Photo picker contract — Jak się bronić
+Photo picker contract
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -666,7 +730,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Backport path — Co to jest
+Backport path
+## subtitle
+Co to jest
 ## term
 Backport path
 ## definition
@@ -686,7 +752,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Backport path — Jak działa
+Backport path
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -707,7 +775,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Backport path — Jak pęka
+Backport path
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Jetpack potrafi zbackportować picker na starsze urządzenia przez jeden kontrakt API.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -728,7 +798,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Backport path — Jak się bronić
+Backport path
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -749,7 +821,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Cloud media providers — Co to jest
+Cloud media providers
+## subtitle
+Co to jest
 ## term
 Cloud media providers
 ## definition
@@ -769,7 +843,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Cloud media providers — Jak działa
+Cloud media providers
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -790,7 +866,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Cloud media providers — Jak pęka
+Cloud media providers
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Cloud media providers pozwalają widzieć lokalne i zdalne biblioteki w jednym wyborze.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -811,7 +889,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Cloud media providers — Jak się bronić
+Cloud media providers
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -832,7 +912,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-MediaStore version lockdown — Co to jest
+MediaStore version lockdown
+## subtitle
+Co to jest
 ## term
 MediaStore version lockdown
 ## definition
@@ -852,7 +934,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-MediaStore version lockdown — Jak działa
+MediaStore version lockdown
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -873,7 +957,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-MediaStore version lockdown — Jak pęka
+MediaStore version lockdown
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: MediaStore#getVersion() jest przycięty tak, by nie służył jako stabilny fingerprint aplikacji.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -894,7 +980,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-MediaStore version lockdown — Jak się bronić
+MediaStore version lockdown
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -915,7 +1003,9 @@ Test i regresja. Obrona to jasny podział permission matrix, odświeżanie stanu
 ## layout
 definition
 ## slide title
-Embedded photo picker — Co to jest
+Embedded photo picker
+## subtitle
+Co to jest
 ## term
 Embedded photo picker
 ## definition
@@ -935,7 +1025,9 @@ Dlaczego ten mechanizm istnieje. Obrona to jasny podział permission matrix, od�
 ## layout
 bullet
 ## slide title
-Embedded photo picker — Jak działa
+Embedded photo picker
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed.
 - Krok 2: Tu ważne są selected access, READ_MEDIA_VISUAL_USER_SELECTED, kontrakt photo pickera, cloud media providers, latest-selection queries i embedded picker osadzony w SurfaceView.
@@ -956,7 +1048,9 @@ Wynik oraz konsekwencja. Obrona to jasny podział permission matrix, odświeżan
 ## layout
 bullet
 ## slide title
-Embedded photo picker — Jak pęka
+Embedded photo picker
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Embedded photo picker działa w SurfaceView przez setChildSurfacePackage i trzyma klienta w stanie resumed.
 - Kontrola atakującego: Breach pojawia się wtedy, gdy aplikacja zatrzymuje stare URI, myli selected access z pełnym dostępem albo traktuje metadane zdjęcia jak dane publiczne.
@@ -977,7 +1071,9 @@ Skutek dla danych lub dostępu. Obrona to jasny podział permission matrix, odś
 ## layout
 bullet
 ## slide title
-Embedded photo picker — Jak się bronić
+Embedded photo picker
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to jasny podział permission matrix, odświeżanie stanu przy revocation, ograniczenie metadanych lokalizacji i korzystanie z systemowego pickera zamiast własnej galerii.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze

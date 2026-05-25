@@ -2,7 +2,9 @@
 ## layout
 definition
 ## slide title
-Why DCL exists — Co to jest
+Why DCL exists
+## subtitle
+Co to jest
 ## term
 Why DCL exists
 ## definition
@@ -22,7 +24,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Why DCL exists — Jak działa
+Why DCL exists
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -43,7 +47,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Why DCL exists — Jak pęka
+Why DCL exists
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: DCL istnieje po to, by obsłużyć modularność, pluginy i runtime updates.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -64,7 +70,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Why DCL exists — Jak się bronić
+Why DCL exists
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -85,7 +93,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Attack surface — Co to jest
+Attack surface
+## subtitle
+Co to jest
 ## term
 Attack surface
 ## definition
@@ -105,7 +115,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Attack surface — Jak działa
+Attack surface
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -126,7 +138,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Attack surface — Jak pęka
+Attack surface
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Powierzchnia ataku rośnie w chwili, gdy ładowany kod da się podmienić lub uszkodzić.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -147,7 +161,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Attack surface — Jak się bronić
+Attack surface
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -168,7 +184,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Remote source risk — Co to jest
+Remote source risk
+## subtitle
+Co to jest
 ## term
 Remote source risk
 ## definition
@@ -188,7 +206,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Remote source risk — Jak działa
+Remote source risk
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -209,7 +229,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Remote source risk — Jak pęka
+Remote source risk
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Remote code loading jest najdroższe z punktu widzenia ryzyka i może łamać Google Play policy.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -230,7 +252,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Remote source risk — Jak się bronić
+Remote source risk
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -251,7 +275,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Trusted storage — Co to jest
+Trusted storage
+## subtitle
+Co to jest
 ## term
 Trusted storage
 ## definition
@@ -271,7 +297,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Trusted storage — Jak działa
+Trusted storage
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -292,7 +320,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Trusted storage — Jak pęka
+Trusted storage
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Kod, który ma być później ładowany, powinien lądować w internal storage albo w scoped storage.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -313,7 +343,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Trusted storage — Jak się bronić
+Trusted storage
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -334,7 +366,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-External storage risk — Co to jest
+External storage risk
+## subtitle
+Co to jest
 ## term
 External storage risk
 ## definition
@@ -354,7 +388,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-External storage risk — Jak działa
+External storage risk
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -375,7 +411,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-External storage risk — Jak pęka
+External storage risk
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Shared external storage jest mutowalny, więc nie nadaje się na artefakt wykonywalny.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -396,7 +434,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-External storage risk — Jak się bronić
+External storage risk
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -417,7 +457,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Integrity before load — Co to jest
+Integrity before load
+## subtitle
+Co to jest
 ## term
 Integrity before load
 ## definition
@@ -437,7 +479,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Integrity before load — Jak działa
+Integrity before load
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Bezpieczny wzorzec to verify-before-load, a nie load-first.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -458,7 +502,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Integrity before load — Jak pęka
+Integrity before load
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Bezpieczny wzorzec to verify-before-load, a nie load-first.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -479,7 +525,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Integrity before load — Jak się bronić
+Integrity before load
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -500,7 +548,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-SHA-256 checker — Co to jest
+SHA-256 checker
+## subtitle
+Co to jest
 ## term
 SHA-256 checker
 ## definition
@@ -520,7 +570,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-SHA-256 checker — Jak działa
+SHA-256 checker
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -541,7 +593,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-SHA-256 checker — Jak pęka
+SHA-256 checker
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: SHA-256 checker liczy digest i porównuje go z referencją zaufaną przez aplikację.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -562,7 +616,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-SHA-256 checker — Jak się bronić
+SHA-256 checker
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -583,7 +639,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Code signing — Co to jest
+Code signing
+## subtitle
+Co to jest
 ## term
 Code signing
 ## definition
@@ -603,7 +661,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Code signing — Jak działa
+Code signing
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Podpis kodu dodaje podpis kryptograficzny i zaufany public key.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -624,7 +684,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Code signing — Jak pęka
+Code signing
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Podpis kodu dodaje podpis kryptograficzny i zaufany public key.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -645,7 +707,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Code signing — Jak się bronić
+Code signing
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -666,7 +730,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Hash storage — Co to jest
+Hash storage
+## subtitle
+Co to jest
 ## term
 Hash storage
 ## definition
@@ -686,7 +752,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Hash storage — Jak działa
+Hash storage
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -707,7 +775,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Hash storage — Jak pęka
+Hash storage
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Referencja hash lub signature musi leżeć w chronionym miejscu, a nie obok samego payloadu.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -728,7 +798,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Hash storage — Jak się bronić
+Hash storage
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -749,7 +821,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Path to execution — Co to jest
+Path to execution
+## subtitle
+Co to jest
 ## term
 Path to execution
 ## definition
@@ -769,7 +843,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Path to execution — Jak działa
+Path to execution
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Niebezpieczna ścieżka to download, write, verify, load i execute.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -790,7 +866,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Path to execution — Jak pęka
+Path to execution
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Niebezpieczna ścieżka to download, write, verify, load i execute.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -811,7 +889,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Path to execution — Jak się bronić
+Path to execution
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -832,7 +912,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Class loader choices — Co to jest
+Class loader choices
+## subtitle
+Co to jest
 ## term
 Class loader choices
 ## definition
@@ -852,7 +934,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Class loader choices — Jak działa
+Class loader choices
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -873,7 +957,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Class loader choices — Jak pęka
+Class loader choices
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: DexClassLoader, PathClassLoader i InMemoryDexClassLoader różnią się tym, skąd biorą kod i jak długo go trzymają.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -894,7 +980,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Class loader choices — Jak się bronić
+Class loader choices
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -915,7 +1003,9 @@ Test i regresja. Obrona to internal albo scoped storage, integrity checks przed 
 ## layout
 definition
 ## slide title
-Native versus Java — Co to jest
+Native versus Java
+## subtitle
+Co to jest
 ## term
 Native versus Java
 ## definition
@@ -935,7 +1025,9 @@ Dlaczego ten mechanizm istnieje. Obrona to internal albo scoped storage, integri
 ## layout
 bullet
 ## slide title
-Native versus Java — Jak działa
+Native versus Java
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex.
 - Krok 2: W tym bloku ważny jest cały pipeline: download, write, verify, load i execute, a także różnice między DexClassLoader, PathClassLoader i InMemoryDexClassLoader.
@@ -956,7 +1048,9 @@ Wynik oraz konsekwencja. Obrona to internal albo scoped storage, integrity check
 ## layout
 bullet
 ## slide title
-Native versus Java — Jak pęka
+Native versus Java
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Natywne dlopen i dlsym mają ten sam problem z podmianą co loading pliku dex.
 - Kontrola atakującego: Atakujący szuka punktu, w którym plik z kodem można podmienić, skłamać o hash, zapisać do shared storage albo przekonać aplikację do uruchomienia cudzej wersji.
@@ -977,7 +1071,9 @@ Skutek dla danych lub dostępu. Obrona to internal albo scoped storage, integrit
 ## layout
 bullet
 ## slide title
-Native versus Java — Jak się bronić
+Native versus Java
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to internal albo scoped storage, integrity checks przed load, read-only pliki, podpisy kryptograficzne i rollback z pełnym loggingiem.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze

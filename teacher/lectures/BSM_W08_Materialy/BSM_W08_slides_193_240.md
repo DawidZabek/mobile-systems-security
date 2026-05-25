@@ -2,7 +2,9 @@
 ## layout
 definition
 ## slide title
-Continuity overview — Co to jest
+Continuity overview
+## subtitle
+Co to jest
 ## term
 Continuity overview
 ## definition
@@ -22,7 +24,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Continuity overview — Jak działa
+Continuity overview
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -43,7 +47,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Continuity overview — Jak pęka
+Continuity overview
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Apple's Continuity obejmuje Handoff, Universal Clipboard i Wi-Fi Password Sharing.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -64,7 +70,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Continuity overview — Jak się bronić
+Continuity overview
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -85,7 +93,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-Handoff discovery — Co to jest
+Handoff discovery
+## subtitle
+Co to jest
 ## term
 Handoff discovery
 ## definition
@@ -105,7 +115,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Handoff discovery — Jak działa
+Handoff discovery
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -126,7 +138,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Handoff discovery — Jak pęka
+Handoff discovery
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Handoff zaczyna się od BLE discovery i przenosi activity state w stacku Continuity.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -147,7 +161,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Handoff discovery — Jak się bronić
+Handoff discovery
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -168,7 +184,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-AirDrop discovery — Co to jest
+AirDrop discovery
+## subtitle
+Co to jest
 ## term
 AirDrop discovery
 ## definition
@@ -188,7 +206,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-AirDrop discovery — Jak działa
+AirDrop discovery
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -209,7 +229,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-AirDrop discovery — Jak pęka
+AirDrop discovery
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: AirDrop używa discovery, authentication i transferu na bazie BLE, AWDL i Wi-Fi.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -230,7 +252,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-AirDrop discovery — Jak się bronić
+AirDrop discovery
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -251,7 +275,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-PrivateDrop — Co to jest
+PrivateDrop
+## subtitle
+Co to jest
 ## term
 PrivateDrop
 ## definition
@@ -271,7 +297,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-PrivateDrop — Jak działa
+PrivateDrop
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -292,7 +320,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-PrivateDrop — Jak pęka
+PrivateDrop
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: PrivateDrop zastępuje leaked contact checks mechanizmem PSI, żeby nie ujawniać phone number ani email.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -313,7 +343,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-PrivateDrop — Jak się bronić
+PrivateDrop
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -334,7 +366,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-AWDL and BLE — Co to jest
+AWDL and BLE
+## subtitle
+Co to jest
 ## term
 AWDL and BLE
 ## definition
@@ -354,7 +388,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-AWDL and BLE — Jak działa
+AWDL and BLE
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -375,7 +411,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-AWDL and BLE — Jak pęka
+AWDL and BLE
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: AWDL i BLE niosą niskopoziomowy ruch discovery oraz widoczny dla użytkownika stan Continuity.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -396,7 +434,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-AWDL and BLE — Jak się bronić
+AWDL and BLE
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -417,7 +457,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-Cross-device identity — Co to jest
+Cross-device identity
+## subtitle
+Co to jest
 ## term
 Cross-device identity
 ## definition
@@ -437,7 +479,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Cross-device identity — Jak działa
+Cross-device identity
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -458,7 +502,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Cross-device identity — Jak pęka
+Cross-device identity
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Messagi Continuity mogą ujawniać typ urządzenia, wersję OS i zachowanie pasywnemu obserwatorowi.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -479,7 +525,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Cross-device identity — Jak się bronić
+Cross-device identity
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -500,7 +548,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-Spoof relay downgrade — Co to jest
+Spoof relay downgrade
+## subtitle
+Co to jest
 ## term
 Spoof relay downgrade
 ## definition
@@ -520,7 +570,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Spoof relay downgrade — Jak działa
+Spoof relay downgrade
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -541,7 +593,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Spoof relay downgrade — Jak pęka
+Spoof relay downgrade
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Atakujący może spoofować, relayować albo downgrade'ować discovery i authentication.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -562,7 +616,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Spoof relay downgrade — Jak się bronić
+Spoof relay downgrade
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -583,7 +639,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-Transport and state machine — Co to jest
+Transport and state machine
+## subtitle
+Co to jest
 ## term
 Transport and state machine
 ## definition
@@ -603,7 +661,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Transport and state machine — Jak działa
+Transport and state machine
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -624,7 +684,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Transport and state machine — Jak pęka
+Transport and state machine
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Structured analysis wymaga obserwacji całego state machine na różnych vantage points macOS.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -645,7 +707,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Transport and state machine — Jak się bronić
+Transport and state machine
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -666,7 +730,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-Packet analysis — Co to jest
+Packet analysis
+## subtitle
+Co to jest
 ## term
 Packet analysis
 ## definition
@@ -686,7 +752,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Packet analysis — Jak działa
+Packet analysis
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -707,7 +775,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Packet analysis — Jak pęka
+Packet analysis
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Packet captures pokazują, które pola są szyfrowane, a które metadata lecą jawnie.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -728,7 +798,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Packet analysis — Jak się bronić
+Packet analysis
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -749,7 +821,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-Mitigations — Co to jest
+Mitigations
+## subtitle
+Co to jest
 ## term
 Mitigations
 ## definition
@@ -769,7 +843,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Mitigations — Jak działa
+Mitigations
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -790,7 +866,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Mitigations — Jak pęka
+Mitigations
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: PSI, większa ostrożność w contact discovery i twardsza kontrola widoczności ograniczają wyciek.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -811,7 +889,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Mitigations — Jak się bronić
+Mitigations
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -832,7 +912,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-Test matrix — Co to jest
+Test matrix
+## subtitle
+Co to jest
 ## term
 Test matrix
 ## definition
@@ -852,7 +934,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Test matrix — Jak działa
+Test matrix
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Dobry test matrix zmienia stan urządzenia, odległość i użyty transport.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -873,7 +957,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Test matrix — Jak pęka
+Test matrix
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Dobry test matrix zmienia stan urządzenia, odległość i użyty transport.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -894,7 +980,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Test matrix — Jak się bronić
+Test matrix
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -915,7 +1003,9 @@ Test i regresja. PrivateDrop zastępuje kruche contact checks przez PSI, a anali
 ## layout
 definition
 ## slide title
-Android comparison — Co to jest
+Android comparison
+## subtitle
+Co to jest
 ## term
 Android comparison
 ## definition
@@ -935,7 +1025,9 @@ Dlaczego ten mechanizm istnieje. PrivateDrop zastępuje kruche contact checks pr
 ## layout
 bullet
 ## slide title
-Android comparison — Jak działa
+Android comparison
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity.
 - Krok 2: W źródłach widać, że protokoły Continuity mają własne discovery, transfer i auth state machine oraz że da się je analizować przez reverse engineering i packet capture.
@@ -956,7 +1048,9 @@ Wynik oraz konsekwencja. PrivateDrop zastępuje kruche contact checks przez PSI,
 ## layout
 bullet
 ## slide title
-Android comparison — Jak pęka
+Android comparison
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Android local-network policy daje użyteczny kontrast dla zawsze aktywnych kanałów continuity.
 - Kontrola atakującego: Problemy pojawiają się przez leakage of identifying information, trackability, spoofing, relay i DoS na warstwie discovery oraz transportu.
@@ -977,7 +1071,9 @@ Skutek dla danych lub dostępu. PrivateDrop zastępuje kruche contact checks prz
 ## layout
 bullet
 ## slide title
-Android comparison — Jak się bronić
+Android comparison
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: PrivateDrop zastępuje kruche contact checks przez PSI, a analityka i testy powinny obejmować stany urządzeń, zasięg i typ transportu.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze

@@ -2,7 +2,9 @@
 ## layout
 definition
 ## slide title
-mDNS record anatomy — Co to jest
+mDNS record anatomy
+## subtitle
+Co to jest
 ## term
 mDNS record anatomy
 ## definition
@@ -22,7 +24,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-mDNS record anatomy — Jak działa
+mDNS record anatomy
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -43,7 +47,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-mDNS record anatomy — Jak pęka
+mDNS record anatomy
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: mDNS ogłasza usługi w LAN przez rekordy PTR, SRV i TXT wysyłane na UDP 5353.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -64,7 +70,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-mDNS record anatomy — Jak się bronić
+mDNS record anatomy
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -85,7 +93,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-SSDP discovery — Co to jest
+SSDP discovery
+## subtitle
+Co to jest
 ## term
 SSDP discovery
 ## definition
@@ -105,7 +115,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-SSDP discovery — Jak działa
+SSDP discovery
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -126,7 +138,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-SSDP discovery — Jak pęka
+SSDP discovery
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: SSDP wykrywa urządzenia przez M-SEARCH, NOTIFY i nagłówek LOCATION.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -147,7 +161,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-SSDP discovery — Jak się bronić
+SSDP discovery
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -168,7 +184,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-IPv6 link-local — Co to jest
+IPv6 link-local
+## subtitle
+Co to jest
 ## term
 IPv6 link-local
 ## definition
@@ -188,7 +206,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-IPv6 link-local — Jak działa
+IPv6 link-local
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -209,7 +229,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-IPv6 link-local — Jak pęka
+IPv6 link-local
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: IPv6 link-local działa tylko na jednej karcie sieciowej i używa zakresu fe80::/10.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -230,7 +252,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-IPv6 link-local — Jak się bronić
+IPv6 link-local
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -251,7 +275,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-Raw socket access — Co to jest
+Raw socket access
+## subtitle
+Co to jest
 ## term
 Raw socket access
 ## definition
@@ -271,7 +297,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-Raw socket access — Jak działa
+Raw socket access
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -292,7 +320,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-Raw socket access — Jak pęka
+Raw socket access
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Surowe sockety pozwalają aplikacji próbować mDNS i SSDP nawet wtedy, gdy ma tylko INTERNET.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -313,7 +343,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-Raw socket access — Jak się bronić
+Raw socket access
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -334,7 +366,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-NsdManager — Co to jest
+NsdManager
+## subtitle
+Co to jest
 ## term
 NsdManager
 ## definition
@@ -354,7 +388,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-NsdManager — Jak działa
+NsdManager
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -375,7 +411,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-NsdManager — Jak pęka
+NsdManager
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: NsdManager jest frameworkowym API do discovery, które odciąża aplikację od ręcznego skanowania LAN.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -396,7 +434,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-NsdManager — Jak się bronić
+NsdManager
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -417,7 +457,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-Casting path — Co to jest
+Casting path
+## subtitle
+Co to jest
 ## term
 Casting path
 ## definition
@@ -437,7 +479,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-Casting path — Jak działa
+Casting path
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -458,7 +502,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-Casting path — Jak pęka
+Casting path
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Casting zwykle powinien iść przez systemowy picker lub output switcher zamiast przez własne skanowanie usług.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -479,7 +525,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-Casting path — Jak się bronić
+Casting path
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -500,7 +548,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-Android 16 opt-in — Co to jest
+Android 16 opt-in
+## subtitle
+Co to jest
 ## term
 Android 16 opt-in
 ## definition
@@ -520,7 +570,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-Android 16 opt-in — Jak działa
+Android 16 opt-in
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -541,7 +593,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-Android 16 opt-in — Jak pęka
+Android 16 opt-in
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Android 16 pozwala developersko włączyć RESTRICT_LOCAL_NETWORK, żeby ujawnić ukryte zależności od LAN.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -562,7 +616,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-Android 16 opt-in — Jak się bronić
+Android 16 opt-in
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -583,7 +639,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-Android 17 enforcement — Co to jest
+Android 17 enforcement
+## subtitle
+Co to jest
 ## term
 Android 17 enforcement
 ## definition
@@ -603,7 +661,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-Android 17 enforcement — Jak działa
+Android 17 enforcement
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -624,7 +684,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-Android 17 enforcement — Jak pęka
+Android 17 enforcement
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Android 17 blokuje LAN domyślnie dla targetSdk 37+ i wprowadza ACCESS_LOCAL_NETWORK.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -645,7 +707,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-Android 17 enforcement — Jak się bronić
+Android 17 enforcement
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -666,7 +730,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-Permission split — Co to jest
+Permission split
+## subtitle
+Co to jest
 ## term
 Permission split
 ## definition
@@ -686,7 +752,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-Permission split — Jak działa
+Permission split
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -707,7 +775,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-Permission split — Jak pęka
+Permission split
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Przejście zaczyna się jeszcze przez NEARBY_WIFI_DEVICES, a docelowo trafia do NEARBY_DEVICES.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -728,7 +798,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-Permission split — Jak się bronić
+Permission split
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -749,7 +821,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-Broad access path — Co to jest
+Broad access path
+## subtitle
+Co to jest
 ## term
 Broad access path
 ## definition
@@ -769,7 +843,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-Broad access path — Jak działa
+Broad access path
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: Broad access path to klasyczny runtime permission request dla lokalnej sieci.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -790,7 +866,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-Broad access path — Jak pęka
+Broad access path
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: Broad access path to klasyczny runtime permission request dla lokalnej sieci.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -811,7 +889,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-Broad access path — Jak się bronić
+Broad access path
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -832,7 +912,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-Privacy-preserving picker — Co to jest
+Privacy-preserving picker
+## subtitle
+Co to jest
 ## term
 Privacy-preserving picker
 ## definition
@@ -852,7 +934,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-Privacy-preserving picker — Jak działa
+Privacy-preserving picker
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -873,7 +957,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-Privacy-preserving picker — Jak pęka
+Privacy-preserving picker
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: System-mediated discovery pozwala uniknąć szerokiego grantu dla sieci lokalnej.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -894,7 +980,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-Privacy-preserving picker — Jak się bronić
+Privacy-preserving picker
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
@@ -915,7 +1003,9 @@ Test i regresja. Obrona to ścisła separacja LAN od Internetu, mediacja przez s
 ## layout
 definition
 ## slide title
-Host app inheritance — Co to jest
+Host app inheritance
+## subtitle
+Co to jest
 ## term
 Host app inheritance
 ## definition
@@ -935,7 +1025,9 @@ Dlaczego ten mechanizm istnieje. Obrona to ścisła separacja LAN od Internetu, 
 ## layout
 bullet
 ## slide title
-Host app inheritance — Jak działa
+Host app inheritance
+## subtitle
+Jak działa
 ## bullets
 - Krok 1: WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta.
 - Krok 2: W tym bloku patrzysz na rekordy PTR, SRV i TXT, multicast na UDP 5353, M-SEARCH, NOTIFY oraz na to, kiedy aplikacja prosi system o pomoc, a kiedy sama skanuje sieć.
@@ -956,7 +1048,9 @@ Wynik oraz konsekwencja. Obrona to ścisła separacja LAN od Internetu, mediacja
 ## layout
 bullet
 ## slide title
-Host app inheritance — Jak pęka
+Host app inheritance
+## subtitle
+Jak pęka
 ## bullets
 - Warunek powodzenia: WebView dziedziczy stan dostępu do lokalnej sieci po aplikacji hosta.
 - Kontrola atakującego: Atak zwykle polega na spoofingu odpowiedzi, korelacji broadcastów albo na tym, że aplikacja ufa lokalnym odpowiedziom tak, jakby były już zweryfikowane.
@@ -977,7 +1071,9 @@ Skutek dla danych lub dostępu. Obrona to ścisła separacja LAN od Internetu, m
 ## layout
 bullet
 ## slide title
-Host app inheritance — Jak się bronić
+Host app inheritance
+## subtitle
+Jak się bronić
 ## bullets
 - Reguła: Obrona to ścisła separacja LAN od Internetu, mediacja przez system, ograniczenie zakresu uprawnień i testy na błędy socketów, revocation i WebView inheritance.
 - Egzekwowanie: w manifeście, API, pickerze albo parserze
