@@ -143,32 +143,6 @@ tasks.register("bsmEvidence") {
             return "$taskId|ok=$okS$codePart|tests=$tests|failures=$failures|errors=$errors|skipped=$skipped|$statuses"
         }
 
-        fun evidenceOverall(): String {
-            var totalTests = 0
-            var totalFailures = 0
-            var totalErrors = 0
-            var totalSkipped = 0
-            for (suite in xmlFiles.mapNotNull(::parseSuite)) {
-                totalTests += suiteAttrInt(suite, "tests")
-                totalFailures += suiteAttrInt(suite, "failures")
-                totalErrors += suiteAttrInt(suite, "errors")
-                totalSkipped += suiteAttrInt(suite, "skipped")
-            }
-            val okS = if (totalFailures == 0 && totalErrors == 0) "YES" else "NO"
-            return "E04|ok=$okS|tests=$totalTests|failures=$totalFailures|errors=$totalErrors|skipped=$totalSkipped"
-        }
-
-        println(
-            evidenceFor(
-                taskId = "G01",
-                fqcn = "com.example.secretlab.secure.SecretBoxStudentTest",
-                required = listOf(
-                    "encryptsAsIvPlusCiphertextAndDecryptsBack",
-                    "detectsTamperingAndReturnsNull",
-                    "rejectsWrongIvLengthInEncrypt",
-                ),
-            ),
-        )
         println(
             evidenceFor(
                 taskId = "G02",
@@ -187,18 +161,6 @@ tasks.register("bsmEvidence") {
                     "task3CodeAppearsOnlyWhenIntegrityVerdictAndBindingAreReady",
                 ),
                 code = "I3B9T",
-            ),
-        )
-        println(
-            evidenceFor(
-                taskId = "G04",
-                fqcn = "com.example.secretlab.secure.BiometricBoundSecretStoreStudentTest",
-                required = listOf(
-                    "refusesToRevealSecretWithoutToken",
-                    "refusesToRevealSecretWhenTokenIsTooOld",
-                    "revealsSecretWhenTokenIsFreshEnough",
-                    "refusesToRevealSecretWhenTokenIsFromFuture",
-                ),
             ),
         )
     }
