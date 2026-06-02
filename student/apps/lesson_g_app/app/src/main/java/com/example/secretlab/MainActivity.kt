@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,8 +27,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.gestures.detectTransformGestures
-import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -39,7 +38,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -48,6 +46,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -72,7 +72,7 @@ import androidx.compose.foundation.Image
 import coil.compose.rememberAsyncImagePainter
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import com.example.secretlab.secure.SecurePrefs
+import com.example.secretlab.secure.AppSecrets
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import kotlinx.coroutines.Dispatchers
@@ -88,8 +88,6 @@ private const val SUBMISSION_BASE_URL = "https://www.duszekjk.com/bsk/"
 private const val TASK_1_PASSWORD = "harbor"
 private const val TASK_1_CODE = "S2A9K1"
 private const val TASK_1_ID = "G01"
-private const val TASK_4_SECRET_KEY = "task4_secret_5char"
-private const val TASK_4_SECRET_VALUE = "Q7X2R"
 
 data class PhotoEntry(val uri: Uri, val source: String)
 data class SubmissionResult(val code: Int, val body: String)
@@ -109,7 +107,6 @@ class MainActivity : ComponentActivity() {
 private fun LessonGStarterApp() {
     val context = LocalContext.current
     val locationManager = remember { context.getSystemService(Context.LOCATION_SERVICE) as LocationManager }
-    val securePrefs = remember { SecurePrefs.open(context) }
     val scope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
@@ -190,12 +187,6 @@ private fun LessonGStarterApp() {
 
     LaunchedEffect(Unit) { refreshLocation() }
 
-    LaunchedEffect(Unit) {
-        if (securePrefs.getString(TASK_4_SECRET_KEY, null) == null) {
-            securePrefs.edit().putString(TASK_4_SECRET_KEY, TASK_4_SECRET_VALUE).apply()
-        }
-    }
-
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -251,7 +242,10 @@ private fun LessonGStarterApp() {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     Text("Small map", style = MaterialTheme.typography.titleLarge)
                     Text(locationSummary(currentLocation))
-                    SmallMap(location = currentLocation)
+                    ApiMapCard(
+                        location = currentLocation,
+                        mapApiKey = AppSecrets.readMapApiKey(),
+                    )
                 }
             }
 
@@ -292,9 +286,19 @@ private fun LessonGStarterApp() {
 }
 
 @Composable
-private fun SmallMap(location: Location?) {
+private fun ApiMapCard(
+    location: Location?,
+    mapApiKey: String?,
+) {
     val lat = location?.latitude
     val lon = location?.longitude
+    val hasLocation = lat != null && lon != null
+    val mapUrl = if (hasLocation && !mapApiKey.isNullOrBlank()) {
+        buildStaticMapUrl(lat = lat!!, lon = lon!!, apiKey = mapApiKey)
+    } else {
+        null
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -303,28 +307,51 @@ private fun SmallMap(location: Location?) {
         tonalElevation = 1.dp,
     ) {
         Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surfaceContainerLowest)) {
-            Canvas(modifier = Modifier.fillMaxSize().padding(12.dp)) {
-                val gridColor = Color(0xFF8AA0B6)
-                val markerColor = Color(0xFFE4572E)
-                repeat(5) { i ->
-                    val x = size.width * i / 4f
-                    drawLine(gridColor.copy(alpha = 0.25f), Offset(x, 0f), Offset(x, size.height), strokeWidth = 2f)
-                    val y = size.height * i / 4f
-                    drawLine(gridColor.copy(alpha = 0.25f), Offset(0f, y), Offset(size.width, y), strokeWidth = 2f)
+            if (mapUrl != null) {
+                Image(
+                    painter = rememberAsyncImagePainter(mapUrl),
+                    contentDescription = "Current location map",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize(),
+                )
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .size(18.dp)
+                        .background(Color.Transparent),
+                ) {
+                    Canvas(modifier = Modifier.fillMaxSize()) {
+                        drawCircle(Color(0xFFE4572E), radius = 14f, center = Offset(size.width / 2f, size.height / 2f))
+                        drawCircle(Color.White, radius = 6f, center = Offset(size.width / 2f, size.height / 2f))
+                    }
                 }
-                if (lat != null && lon != null) {
-                    val x = ((lon + 180.0) / 360.0 * size.width).toFloat().coerceIn(16f, size.width - 16f)
-                    val y = ((90.0 - lat) / 180.0 * size.height).toFloat().coerceIn(16f, size.height - 16f)
-                    drawCircle(markerColor, radius = 16f, center = Offset(x, y))
-                    drawCircle(Color.White, radius = 6f, center = Offset(x, y))
+            } else {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    val message = when {
+                        !hasLocation -> "Grant location permission and refresh to load the map."
+                        mapApiKey.isNullOrBlank() -> "Geoapify API key missing."
+                        else -> "Map unavailable."
+                    }
+                    Text(
+                        text = message,
+                    )
                 }
             }
-            Text(
-                text = if (lat == null || lon == null) "No location fix yet." else "Marker = current location",
-                modifier = Modifier.align(Alignment.BottomStart).padding(12.dp),
-            )
         }
     }
+}
+
+private fun buildStaticMapUrl(lat: Double, lon: Double, apiKey: String): String {
+    val zoom = 14
+    val width = 640
+    val height = 480
+    return "https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=$width&height=$height&center=lonlat:$lon,$lat&zoom=$zoom&marker=lonlat:$lon,$lat;type:circle;color:%23e4572e;size:48&apiKey=${apiKey.trim()}"
 }
 
 private fun locationSummary(location: Location?): String =
@@ -472,20 +499,31 @@ private fun FullScreenPhotoViewer(
     onDismiss: () -> Unit,
 ) {
     val pagerState = rememberPagerState(initialPage = initialIndex, pageCount = { photos.size })
-    AlertDialog(
+    Dialog(
         onDismissRequest = onDismiss,
-        confirmButton = {},
-        dismissButton = {
-            Button(onClick = onDismiss) {
-                Text("Close")
-            }
-        },
-        text = {
-            HorizontalPager(state = pagerState) { page ->
+        properties = DialogProperties(usePlatformDefaultWidth = false),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black),
+        ) {
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.fillMaxSize(),
+            ) { page ->
                 ZoomablePhoto(uri = photos[page].uri)
             }
-        },
-    )
+            Button(
+                onClick = onDismiss,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(16.dp),
+            ) {
+                Text("Close")
+            }
+        }
+    }
 }
 
 @Composable
@@ -495,8 +533,7 @@ private fun ZoomablePhoto(uri: Uri) {
     val painter = rememberAsyncImagePainter(uri)
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1f)
+            .fillMaxSize()
             .clipToBounds()
             .background(Color.Black),
     ) {
