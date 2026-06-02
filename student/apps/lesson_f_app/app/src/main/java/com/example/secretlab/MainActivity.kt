@@ -26,6 +26,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -47,6 +48,7 @@ import com.example.secretlab.face.FacePhoto
 import com.example.secretlab.face.FaceInputPolicy
 import com.example.secretlab.face.FaceSession
 import com.example.secretlab.face.FaceTfliteSession
+import com.example.secretlab.face.FaceTrainingProgress
 import com.example.secretlab.face.FaceTrainingPolicy
 import com.example.secretlab.face.InputSource
 import java.io.File
@@ -75,6 +77,7 @@ private fun FaceLabScreen() {
     var selectedPhotoIndex by remember { mutableStateOf<Int?>(null) }
     var cameraTarget by remember { mutableStateOf<Int?>(null) }
     var pendingCapture by remember { mutableStateOf<Uri?>(null) }
+    var trainingProgress by remember { mutableStateOf(FaceTrainingProgress()) }
 
     val galleryLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
@@ -132,6 +135,10 @@ private fun FaceLabScreen() {
             Text("Metric ACC code: ${FaceCompletionCodeBook.trainingAccuracyCode(0.91)}")
             Text("TFLite ready: ${tfliteSession.isReady()}")
             Text("Live camera loop: every ${trainingPolicy.backgroundInferenceEverySeconds} seconds")
+            Text("Training status: ${trainingProgress.summary()}")
+            if (trainingProgress.totalEpochs > 0) {
+                LinearProgressIndicator(progress = { trainingProgress.progressFraction() })
+            }
             selectedPhoto?.let { Text("Last selected photo: $it") }
 
             box.slots.forEachIndexed { index, slot ->
@@ -153,6 +160,7 @@ private fun FaceLabScreen() {
             Button(
                 onClick = {
                     banner = if (box.allReady()) {
+                        trainingProgress = FaceTrainingProgress(epoch = 0, totalEpochs = 5)
                         tfliteSession.open()
                         val result = tfliteSession.processFrame(ByteBuffer.allocate(96 * 96 * 3 * 4), 0L)
                         result?.let { session.update(it) }
