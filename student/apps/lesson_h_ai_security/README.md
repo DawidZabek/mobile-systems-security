@@ -7,10 +7,10 @@ Shared lesson reference:
 - All agents should use this file for lesson-specific, practical interpretation of the literature.
 
 Projects:
-- `student/apps/lesson_h_insecurenotes` - source-code scan target
-- `student/apps/lesson_h_fakebanklite` - APK / MobSF target
-- `student/apps/lesson_h_securepatchtarget_v1` - vulnerable baseline
-- `student/apps/lesson_h_securepatchtarget_v2` - patched baseline
+- `student/apps/lesson_h_ai_security/InsecureNotes` - source-code scan target
+- `student/apps/lesson_h_ai_security/FakeBankLite` - APK / MobSF target
+- `student/apps/lesson_h_ai_security/SecurePatchTarget_v1` - vulnerable baseline
+- `student/apps/lesson_h_ai_security/SecurePatchTarget_v2` - patched baseline
 
 Notebook tasks:
 - `H01` source-code scan
