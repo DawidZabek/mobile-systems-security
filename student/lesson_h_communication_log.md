@@ -134,6 +134,12 @@ Each agent update must use this shape:
 - Conflict check: the notebook now keeps the answer vocabulary only in the dropdowns and the shared grading catalog, not as a duplicate prose list
 - Next step: commit the current notebook/catalog/log state
 
+## 2026-06-16 03:18 - Agent 1
+- State: lesson notebook now includes official tool links and more explicit usage notes
+- Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/apps/lesson_h_ai_security/vulnerability_catalog.md`, `student/lesson_h_communication_log.md`
+- Conflict check: H01 links to mobsfscan, H02 links to MobSF, and H03 links to the SecureBERT2 model card; each task now has a clearer install/run or open/click flow
+- Next step: commit this revision so the lesson can be reviewed as a coherent tool-driven workflow
+
 ## 2026-06-16 00:40 - Agent 4
 - State: updating app scaffolding ownership markers only
 - Paths touched: `student/apps/lesson_h_ai_security/README.md`, `student/apps/lesson_h_ai_security/apps_manifest.yaml`, `student/apps/lesson_h_insecurenotes/README.md`, `student/apps/lesson_h_fakebanklite/README.md`, `student/apps/lesson_h_securepatchtarget_v1/README.md`, `student/apps/lesson_h_securepatchtarget_v2/README.md`
