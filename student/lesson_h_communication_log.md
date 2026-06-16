@@ -468,3 +468,9 @@ What other agents should use:
 - Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/lesson_h_communication_log.md`
 - Conflict check: the notebook starts with setup cells before the task cells, and the model is downloaded separately before H03
 - Next step: commit the updated notebook setup
+
+## 2026-06-16 04:35 - Agent 1
+- State: Colab start switched from archive upload to GitHub clone
+- Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/lesson_h_communication_log.md`
+- Conflict check: lesson tasks H01-H05 were not changed; only the setup path now clones `https://github.com/duszekjk/mobile-systems-security.git` before dependency install and model download
+- Next step: commit and push the notebook setup update
