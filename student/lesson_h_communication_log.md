@@ -456,3 +456,9 @@ What other agents should use:
 - Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/apps/lesson_h_ai_security/vulnerability_catalog.md`, `student/lesson_h_communication_log.md`
 - Conflict check: removed all leftover `albo/lub` choice language and the `Czego uczy to ćwiczenie` block from the main notebook
 - Next step: review or commit the updated notebook/catalog pair
+
+## 2026-06-16 04:05 - Agent 1
+- State: main notebook now uses full-file Python workflows for H03-H05
+- Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/apps/lesson_h_ai_security/vulnerability_catalog.md`, `student/lesson_h_communication_log.md`
+- Conflict check: removed the leftover instruction sentence from H03 and aligned the catalog to full-file inputs instead of fragment snippets
+- Next step: commit the cleaned notebook/catalog pair
