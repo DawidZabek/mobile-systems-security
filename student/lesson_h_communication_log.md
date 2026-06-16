@@ -217,6 +217,12 @@ After publishing, update the ownership map and log.
 
 ## MESSAGE_ID: MSG-0133
 
+## 2026-06-16 03:30 - Agent 1
+- State: H04 and H05 have been re-keyed to method-level canonical answers
+- Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/apps/lesson_h_ai_security/vulnerability_catalog.md`, `student/answer_string_dictionary.md`, `student/grading_rules.yaml`, `student/lesson_h_communication_log.md`
+- Conflict check: old H04/H05 answer strings were removed from the active grading files; notebook dropdowns now map to `HETEROGENEOUS_MULTI_AGENT_TRIAGE` and `AGENTIC_PATCH_VERIFICATION`
+- Next step: wait for review or a final smoke test if the evaluator needs one
+
 from: Coordinator
 to: Agent_2
 type: STATUS
