@@ -450,3 +450,9 @@ Remaining gaps:
 
 What other agents should use:
 - Use `research/2026-lecture-ai-vuln/lesson_h_practical_notes.md` as the lesson-facing bridge from literature to task design.
+
+## 2026-06-16 03:48 - Agent 1
+- State: H03-H05 rewritten as concrete Python notebook workflows
+- Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/apps/lesson_h_ai_security/vulnerability_catalog.md`, `student/lesson_h_communication_log.md`
+- Conflict check: removed all leftover `albo/lub` choice language and the `Czego uczy to ćwiczenie` block from the main notebook
+- Next step: review or commit the updated notebook/catalog pair
