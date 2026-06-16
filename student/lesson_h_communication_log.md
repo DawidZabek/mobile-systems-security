@@ -462,3 +462,9 @@ What other agents should use:
 - Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/apps/lesson_h_ai_security/vulnerability_catalog.md`, `student/lesson_h_communication_log.md`
 - Conflict check: removed the leftover instruction sentence from H03 and aligned the catalog to full-file inputs instead of fragment snippets
 - Next step: commit the cleaned notebook/catalog pair
+
+## 2026-06-16 04:20 - Agent 1
+- State: Colab setup now includes archive upload, dependency install, and explicit SecureBERT2 download
+- Paths touched: `student/labs/BSM_L08_AI_Assisted_Mobile_Security_Assessment.ipynb`, `student/lesson_h_communication_log.md`
+- Conflict check: the notebook starts with setup cells before the task cells, and the model is downloaded separately before H03
+- Next step: commit the updated notebook setup
